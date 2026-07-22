@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Zenki Lab — Premium Digital Manufacturing",
+  title: "Zenki Lab · Premium Digital Manufacturing",
   description:
-    "Zenki Lab provides custom on-demand 3D printing and digital manufacturing. Industrial-grade parts, functional prototypes, and production-ready components — manufactured on demand, on time.",
+    "Zenki Lab provides custom on-demand 3D printing and digital manufacturing. Industrial-grade parts, functional prototypes, and production-ready components. Manufactured on demand, on time.",
   keywords: [
     "3D printing",
     "digital manufacturing",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Zenki Lab" }],
   openGraph: {
-    title: "Zenki Lab — Premium Digital Manufacturing",
+    title: "Zenki Lab · Premium Digital Manufacturing",
     description:
       "If you can imagine it, we can print it. Custom on-demand 3D printing and digital manufacturing for prototypes, parts, and production.",
     url: "https://zenkilab.com",
@@ -53,7 +53,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-screen bg-[#111111] text-white font-sans">
+      <body className="min-h-screen bg-[#0F1115] text-white font-sans">
         {children}
       </body>
     </html>

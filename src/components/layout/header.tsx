@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Menu, X, Upload, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -26,21 +25,18 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         scrolled
-          ? "bg-[#111111]/80 backdrop-blur-xl border-b border-white/[0.06]"
+          ? "bg-[#0F1115]/80 backdrop-blur-xl border-b border-white/[0.06]"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
         <nav className="flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-3 group"
-          >
-            <div className="w-9 h-9 rounded-lg bg-[#E63946] flex items-center justify-center">
-              <span className="text-white font-bold text-sm tracking-tight">Z</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 rounded-lg bg-[#22D3EE] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              <span className="text-[#0F1115] font-bold text-sm tracking-tight">Z</span>
             </div>
             <span className="text-lg font-semibold tracking-tight text-white">
               Zenki Lab
@@ -63,18 +59,17 @@ export function Header() {
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="#quote"
+              href="#services"
               className="inline-flex items-center gap-2 text-neutral-300 hover:text-white hover:bg-white/[0.06] h-10 px-4 text-sm font-medium rounded-lg transition-colors"
             >
-              <FileText className="w-4 h-4" />
-              Request Quote
+              What We Make
             </a>
             <a
               href="#quote"
-              className="inline-flex items-center gap-2 bg-[#E63946] hover:bg-[#E63946]/90 text-white h-10 px-5 text-sm font-medium rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-[#EF4444] hover:bg-[#EF4444]/90 text-white h-10 px-5 text-sm font-medium rounded-lg transition-colors hover:shadow-[0_0_25px_rgba(239,68,68,0.2)]"
             >
-              <Upload className="w-4 h-4" />
-              Upload STL
+              Start Your Project
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
@@ -97,7 +92,7 @@ export function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden bg-[#111111]/95 backdrop-blur-xl border-b border-white/[0.06] overflow-hidden"
+            className="lg:hidden bg-[#0F1115]/95 backdrop-blur-xl border-b border-white/[0.06] overflow-hidden"
           >
             <div className="px-6 py-6 space-y-1">
               {navLinks.map((link) => (
@@ -114,18 +109,17 @@ export function Header() {
                 <a
                   href="#quote"
                   onClick={() => setMobileOpen(false)}
-                  className="inline-flex items-center justify-center gap-2 w-full bg-[#E63946] hover:bg-[#E63946]/90 text-white h-12 text-sm font-medium rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center gap-2 w-full bg-[#EF4444] hover:bg-[#EF4444]/90 text-white h-12 text-sm font-medium rounded-lg transition-colors"
                 >
-                  <Upload className="w-4 h-4" />
-                  Upload STL
+                  Start Your Project
+                  <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="#quote"
+                  href="#services"
                   onClick={() => setMobileOpen(false)}
                   className="inline-flex items-center justify-center gap-2 w-full text-neutral-300 hover:text-white hover:bg-white/[0.06] h-12 text-sm font-medium rounded-lg transition-colors"
                 >
-                  <FileText className="w-4 h-4" />
-                  Request Quote
+                  What We Make
                 </a>
               </div>
             </div>

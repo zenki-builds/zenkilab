@@ -12,6 +12,7 @@ import {
   CheckCircle,
   Loader2,
   Paperclip,
+  Sparkles,
 } from "lucide-react";
 
 const MAX_FILE_SIZE = 250 * 1024 * 1024; // 250 MB
@@ -46,15 +47,15 @@ const materials = [
   { value: "asa", label: "ASA" },
   { value: "tpu", label: "TPU" },
   { value: "carbon-fiber", label: "Carbon Fiber Composite" },
-  { value: "not-sure", label: "Not Sure — Need Recommendation" },
+  { value: "not-sure", label: "Not Sure / Need Recommendation" },
 ];
 
 const layerHeights = [
-  { value: "0.10", label: "0.10 mm — Ultra Detail" },
-  { value: "0.16", label: "0.16 mm — High Quality" },
-  { value: "0.20", label: "0.20 mm — Standard" },
-  { value: "0.28", label: "0.28 mm — Draft" },
-  { value: "0.32", label: "0.32 mm — Fast" },
+  { value: "0.10", label: "0.10 mm · Ultra Detail" },
+  { value: "0.16", label: "0.16 mm · High Quality" },
+  { value: "0.20", label: "0.20 mm · Standard" },
+  { value: "0.28", label: "0.28 mm · Draft" },
+  { value: "0.32", label: "0.32 mm · Fast" },
 ];
 
 const quantities = [
@@ -68,6 +69,8 @@ const quantities = [
 export function QuoteSection() {
   const [files, setFiles] = useState<File[]>([]);
   const [dragOver, setDragOver] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -94,7 +97,22 @@ export function QuoteSection() {
           ACCEPTED_TYPES.some((ext) => f.name.toLowerCase().endsWith(ext)) ||
           incoming.some((x) => x.type === "application/zip")
       );
-      setFiles((prev) => [...prev, ...valid].slice(0, 10));
+      if (valid.length > 0) {
+        setFiles((prev) => [...prev, ...valid].slice(0, 10));
+        // Simulate upload animation
+        setUploading(true);
+        setUploadProgress(0);
+        const interval = setInterval(() => {
+          setUploadProgress((prev) => {
+            if (prev >= 100) {
+              clearInterval(interval);
+              setUploading(false);
+              return 100;
+            }
+            return prev + Math.random() * 20 + 10;
+          });
+        }, 200);
+      }
     },
     []
   );
@@ -112,13 +130,15 @@ export function QuoteSection() {
 
   const onSubmit = async (data: QuoteFormData) => {
     setIsSubmitting(true);
-    // Simulate API call
     await new Promise((r) => setTimeout(r, 2000));
     console.log("Quote data:", data, "Files:", files.length);
     setIsSubmitting(false);
     setSubmitted(true);
     reset();
-    setTimeout(() => setSubmitted(false), 6000);
+    setTimeout(() => {
+      setSubmitted(false);
+      setFiles([]);
+    }, 6000);
   };
 
   return (
@@ -132,15 +152,15 @@ export function QuoteSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-16 lg:mb-20"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#E63946] mb-4 block">
-            Get a Quote
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#22D3EE] mb-4 block">
+            Start Your Project
           </span>
           <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[700px]">
-            Tell us about your project.
+            Tell us what you need. We'll handle the rest.
           </h2>
           <p className="text-neutral-500 text-lg mt-4 max-w-[600px] leading-relaxed">
-            Upload your files and fill in the details. Our engineers will review
-            and respond with a detailed quotation within 24 hours.
+            Upload your files, describe your project, and our engineers will
+            review and respond with a detailed quote within 24 hours.
           </p>
         </motion.div>
 
@@ -154,15 +174,16 @@ export function QuoteSection() {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-10"
           >
-            {/* File Upload */}
+            {/* File Upload — redesigned Linear/Figma style */}
             <div>
-              <label className="text-sm font-semibold text-neutral-300 mb-3 block">
+              <label className="text-sm font-semibold text-neutral-300 mb-2 block">
                 Design Files
               </label>
-              <p className="text-xs text-neutral-600 mb-3">
-                Accepted: STL, OBJ, 3MF, STEP, ZIP (max 250 MB per file, up to 10 files)
+              <p className="text-xs text-neutral-600 mb-4">
+                Accepted: STL, OBJ, 3MF, STEP, ZIP &middot; Up to 250 MB per file &middot; Max 10 files
               </p>
 
+              {/* Drop zone */}
               <div
                 onDragOver={(e) => {
                   e.preventDefault();
@@ -174,10 +195,10 @@ export function QuoteSection() {
                   setDragOver(false);
                   handleFiles(e.dataTransfer.files);
                 }}
-                className={`relative border-2 border-dashed rounded-2xl p-12 lg:p-16 text-center transition-all duration-300 ${
+                className={`relative border-2 border-dashed rounded-2xl p-12 lg:p-16 text-center transition-all duration-400 ${
                   dragOver
-                    ? "border-[#E63946] bg-[#E63946]/5"
-                    : "border-white/[0.08] hover:border-white/[0.15] bg-white/[0.01]"
+                    ? "border-[#22D3EE] bg-[#22D3EE]/[0.04] scale-[1.01]"
+                    : "border-white/[0.06] hover:border-[#22D3EE]/30 bg-white/[0.01]"
                 }`}
               >
                 <input
@@ -186,16 +207,53 @@ export function QuoteSection() {
                   multiple
                   accept={ACCEPTED_TYPES.join(",")}
                   onChange={(e) => handleFiles(e.target.files)}
-                  className="absolute inset-0 opacity-0 cursor-pointer"
+                  className="absolute inset-0 opacity-0 cursor-pointer z-10"
                 />
 
-                <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center mx-auto mb-5">
-                  <Upload className="w-6 h-6 text-neutral-400" />
+                {/* Upload icon with animated ring */}
+                <div className="relative w-16 h-16 mx-auto mb-5">
+                  <div className="absolute inset-0 rounded-2xl border border-[#22D3EE]/20 animate-pulse" />
+                  <div className="relative w-full h-full rounded-2xl bg-[#22D3EE]/[0.06] border border-[#22D3EE]/20 flex items-center justify-center">
+                    {uploading ? (
+                      <Loader2 className="w-6 h-6 text-[#22D3EE] animate-spin" />
+                    ) : (
+                      <Upload className="w-6 h-6 text-[#22D3EE]" />
+                    )}
+                  </div>
                 </div>
+
                 <p className="text-base font-medium text-white mb-1">
-                  Drag and drop your files here
+                  {dragOver ? "Drop your files here" : "Drag and drop your files here"}
                 </p>
-                <p className="text-sm text-neutral-500">or click to browse</p>
+                <p className="text-sm text-neutral-500">
+                  or click to browse
+                </p>
+
+                {/* Upload progress bar */}
+                <AnimatePresence>
+                  {uploading && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="mt-5 max-w-[320px] mx-auto"
+                    >
+                      <div className="h-1 bg-white/[0.06] rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full bg-gradient-to-r from-[#22D3EE] to-[#0891B2] rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${Math.min(uploadProgress, 100)}%` }}
+                          transition={{ duration: 0.2 }}
+                        />
+                      </div>
+                      <p className="text-xs text-neutral-500 mt-2">
+                        {uploadProgress < 100
+                          ? "Analysing file..."
+                          : "File uploaded successfully"}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* File List */}
@@ -213,19 +271,22 @@ export function QuoteSection() {
                         initial={{ opacity: 0, x: -12 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 12 }}
-                        className="flex items-center gap-3 bg-[#1a1a1a] border border-white/[0.06] rounded-xl px-4 py-3"
+                        className="flex items-center gap-3 bg-[#161A20] border border-white/[0.06] rounded-xl px-4 py-3"
                       >
-                        <FileIcon className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+                        <div className="w-9 h-9 rounded-lg bg-[#22D3EE]/10 border border-[#22D3EE]/15 flex items-center justify-center flex-shrink-0">
+                          <FileIcon className="w-4 h-4 text-[#22D3EE]" />
+                        </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm text-white truncate">{file.name}</p>
-                          <p className="text-xs text-neutral-600">
-                            {formatSize(file.size)}
+                          <p className="text-xs text-neutral-500">
+                            {formatSize(file.size)} &middot; Printability:{" "}
+                            <span className="text-[#22D3EE]">Checking...</span>
                           </p>
                         </div>
                         <button
                           type="button"
                           onClick={() => removeFile(idx)}
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-neutral-600 hover:text-[#E63946] hover:bg-[#E63946]/5 transition-colors"
+                          className="w-7 h-7 rounded-lg flex items-center justify-center text-neutral-500 hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors"
                         >
                           <X className="w-3.5 h-3.5" />
                         </button>
@@ -238,7 +299,6 @@ export function QuoteSection() {
 
             {/* Two column grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name */}
               <FieldWrapper label="Full Name" error={errors.name?.message} required>
                 <input
                   {...register("name")}
@@ -248,7 +308,6 @@ export function QuoteSection() {
                 />
               </FieldWrapper>
 
-              {/* Email */}
               <FieldWrapper label="Email" error={errors.email?.message} required>
                 <input
                   {...register("email")}
@@ -258,7 +317,6 @@ export function QuoteSection() {
                 />
               </FieldWrapper>
 
-              {/* Phone */}
               <FieldWrapper label="Phone" error={errors.phone?.message} required>
                 <input
                   {...register("phone")}
@@ -268,7 +326,6 @@ export function QuoteSection() {
                 />
               </FieldWrapper>
 
-              {/* Country */}
               <FieldWrapper label="Country" error={errors.country?.message} required>
                 <input
                   {...register("country")}
@@ -278,7 +335,6 @@ export function QuoteSection() {
                 />
               </FieldWrapper>
 
-              {/* Material */}
               <FieldWrapper label="Material" error={errors.material?.message} required>
                 <select {...register("material")} className={inputClass}>
                   <option value="">Select material...</option>
@@ -290,7 +346,6 @@ export function QuoteSection() {
                 </select>
               </FieldWrapper>
 
-              {/* Color */}
               <FieldWrapper label="Color" error={errors.color?.message} required>
                 <input
                   {...register("color")}
@@ -300,7 +355,6 @@ export function QuoteSection() {
                 />
               </FieldWrapper>
 
-              {/* Quantity */}
               <FieldWrapper label="Quantity" error={errors.quantity?.message} required>
                 <select {...register("quantity")} className={inputClass}>
                   {quantities.map((q) => (
@@ -311,7 +365,6 @@ export function QuoteSection() {
                 </select>
               </FieldWrapper>
 
-              {/* Layer Height */}
               <FieldWrapper
                 label="Layer Height"
                 error={errors.layerHeight?.message}
@@ -344,7 +397,7 @@ export function QuoteSection() {
               <textarea
                 {...register("notes")}
                 rows={4}
-                placeholder="Describe your project — dimensions, application, post-processing needs, any specific requirements..."
+                placeholder="Tell us about your project — what are you making, what's it for, any specific requirements? The more detail, the more accurate your quote."
                 className={`${inputClass} resize-none`}
               />
             </FieldWrapper>
@@ -353,7 +406,7 @@ export function QuoteSection() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2.5 bg-[#E63946] hover:bg-[#E63946]/90 disabled:opacity-50 disabled:cursor-not-allowed text-white h-[52px] px-8 rounded-xl text-sm font-semibold transition-all duration-300"
+              className="inline-flex items-center gap-2.5 bg-[#EF4444] hover:bg-[#EF4444]/90 disabled:opacity-50 disabled:cursor-not-allowed text-white h-[52px] px-8 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.25)]"
             >
               {isSubmitting ? (
                 <>
@@ -362,7 +415,7 @@ export function QuoteSection() {
                 </>
               ) : (
                 <>
-                  <Paperclip className="w-4 h-4" />
+                  <Sparkles className="w-4 h-4" />
                   Submit Quote Request
                 </>
               )}
@@ -375,15 +428,15 @@ export function QuoteSection() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-20"
           >
-            <div className="w-16 h-16 rounded-2xl bg-[#E63946]/10 border border-[#E63946]/20 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-[#E63946]" />
+            <div className="w-16 h-16 rounded-2xl bg-[#22D3EE]/10 border border-[#22D3EE]/20 flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-8 h-8 text-[#22D3EE]" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">
               Quote Request Submitted
             </h3>
             <p className="text-neutral-400 max-w-[460px] mx-auto leading-relaxed">
               Thank you. Our engineering team will review your files and respond
-              with a detailed quotation within 24 hours.
+              with a detailed quotation within 24 hours. We're excited to work on your project.
             </p>
           </motion.div>
         )}
@@ -409,15 +462,15 @@ function FieldWrapper({
     <div className="space-y-2">
       <label className="text-sm font-semibold text-neutral-300 flex items-center gap-1">
         {label}
-        {required && <span className="text-[#E63946]">*</span>}
+        {required && <span className="text-[#EF4444]">*</span>}
       </label>
       {children}
       {error && (
-        <p className="text-xs text-[#E63946] mt-1">{error}</p>
+        <p className="text-xs text-[#EF4444] mt-1">{error}</p>
       )}
     </div>
   );
 }
 
 const inputClass =
-  "w-full h-12 px-4 bg-[#1a1a1a] border border-white/[0.08] rounded-xl text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-[#E63946]/40 focus:ring-1 focus:ring-[#E63946]/20 transition-all duration-200";
+  "w-full h-12 px-4 bg-[#161A20] border border-white/[0.06] rounded-xl text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-[#22D3EE]/30 focus:ring-1 focus:ring-[#22D3EE]/15 transition-all duration-200";

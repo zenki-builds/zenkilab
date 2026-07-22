@@ -17,93 +17,144 @@ import {
   Zap,
   Droplets,
   Leaf,
+  FileText,
+  Camera,
+  Lightbulb,
+  Sparkles,
 } from "lucide-react";
 
+// ── Project Start Journeys ────────────────────────────
+export type ProjectJourney = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  href: string;
+  color: string;
+};
+
+export const projectJourneys: ProjectJourney[] = [
+  {
+    title: "I already have an STL file",
+    description:
+      "Upload your 3D model and we'll review it for printability, material recommendations, and pricing within 24 hours.",
+    icon: FileText,
+    href: "#quote",
+    color: "#22D3EE",
+  },
+  {
+    title: "I have a broken part",
+    description:
+      "Send us a photo and measurements of the part you need replaced. We'll reverse-engineer and manufacture a perfect replacement.",
+    icon: Camera,
+    href: "#quote",
+    color: "#22D3EE",
+  },
+  {
+    title: "I have an idea",
+    description:
+      "Describe what you want to make. Our engineers will help you refine the concept, create a model, and bring it to life.",
+    icon: Lightbulb,
+    href: "#quote",
+    color: "#22D3EE",
+  },
+  {
+    title: "I want something custom",
+    description:
+      "One-off gifts, art pieces, cosplay props, or anything you can dream up. We'll work with you from sketch to finished product.",
+    icon: Sparkles,
+    href: "#quote",
+    color: "#22D3EE",
+  },
+];
+
 // ── Services ──────────────────────────────────────────
+export type ServiceCategory = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  items: string[];
+};
+
 export type Service = {
   title: string;
   description: string;
   icon: LucideIcon;
   href: string;
+  examples: string[];
 };
 
 export const services: Service[] = [
   {
-    title: "Custom Parts",
+    title: "Functional Parts",
     description:
-      "Precision-engineered custom components built to your exact specifications. From one-off replacements to complex geometries, we manufacture parts that fit perfectly every time.",
+      "Replacement components, brackets, mounts, and mechanical parts that actually work — not just look like they work.",
     icon: Cog,
     href: "#quote",
+    examples: ["Gears & sprockets", "Mounting brackets", "Clips & fasteners"],
   },
   {
     title: "Automotive",
     description:
-      "High-temperature, chemical-resistant automotive components. Print intake manifolds, mounting brackets, clips, and bespoke interior fittings in engineering-grade materials.",
+      "High-temperature, chemical-resistant components for engine bays, interiors, and custom fabrication projects.",
     icon: Car,
     href: "#quote",
+    examples: ["Intake manifolds", "Gauge pods", "Interior trim clips"],
   },
   {
     title: "Electronics",
     description:
-      "Custom enclosures, mounting plates, and internal chassis for PCBs, Raspberry Pi, Arduino projects, and consumer electronics with precise cutouts and ventilation.",
+      "Custom enclosures, mounting plates, and internal chassis with precise cutouts for PCBs, ports, and ventilation.",
     icon: Cpu,
     href: "#quote",
+    examples: ["Project boxes", "PCB enclosures", "Sensor housings"],
   },
   {
     title: "Prototypes",
     description:
-      "Iterate faster with rapid functional prototypes. Test fit, form, and function before committing to expensive tooling. Turn CAD into physical parts in days, not weeks.",
+      "Test fit, form, and function before committing to expensive tooling. Turn CAD into physical parts in days.",
     icon: FlaskConical,
     href: "#quote",
+    examples: ["Product mockups", "Engineering samples", "Fitment checks"],
   },
   {
-    title: "Keychains",
+    title: "Gifts & Keepsakes",
     description:
-      "Bulk-printed custom keychains for brands, events, and personal use. Full-color logo embossing, QR code engraving, and multi-material options available.",
-    icon: KeyRound,
-    href: "#quote",
-  },
-  {
-    title: "Gifts",
-    description:
-      "Truly personal gifts manufactured on demand. Lithophanes, articulated figurines, custom nameplates, and bespoke keepsakes designed to last a lifetime.",
+      "Personalised items manufactured on demand. Lithophanes, custom nameplates, articulated figurines, and more.",
     icon: Gift,
     href: "#quote",
+    examples: ["Bespoke gifts", "Keychains", "Trophies & awards"],
   },
   {
-    title: "Replacement Parts",
+    title: "Cosplay & Props",
     description:
-      "Reverse-engineered replacement components for appliances, machinery, and everyday items. Extend product life and reduce waste with durable, printed alternatives.",
-    icon: Wrench,
-    href: "#quote",
-  },
-  {
-    title: "Home Décor",
-    description:
-      "Architectural details, vases, lamp shades, wall art, and sculptural pieces that bring industrial precision into interior spaces. Form meets function.",
-    icon: Home,
-    href: "#quote",
-  },
-  {
-    title: "Art Pieces",
-    description:
-      "Collaborate on gallery-ready sculptures, installations, and limited-edition art objects. Multi-axis printing enables complex geometries impossible with traditional methods.",
-    icon: Palette,
-    href: "#quote",
-  },
-  {
-    title: "Cosplay",
-    description:
-      "Screen-accurate props, armour pieces, helmets, and accessories. Lightweight, sandable, and paintable — ideal for conventions, film, and professional cosplay.",
+      "Screen-accurate helmets, armour, weapons, and accessories. Lightweight, sandable, and ready for paint.",
     icon: Gem,
     href: "#quote",
+    examples: ["Helmets & masks", "Armour pieces", "Prop weapons"],
   },
   {
-    title: "Industrial Components",
+    title: "Art & Sculpture",
     description:
-      "End-use production parts, jigs, fixtures, and tooling aids. Manufactured in ASA, PETG, and carbon-fibre composites for demanding shop-floor environments.",
+      "Gallery-ready installations, wall sculptures, and limited-edition art objects with complex geometries.",
+    icon: Palette,
+    href: "#quote",
+    examples: ["Wall art", "Sculptures", "Architectural details"],
+  },
+  {
+    title: "Home & Décor",
+    description:
+      "Vases, lamp shades, organisers, and decorative pieces that blend industrial precision with interior design.",
+    icon: Home,
+    href: "#quote",
+    examples: ["Pendant lamps", "Planters", "Desk organisers"],
+  },
+  {
+    title: "Business & Bulk",
+    description:
+      "Production runs, branded merchandise, point-of-sale displays, and jigs for manufacturing lines.",
     icon: Component,
     href: "#quote",
+    examples: ["POS displays", "Jigs & fixtures", "Branded merch"],
   },
 ];
 
@@ -134,9 +185,9 @@ export const materials: Material[] = [
       { label: "Outdoor Use", value: "Not recommended", icon: Sun },
       { label: "Best For", value: "Prototypes, décor, gifts", icon: Zap },
     ],
-    color: "#E63946",
-    textColor: "text-red-400",
-    borderColor: "border-red-500/20",
+    color: "#22D3EE",
+    textColor: "text-cyan-400",
+    borderColor: "border-cyan-500/20",
   },
   {
     name: "PETG",
@@ -220,27 +271,27 @@ export type Step = {
 export const steps: Step[] = [
   {
     number: "01",
-    title: "Upload Your Design",
+    title: "Tell us what you need",
     description:
-      "Drag and drop your STL, OBJ, 3MF, or STEP file. Describe your project in detail — dimensions, application, and any special requirements.",
+      "Upload a file, send a photo, or describe your idea. Choose the path that best fits your situation — we meet you where you are.",
   },
   {
     number: "02",
-    title: "Receive Quotation",
+    title: "We review and quote",
     description:
-      "Our engineers review your design within 24 hours. You'll receive a detailed quote covering material, print time, finishing, and delivery options.",
+      "Our engineers assess your project within 24 hours. You'll get a clear, itemised quote with material recommendations and timeline.",
   },
   {
     number: "03",
-    title: "Manufacturing Begins",
+    title: "We manufacture",
     description:
-      "Once confirmed, your job enters our production queue. Industrial-grade printers run 24/7 with live quality monitoring throughout the print cycle.",
+      "Once confirmed, your job enters production. Industrial-grade printers run with live quality monitoring. We keep you updated throughout.",
   },
   {
     number: "04",
-    title: "Delivery or Pickup",
+    title: "Quality check and deliver",
     description:
-      "Finished parts undergo quality inspection, post-processing, and packaging. Choose island-wide delivery or collect from our Colombo facility.",
+      "Every part is inspected, finished, and carefully packaged. Island-wide delivery or pickup from our Colombo facility — your choice.",
   },
 ];
 
@@ -361,6 +412,11 @@ export const faqs: FAQ[] = [
       "We accept STL, OBJ, 3MF, and STEP files. For assemblies, ZIP archives containing multiple files are recommended. Maximum single file size is 250 MB through our uploader. For larger projects, contact us directly.",
   },
   {
+    question: "I don't have a 3D file — can you still help?",
+    answer:
+      "Absolutely. Most of our customers don't have ready-made 3D models. You can send us a photo of a broken part, a sketch of an idea, or just describe what you need. Our team can create the model for you or guide you through the process.",
+  },
+  {
     question: "What materials can you print in?",
     answer:
       "Our current material lineup includes PLA, PETG, ABS, ASA, and TPU. Carbon-fibre-reinforced composites are available on a per-project basis. Each material has different properties — strength, flexibility, heat resistance, and UV stability — and we'll help you select the right one for your application.",
@@ -400,6 +456,19 @@ export const faqs: FAQ[] = [
     answer:
       "No. We manufacture single one-off prints as well as production runs of hundreds of units. Per-unit cost decreases with quantity, and we're happy to discuss volume pricing for recurring orders.",
   },
+];
+
+// ── Social Proof / Stats ──────────────────────────────
+export type TrustStat = {
+  label: string;
+  value: string;
+};
+
+export const trustStats: TrustStat[] = [
+  { label: "Projects Completed", value: "1,200+" },
+  { label: "Print Hours", value: "18,500+" },
+  { label: "Materials Available", value: "10+" },
+  { label: "Avg. Response Time", value: "< 12 hrs" },
 ];
 
 // ── Contact ────────────────────────────────────────────
@@ -444,7 +513,7 @@ export const footerLinks = [
       { label: "Gallery", href: "#gallery" },
       { label: "FAQ", href: "#faq" },
       { label: "Contact", href: "#contact" },
-      { label: "Get a Quote", href: "#quote" },
+      { label: "Start a Project", href: "#quote" },
     ],
   },
   {

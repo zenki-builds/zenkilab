@@ -9,6 +9,7 @@ import {
   Music2,
   MapPin,
   ExternalLink,
+  ArrowRight,
 } from "lucide-react";
 import { contactChannels } from "@/lib/constants";
 
@@ -32,11 +33,11 @@ export function ContactSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-16 lg:mb-20"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#E63946] mb-4 block">
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#22D3EE] mb-4 block">
             Contact
           </span>
           <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[600px]">
-            Let's build something together.
+            Let's make something together.
           </h2>
         </motion.div>
 
@@ -46,7 +47,7 @@ export function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[640px] mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[640px] mx-auto"
         >
           {contactChannels.map((channel, idx) => (
             <a
@@ -54,9 +55,9 @@ export function ContactSection() {
               href={channel.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-4 rounded-xl border border-white/[0.04] hover:border-[#E63946]/20 hover:bg-[#E63946]/[0.02] transition-all duration-300"
+              className="group flex items-center gap-4 p-4 rounded-xl border border-white/[0.04] hover:border-[#22D3EE]/20 hover:bg-[#22D3EE]/[0.02] transition-all duration-300"
             >
-              <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center text-neutral-400 group-hover:text-[#E63946] group-hover:border-[#E63946]/20 transition-colors duration-300 flex-shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-white/[0.02] border border-white/[0.05] flex items-center justify-center text-neutral-400 group-hover:text-[#22D3EE] group-hover:border-[#22D3EE]/20 transition-colors duration-300 flex-shrink-0">
                 {channelIcons[channel.label] || <ExternalLink className="w-5 h-5" />}
               </div>
               <div className="min-w-0 flex-1">
@@ -65,7 +66,7 @@ export function ContactSection() {
                 </p>
                 <p className="text-sm text-white truncate">{channel.value}</p>
               </div>
-              <ExternalLink className="w-3.5 h-3.5 text-neutral-700 group-hover:text-[#E63946] transition-colors duration-300 flex-shrink-0" />
+              <ExternalLink className="w-3.5 h-3.5 text-neutral-700 group-hover:text-[#22D3EE] transition-colors duration-300 flex-shrink-0" />
             </a>
           ))}
         </motion.div>
@@ -76,20 +77,24 @@ export function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="mt-16 text-center p-10 lg:p-14 rounded-2xl border border-white/[0.06] bg-white/[0.01]"
+          className="mt-16 text-center p-10 lg:p-14 rounded-2xl border border-white/[0.06] bg-[#161A20]"
         >
+          <div className="w-12 h-12 rounded-xl bg-[#22D3EE]/10 border border-[#22D3EE]/15 flex items-center justify-center mx-auto mb-5">
+            <MapPin className="w-5 h-5 text-[#22D3EE]" />
+          </div>
           <h3 className="text-2xl font-bold text-white mb-3">
-            Ready to start your project?
+            Based in Colombo, shipping island-wide
           </h3>
           <p className="text-neutral-400 mb-8 max-w-[480px] mx-auto leading-relaxed">
-            Upload your design and receive a detailed quotation within 24 hours.
-            No minimum order quantity — we print from one to thousands.
+            We're a local team serving all of Sri Lanka. Whether you're in
+            Colombo, Kandy, Galle, or Jaffna — we deliver to your doorstep.
           </p>
           <a
             href="#quote"
-            className="inline-flex items-center gap-2 bg-[#E63946] hover:bg-[#E63946]/90 text-white h-[52px] px-7 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_40px_rgba(230,57,70,0.3)]"
+            className="inline-flex items-center gap-2 bg-[#EF4444] hover:bg-[#EF4444]/90 text-white h-[52px] px-7 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.25)]"
           >
-            Get a Free Quote
+            Start Your Project
+            <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>
       </div>

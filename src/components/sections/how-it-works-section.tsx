@@ -15,7 +15,7 @@ export function HowItWorksSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-20 lg:mb-28"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#E63946] mb-4 block">
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#22D3EE] mb-4 block">
             How It Works
           </span>
           <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[700px]">
@@ -48,7 +48,7 @@ export function HowItWorksSection() {
                   style={{ direction: "ltr" }}
                 >
                   {/* Step number (mobile) */}
-                  <span className="lg:hidden text-[#E63946] text-sm font-bold tracking-[0.2em] mb-4 block">
+                  <span className="lg:hidden text-[#22D3EE] text-sm font-bold tracking-[0.2em] mb-4 block">
                     {step.number}
                   </span>
 
@@ -66,8 +66,8 @@ export function HowItWorksSection() {
                   style={{ direction: "ltr" }}
                 >
                   <div className="absolute left-1/2 -translate-x-1/2">
-                    <div className="w-14 h-14 rounded-2xl bg-[#1a1a1a] border border-white/[0.08] flex items-center justify-center shadow-[0_0_30px_rgba(230,57,70,0.1)]">
-                      <span className="text-sm font-bold text-[#E63946] tracking-widest">
+                    <div className="w-14 h-14 rounded-2xl bg-[#161A20] border border-white/[0.08] flex items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.1)]">
+                      <span className="text-sm font-bold text-[#22D3EE] tracking-widest">
                         {step.number}
                       </span>
                     </div>

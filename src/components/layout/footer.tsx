@@ -3,22 +3,22 @@ import { footerLinks } from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-[#111111]">
+    <footer className="border-t border-white/[0.06] bg-[#0F1115]">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
         {/* Top */}
         <div className="py-20 grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-[#E63946] flex items-center justify-center">
-                <span className="text-white font-bold text-xs">Z</span>
+              <div className="w-8 h-8 rounded-lg bg-[#22D3EE] flex items-center justify-center">
+                <span className="text-[#0F1115] font-bold text-xs">Z</span>
               </div>
               <span className="text-base font-semibold tracking-tight text-white">
                 Zenki Lab
               </span>
             </Link>
             <p className="text-sm text-neutral-500 leading-relaxed max-w-[220px]">
-              Premium on-demand digital manufacturing. From prototypes to production, we print the future.
+              Custom manufacturing using professional 3D printing. From ideas to finished parts — we make things for people who need things made.
             </p>
           </div>
 
