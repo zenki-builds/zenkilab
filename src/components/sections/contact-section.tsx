@@ -40,78 +40,35 @@ export function ContactSection() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Channels */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="space-y-4"
-          >
-            {contactChannels.map((channel, idx) => (
-              <a
-                key={channel.label}
-                href={channel.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 p-4 rounded-xl border border-white/[0.04] hover:border-[#E63946]/20 hover:bg-[#E63946]/[0.02] transition-all duration-300"
-              >
-                <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center text-neutral-400 group-hover:text-[#E63946] group-hover:border-[#E63946]/20 transition-colors duration-300 flex-shrink-0">
-                  {channelIcons[channel.label] || <ExternalLink className="w-5 h-5" />}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-semibold tracking-widest uppercase text-neutral-500 mb-0.5">
-                    {channel.label}
-                  </p>
-                  <p className="text-sm text-white truncate">{channel.value}</p>
-                </div>
-                <ExternalLink className="w-3.5 h-3.5 text-neutral-700 group-hover:text-[#E63946] transition-colors duration-300 flex-shrink-0" />
-              </a>
-            ))}
-          </motion.div>
-
-          {/* Map / Location */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="bg-[#1a1a1a] border border-white/[0.06] rounded-2xl overflow-hidden h-full min-h-[320px] flex flex-col"
-          >
-            {/* Map placeholder */}
-            <div className="flex-1 bg-gradient-to-br from-[#262626] to-[#1a1a1a] flex items-center justify-center relative">
-              <div className="text-center">
-                <MapPin className="w-10 h-10 text-neutral-600 mx-auto mb-3" />
-                <p className="text-sm text-neutral-500 font-medium">Colombo, Sri Lanka</p>
-                <p className="text-xs text-neutral-700 mt-1">
-                  Google Maps integration coming soon
+        {/* Contact Channels */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[640px] mx-auto"
+        >
+          {contactChannels.map((channel, idx) => (
+            <a
+              key={channel.label}
+              href={channel.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 p-4 rounded-xl border border-white/[0.04] hover:border-[#E63946]/20 hover:bg-[#E63946]/[0.02] transition-all duration-300"
+            >
+              <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center text-neutral-400 group-hover:text-[#E63946] group-hover:border-[#E63946]/20 transition-colors duration-300 flex-shrink-0">
+                {channelIcons[channel.label] || <ExternalLink className="w-5 h-5" />}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-semibold tracking-widest uppercase text-neutral-500 mb-0.5">
+                  {channel.label}
                 </p>
+                <p className="text-sm text-white truncate">{channel.value}</p>
               </div>
-              {/* Grid pattern overlay */}
-              <div
-                className="absolute inset-0 opacity-[0.03]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-                  backgroundSize: "40px 40px",
-                }}
-              />
-            </div>
-            {/* Address Bar */}
-            <div className="p-5 border-t border-white/[0.04]">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#E63946]/10 border border-[#E63946]/20 flex items-center justify-center">
-                  <MapPin className="w-4 h-4 text-[#E63946]" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-white">Zenki Lab</p>
-                  <p className="text-xs text-neutral-500">Colombo, Sri Lanka</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+              <ExternalLink className="w-3.5 h-3.5 text-neutral-700 group-hover:text-[#E63946] transition-colors duration-300 flex-shrink-0" />
+            </a>
+          ))}
+        </motion.div>
 
         {/* Bottom CTA */}
         <motion.div
