@@ -1,13 +1,36 @@
 // Cloudflare Pages Function — handles POST /api/quote
-// Sends quote submissions via MailChannels (free, Cloudflare-native)
-// No third-party API keys required — Cloudflare Workers are pre-authorized senders.
+// Sends quote submissions via MailChannels with DKIM signing.
+//
+// Requires two things set up in Cloudflare:
+//   1. DNS: TXT record at mailchannels._domainkey.zenkilab.com with the public key
+//   2. Env: DKIM_PRIVATE_KEY variable containing the RSA private key (PEM format)
 
-export const onRequestPost = async ({ request }: { request: Request }) => {
+interface Env {
+  DKIM_PRIVATE_KEY: string;
+}
+
+export const onRequestPost = async ({
+  request,
+  env,
+}: {
+  request: Request;
+  env: Env;
+}) => {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
+
+  const DKIM_PRIVATE_KEY = env.DKIM_PRIVATE_KEY;
+
+  if (!DKIM_PRIVATE_KEY) {
+    console.error("DKIM_PRIVATE_KEY environment variable is not set");
+    return new Response(
+      JSON.stringify({ error: "Server not configured — missing DKIM key" }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
 
   let body: {
     name: string;
@@ -33,8 +56,17 @@ export const onRequestPost = async ({ request }: { request: Request }) => {
   }
 
   const {
-    name, email, phone, country, material,
-    color, quantity, layerHeight, notes, desiredDate, fileCount,
+    name,
+    email,
+    phone,
+    country,
+    material,
+    color,
+    quantity,
+    layerHeight,
+    notes,
+    desiredDate,
+    fileCount,
   } = body;
 
   if (!name || !email || !material) {
@@ -97,6 +129,9 @@ ${rows}
         personalizations: [
           {
             to: [{ email: "zenkilabhq@gmail.com", name: "Zenki Lab" }],
+            dkim_domain: "zenkilab.com",
+            dkim_selector: "mailchannels",
+            dkim_private_key: DKIM_PRIVATE_KEY,
           },
         ],
         from: {
