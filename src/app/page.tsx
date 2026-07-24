@@ -6,6 +6,7 @@ import { AboutSection } from "@/components/sections/about-section";
 import { MaterialsSection } from "@/components/sections/materials-section";
 import { HowItWorksSection } from "@/components/sections/how-it-works-section";
 import { GallerySection } from "@/components/sections/gallery-section";
+import { PrinterAnimationSection } from "@/components/sections/printer-animation-section";
 import { QuoteSection } from "@/components/sections/quote-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { ContactSection } from "@/components/sections/contact-section";
@@ -21,6 +22,7 @@ export default function Home() {
         <MaterialsSection />
         <HowItWorksSection />
         <GallerySection />
+        <PrinterAnimationSection />
         <QuoteSection />
         <FAQSection />
         <ContactSection />

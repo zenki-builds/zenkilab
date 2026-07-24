@@ -191,3 +191,103 @@ html {
     linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
 }
+
+/* ═══════════════════════════════════════════════════════
+   Part A — Hero Signature Mark
+   ═══════════════════════════════════════════════════════ */
+
+/* Draw-in: stroke-dasharray covers full path, animated to 0 offset */
+#hero-signature-mark .mark-stroke {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  opacity: 0;
+}
+
+#hero-signature-mark.drawn .mark-stroke {
+  animation: hero-mark-draw 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 1;
+}
+
+#hero-signature-mark.drawn .mark-stroke.mark-accent {
+  animation-delay: 0.22s;
+}
+
+@keyframes hero-mark-draw {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Idle pulse on nozzle dot after draw-in completes */
+#hero-signature-mark .mark-dot {
+  opacity: 0.6;
+}
+
+#hero-signature-mark.drawn .mark-dot {
+  animation: hero-dot-pulse 3.2s ease-in-out 1.6s infinite;
+}
+
+@keyframes hero-dot-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Part B — Printer Build Sequence
+   ═══════════════════════════════════════════════════════ */
+
+/* Blueprint grid behind the printer SVG */
+.printer-blueprint-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, var(--accent) 0.5px, transparent 0.5px),
+    linear-gradient(to bottom, var(--accent) 0.5px, transparent 0.5px);
+  opacity: 0.025;
+}
+
+/* Printer SVG stroke defaults */
+#printer-illustration .printer-outline {
+  stroke: var(--muted-foreground);
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#printer-illustration .printer-accent {
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#printer-illustration .printer-accent-fill {
+  fill: color-mix(in srgb, var(--accent) 70%, white);
+}
+
+/* ═══════════════════════════════════════════════════════
+   prefers-reduced-motion
+   ═══════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  #hero-signature-mark .mark-stroke {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    animation: none !important;
+  }
+
+  #hero-signature-mark .mark-dot {
+    opacity: 0.8;
+    animation: none !important;
+  }
+
+  #printer-illustration .printer-outline,
+  #printer-illustration .printer-accent {
+    animation: none !important;
+    transition: none !important;
+  }
+}

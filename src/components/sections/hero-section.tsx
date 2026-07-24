@@ -18,8 +18,19 @@ interface Particle {
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const markRef = useRef<HTMLDivElement>(null);
   const [showJourneys, setShowJourneys] = useState(false);
   const particlesRef = useRef<Particle[]>([]);
+
+  /* Trigger hero signature mark draw-in on mount */
+  useEffect(() => {
+    const mark = markRef.current;
+    if (!mark) return;
+    const timer = setTimeout(() => {
+      mark.classList.add("drawn");
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -171,6 +182,80 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
+          {/* Hero Signature Mark — small line-art motif above headline */}
+          <div ref={markRef} className="mb-6 flex justify-center" aria-hidden="true">
+            <svg
+              id="hero-signature-mark"
+              width="72"
+              height="64"
+              viewBox="0 0 72 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[56px] h-[50px] sm:w-[72px] sm:h-[64px]"
+            >
+              {/* Outline: nozzle body + partial shape beneath */}
+              <g id="mark-outline">
+                {/* Nozzle body */}
+                <path
+                  className="mark-stroke"
+                  d="M36 8 L26 28 L46 28 Z"
+                  stroke="var(--muted-foreground)"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                {/* Nozzle tip */}
+                <path
+                  className="mark-stroke"
+                  d="M30 28 L36 38 L42 28"
+                  stroke="var(--muted-foreground)"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                {/* Pendant stroke lines — partial shape suggesting a forming print */}
+                <path
+                  className="mark-stroke"
+                  d="M22 46 Q36 42 50 46"
+                  stroke="var(--muted-foreground)"
+                  strokeWidth="1.2"
+                  fill="none"
+                />
+                <path
+                  className="mark-stroke"
+                  d="M26 52 Q36 48 46 52"
+                  stroke="var(--muted-foreground)"
+                  strokeWidth="1.2"
+                  fill="none"
+                />
+              </g>
+              {/* Accent: nozzle tip dot + single highlight line */}
+              <g id="mark-accent">
+                {/* Small accent line on the nozzle */}
+                <path
+                  className="mark-stroke mark-accent"
+                  d="M33 16 L33 24"
+                  stroke="var(--accent)"
+                  strokeWidth="1.2"
+                  fill="none"
+                />
+                <path
+                  className="mark-stroke mark-accent"
+                  d="M39 16 L39 24"
+                  stroke="var(--accent)"
+                  strokeWidth="1.2"
+                  fill="none"
+                />
+                {/* Nozzle tip dot — pulses after draw-in */}
+                <circle
+                  className="mark-dot"
+                  cx="36"
+                  cy="38"
+                  r="2"
+                  fill="var(--accent)"
+                />
+              </g>
+            </svg>
+          </div>
+
           {/* Heading */}
           <h1 className="text-[clamp(2.75rem,7vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white mb-6 max-w-[900px] mx-auto">
             Built by makers,
