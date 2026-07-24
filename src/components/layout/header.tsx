@@ -33,13 +33,10 @@ export function Header() {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
         <nav className="flex items-center justify-between h-[72px]">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-lg bg-[#22D3EE] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <span className="text-[#0F1115] font-bold text-sm tracking-tight">Z</span>
-            </div>
-            <span className="text-lg font-semibold tracking-tight text-white">
-              Zenki Lab
+          {/* Logo — typography only, no placeholder icon */}
+          <Link href="/" className="flex items-center group">
+            <span className="text-xl font-bold tracking-[-0.02em] text-white">
+              ZENKI<span className="text-[#22D3EE]">LAB</span>
             </span>
           </Link>
 

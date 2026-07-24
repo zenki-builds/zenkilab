@@ -21,6 +21,9 @@ export function HowItWorksSection() {
           <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[700px]">
             From idea to finished part in four steps.
           </h2>
+          <p className="text-neutral-500 text-lg mt-4 max-w-[600px] leading-relaxed">
+            Clear communication, honest timelines, and parts that fit — every single time.
+          </p>
         </motion.div>
 
         {/* Timeline */}

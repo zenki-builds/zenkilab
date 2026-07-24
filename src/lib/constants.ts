@@ -68,13 +68,6 @@ export const projectJourneys: ProjectJourney[] = [
 ];
 
 // ── Services ──────────────────────────────────────────
-export type ServiceCategory = {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  items: string[];
-};
-
 export type Service = {
   title: string;
   description: string;
@@ -85,76 +78,68 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    title: "Functional Parts",
+    title: "Automotive Parts",
     description:
-      "Replacement components, brackets, mounts, and mechanical parts that actually work — not just look like they work.",
-    icon: Cog,
-    href: "#quote",
-    examples: ["Gears & sprockets", "Mounting brackets", "Clips & fasteners"],
-  },
-  {
-    title: "Automotive",
-    description:
-      "High-temperature, chemical-resistant components for engine bays, interiors, and custom fabrication projects.",
+      "Hard-to-find clips, brackets, and interior trim pieces for restoration and custom builds. High-temperature materials that survive engine bays.",
     icon: Car,
     href: "#quote",
-    examples: ["Intake manifolds", "Gauge pods", "Interior trim clips"],
+    examples: ["Gauge pods", "Interior trim clips", "Intake components"],
   },
   {
-    title: "Electronics",
+    title: "Replacement Parts",
     description:
-      "Custom enclosures, mounting plates, and internal chassis with precise cutouts for PCBs, ports, and ventilation.",
-    icon: Cpu,
+      "Broke something you can't buy anymore? Send us the original or a photo with measurements. We'll reverse-engineer and manufacture a perfect match.",
+    icon: KeyRound,
     href: "#quote",
-    examples: ["Project boxes", "PCB enclosures", "Sensor housings"],
+    examples: ["Vintage knobs", "Broken clips", "Obsolete fittings"],
   },
   {
-    title: "Prototypes",
+    title: "Die-cast Modifications",
     description:
-      "Test fit, form, and function before committing to expensive tooling. Turn CAD into physical parts in days.",
+      "Body kits, wheel swaps, and custom accessories for die-cast collectors. Precise, clean prints that match your collection's scale and finish.",
+    icon: Gem,
+    href: "#quote",
+    examples: ["Wheels & tyres", "Body kits", "Display stands"],
+  },
+  {
+    title: "Engineering Prototypes",
+    description:
+      "Test fit, form, and function before committing to expensive tooling. Turn CAD concepts into physical parts in days, not weeks.",
     icon: FlaskConical,
     href: "#quote",
     examples: ["Product mockups", "Engineering samples", "Fitment checks"],
   },
   {
-    title: "Gifts & Keepsakes",
+    title: "Functional Parts",
     description:
-      "Personalised items manufactured on demand. Lithophanes, custom nameplates, articulated figurines, and more.",
+      "Gears, brackets, mounts, and mechanical components that actually work under load. Designed for real-world use, not just display.",
+    icon: Cog,
+    href: "#quote",
+    examples: ["Gears & sprockets", "Mounting brackets", "Clips & fasteners"],
+  },
+  {
+    title: "Custom Gifts",
+    description:
+      "Personalised keepsakes, trophies, and one-off creations that feel thoughtful and intentional. Made to order with attention to every detail.",
     icon: Gift,
     href: "#quote",
-    examples: ["Bespoke gifts", "Keychains", "Trophies & awards"],
+    examples: ["Bespoke gifts", "Trophies & awards", "Personalised keychains"],
   },
   {
-    title: "Cosplay & Props",
+    title: "Décor & Home",
     description:
-      "Screen-accurate helmets, armour, weapons, and accessories. Lightweight, sandable, and ready for paint.",
-    icon: Gem,
-    href: "#quote",
-    examples: ["Helmets & masks", "Armour pieces", "Prop weapons"],
-  },
-  {
-    title: "Art & Sculpture",
-    description:
-      "Gallery-ready installations, wall sculptures, and limited-edition art objects with complex geometries.",
-    icon: Palette,
-    href: "#quote",
-    examples: ["Wall art", "Sculptures", "Architectural details"],
-  },
-  {
-    title: "Home & Décor",
-    description:
-      "Vases, lamp shades, organisers, and decorative pieces that blend industrial precision with interior design.",
+      "Vases, lamp shades, organisers, and decorative objects that blend industrial precision with interior design. Beautiful things for everyday spaces.",
     icon: Home,
     href: "#quote",
     examples: ["Pendant lamps", "Planters", "Desk organisers"],
   },
   {
-    title: "Business & Bulk",
+    title: "One-off Custom Prints",
     description:
-      "Production runs, branded merchandise, point-of-sale displays, and jigs for manufacturing lines.",
-    icon: Component,
+      "Cosplay props, art pieces, architectural models, or anything you can dream up. If it can be printed, we'll help you make it real.",
+    icon: Palette,
     href: "#quote",
-    examples: ["POS displays", "Jigs & fixtures", "Branded merch"],
+    examples: ["Cosplay helmets", "Wall sculptures", "Architectural models"],
   },
 ];
 
@@ -466,9 +451,48 @@ export type TrustStat = {
 
 export const trustStats: TrustStat[] = [
   { label: "Projects Completed", value: "1,200+" },
-  { label: "Print Hours", value: "18,500+" },
   { label: "Materials Available", value: "10+" },
-  { label: "Avg. Response Time", value: "< 12 hrs" },
+  { label: "Machines", value: "6" },
+  { label: "Years Building", value: "4+" },
+];
+
+// ── About ─────────────────────────────────────────────
+export const aboutText = {
+  heading: "Built by makers, for makers.",
+  paragraph1:
+    "Zenki Lab began in a workshop solving real-world problems. What started as a way to manufacture custom parts for automotive restoration grew into a workshop dedicated to helping makers, enthusiasts and creators bring their ideas into reality.",
+  paragraph2:
+    "Every project deserves the same care we'd expect for our own. Honest advice, clear communication, and parts that fit — every time.",
+};
+
+// ── Coming Soon ───────────────────────────────────────
+export type ComingSoonFeature = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+export const comingSoonFeatures: ComingSoonFeature[] = [
+  {
+    title: "Customer Dashboard",
+    description: "Track your orders and project history in one place.",
+    icon: FileText,
+  },
+  {
+    title: "Live Print Monitoring",
+    description: "Watch your parts being manufactured in real time.",
+    icon: Camera,
+  },
+  {
+    title: "Timelapse Downloads",
+    description: "Get a timelapse video of your print from start to finish.",
+    icon: Camera,
+  },
+  {
+    title: "Online Quote System",
+    description: "Instant quotes powered by automated file analysis.",
+    icon: Zap,
+  },
 ];
 
 // ── Contact ────────────────────────────────────────────

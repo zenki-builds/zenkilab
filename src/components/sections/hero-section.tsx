@@ -171,27 +171,23 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] bg-white/[0.02] mb-8 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#22D3EE] animate-pulse" />
-            <span className="text-xs font-medium tracking-[0.15em] uppercase text-neutral-400">
-              Custom Manufacturing
-            </span>
-          </div>
-
           {/* Heading */}
           <h1 className="text-[clamp(2.75rem,7vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white mb-6 max-w-[900px] mx-auto">
-            If you can imagine it,
+            Built by makers,
             <br />
-            <span className="text-[#22D3EE]">we can print it.</span>
+            <span className="text-[#22D3EE]">for makers.</span>
           </h1>
 
-          {/* Subtext — human, natural, explains what we do */}
-          <p className="text-lg lg:text-xl text-neutral-400 max-w-[680px] mx-auto mb-10 leading-relaxed">
-            Upload a model, send us a photo of a broken part, or just tell us
-            your idea. We manufacture custom parts, prototypes, gifts, and
-            products using professional 3D printing — no minimum order, no
-            confusing jargon.
+          {/* Subtext — explains what the workshop does, natural language */}
+          <p className="text-lg lg:text-xl text-neutral-400 max-w-[680px] mx-auto mb-6 leading-relaxed">
+            Zenki Lab helps makers, enthusiasts and businesses bring their ideas
+            into the real world through reliable, precision 3D printing.
+          </p>
+
+          <p className="text-base text-neutral-500 max-w-[600px] mx-auto mb-10 leading-relaxed">
+            Whether it's a hard-to-find automotive part, a custom prototype, a
+            die-cast modification or a one-off creation, every project receives
+            the same care we'd expect for our own.
           </p>
 
           {/* Primary CTA — "Start Your Project" */}
@@ -204,16 +200,16 @@ export function HeroSection() {
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="#services"
+              href="#gallery"
               className="inline-flex items-center gap-2.5 border border-white/[0.08] hover:border-[#22D3EE]/30 hover:bg-[#22D3EE]/[0.03] text-neutral-300 hover:text-white h-[52px] px-7 rounded-xl text-sm font-medium transition-all duration-300"
             >
-              See What We Make
+              Explore Our Work
             </a>
           </div>
 
           {/* Trust indicators — subtle */}
           <p className="text-xs text-neutral-600">
-            1,200+ projects completed &middot; 10+ materials &middot; Free quotes in 24 hrs
+            1,200+ projects completed &middot; 10+ materials &middot; 6 machines &middot; Free quotes in 24 hrs
           </p>
         </motion.div>
 
