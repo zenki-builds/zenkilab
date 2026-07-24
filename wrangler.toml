@@ -1,6 +1,0 @@
-name = "zenkilab"
-compatibility_date = "2026-07-24"
-
-# Workers static assets — serves the exported Next.js build
-[assets]
-directory = "./out"
