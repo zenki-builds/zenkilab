@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -67,12 +67,19 @@ const quantities = [
 ];
 
 export function QuoteSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (submitted) {
+      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [submitted]);
 
   const {
     register,
@@ -160,7 +167,7 @@ export function QuoteSection() {
   };
 
   return (
-    <section id="quote" className="relative py-32 lg:py-40 border-t border-white/[0.04]">
+    <section id="quote" ref={sectionRef} className="relative py-32 lg:py-40 border-t border-white/[0.04]">
       <div className="max-w-[960px] mx-auto px-6 lg:px-12">
         {/* Header */}
         <motion.div
