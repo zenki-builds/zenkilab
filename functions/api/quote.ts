@@ -1,20 +1,8 @@
 // Cloudflare Pages Function — handles POST /api/quote
-// Sends quote submissions via Resend to zenkilabhq@gmail.com
+// Sends quote submissions via MailChannels (free, Cloudflare-native)
+// No third-party API keys required — Cloudflare Workers are pre-authorized senders.
 
-interface Env {
-  RESEND_API_KEY: string;
-}
-
-export const onRequestPost = async ({ request, env }: { request: Request; env: Env }) => {
-  const RESEND_API_KEY = env.RESEND_API_KEY;
-
-  if (!RESEND_API_KEY) {
-    return new Response(JSON.stringify({ error: "Server not configured" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
+export const onRequestPost = async ({ request }: { request: Request }) => {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -44,7 +32,10 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     });
   }
 
-  const { name, email, phone, country, material, color, quantity, layerHeight, notes, desiredDate, fileCount } = body;
+  const {
+    name, email, phone, country, material,
+    color, quantity, layerHeight, notes, desiredDate, fileCount,
+  } = body;
 
   if (!name || !email || !material) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -74,19 +65,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     )
     .join("");
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Zenki Lab <quote@zenkilab.com>",
-        to: ["zenkilabhq@gmail.com"],
-        reply_to: email,
-        subject: `New Quote Request from ${name}`,
-        html: `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;background:#0F1115;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
@@ -108,13 +87,37 @@ ${rows}
 </td></tr>
 </table>
 </body>
-</html>`,
+</html>`;
+
+  try {
+    const res = await fetch("https://api.mailchannels.net/tx/v1/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: "zenkilabhq@gmail.com", name: "Zenki Lab" }],
+            dkim_domain: "zenkilab.com",
+            dkim_selector: "mailchannels",
+            dkim_private_key: "[set-in-cloudflare-env]",
+          },
+        ],
+        from: {
+          email: "quote@zenkilab.com",
+          name: "Zenki Lab",
+        },
+        subject: `New Quote Request from ${name}`,
+        content: [
+          { type: "text/plain", value: `New quote request from ${name} (${email}). Phone: ${phone}. Material: ${material}. Notes: ${notes || "None"}.` },
+          { type: "text/html", value: html },
+        ],
+        reply_to: { email, name },
       }),
     });
 
     if (!res.ok) {
       const err = await res.text();
-      console.error("Resend error:", err);
+      console.error("MailChannels error:", err);
       return new Response(JSON.stringify({ error: "Failed to send email" }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
