@@ -1,5 +1,6 @@
 name = "zenkilab"
 compatibility_date = "2026-07-24"
 
-# Cloudflare Pages — static assets deployment
-pages_build_output_dir = "out"
+# Workers static assets — serves the exported Next.js build
+[assets]
+directory = "./out"
