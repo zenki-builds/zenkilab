@@ -97,9 +97,6 @@ ${rows}
         personalizations: [
           {
             to: [{ email: "zenkilabhq@gmail.com", name: "Zenki Lab" }],
-            dkim_domain: "zenkilab.com",
-            dkim_selector: "mailchannels",
-            dkim_private_key: "[set-in-cloudflare-env]",
           },
         ],
         from: {
@@ -108,7 +105,10 @@ ${rows}
         },
         subject: `New Quote Request from ${name}`,
         content: [
-          { type: "text/plain", value: `New quote request from ${name} (${email}). Phone: ${phone}. Material: ${material}. Notes: ${notes || "None"}.` },
+          {
+            type: "text/plain",
+            value: `New quote request from ${name} (${email}).\nPhone: ${phone}\nMaterial: ${material}\nQuantity: ${quantity}\nColor: ${color}\nNotes: ${notes || "None"}\nFiles: ${fileCount || 0}`,
+          },
           { type: "text/html", value: html },
         ],
         reply_to: { email, name },
