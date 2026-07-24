@@ -18,7 +18,7 @@ interface Particle {
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const markRef = useRef<HTMLDivElement>(null);
+  const markRef = useRef<SVGSVGElement>(null);
   const [showJourneys, setShowJourneys] = useState(false);
   const particlesRef = useRef<Particle[]>([]);
 
@@ -183,9 +183,10 @@ export function HeroSection() {
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {/* Hero Signature Mark — small line-art motif above headline */}
-          <div ref={markRef} className="mb-6 flex justify-center" aria-hidden="true">
+          <div className="mb-6 flex justify-center" aria-hidden="true">
             <svg
               id="hero-signature-mark"
+              ref={markRef}
               width="72"
               height="64"
               viewBox="0 0 72 64"
