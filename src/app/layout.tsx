@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     "on-demand manufacturing",
   ],
   authors: [{ name: "Zenki Lab" }],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "Zenki Lab · Premium Digital Manufacturing",
     description:
@@ -35,6 +40,7 @@ export const metadata: Metadata = {
     siteName: "Zenki Lab",
     locale: "en_US",
     type: "website",
+    images: ["/favicon.svg"],
   },
   robots: {
     index: true,
@@ -53,6 +59,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      </head>
       <body className="min-h-screen bg-[#0F1115] text-white font-sans">
         {children}
       </body>
