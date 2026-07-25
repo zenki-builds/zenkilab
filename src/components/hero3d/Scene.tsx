@@ -16,15 +16,37 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-function CameraRig({ mouse }: { mouse: React.RefObject<{ x: number; y: number }> }) {
+function CameraRig({
+  mouse,
+  isMobile,
+  mobileScrollProgress = 0,
+}: {
+  mouse: React.RefObject<{ x: number; y: number }>;
+  isMobile: boolean;
+  mobileScrollProgress?: number;
+}) {
   const { camera } = useThree();
 
   useFrame(() => {
-    const targetX = 4.1 + mouse.current.x * 0.2;
-    const targetY = 3.0 + mouse.current.y * -0.1;
-    camera.position.x += (targetX - camera.position.x) * 0.04;
-    camera.position.y += (targetY - camera.position.y) * 0.04;
-    camera.lookAt(4.0, 0.35, -0.58);
+    if (isMobile) {
+      // Camera drops from filament level to bed level as user scrolls
+      const camY = 2.0 - mobileScrollProgress * 1.5; // 2.0 → 0.5
+      const lookY = 1.5 - mobileScrollProgress * 2.0; // 1.5 → -0.5 (bed level)
+      const lookZ = 0 + mobileScrollProgress * 0.2;
+
+      const targetX = 0 + mouse.current.x * 0.08;
+      const targetY = camY + mouse.current.y * -0.03;
+
+      camera.position.x += (targetX - camera.position.x) * 0.03;
+      camera.position.y += (targetY - camera.position.y) * 0.03;
+      camera.lookAt(0, lookY, lookZ);
+    } else {
+      const targetX = 4.1 + mouse.current.x * 0.2;
+      const targetY = 3.0 + mouse.current.y * -0.1;
+      camera.position.x += (targetX - camera.position.x) * 0.04;
+      camera.position.y += (targetY - camera.position.y) * 0.04;
+      camera.lookAt(4.0, 0.35, -0.58);
+    }
   });
 
   return null;
@@ -53,9 +75,16 @@ function ScrollRig({ sceneRoot }: { sceneRoot: React.RefObject<Group | null> }) 
   return null;
 }
 
-export function Scene() {
+export function Scene({
+  renderOnly,
+  mobileScrollProgress = 0,
+}: {
+  renderOnly?: "phone-hologram" | "printer";
+  mobileScrollProgress?: number;
+}) {
   const mouse = useMouseParallax();
   const sceneRoot = useRef<Group>(null);
+  const isMobile = typeof renderOnly !== "undefined";
 
   return (
     <Canvas
@@ -66,7 +95,11 @@ export function Scene() {
         powerPreference: "high-performance",
         localClippingEnabled: true,
       }}
-      camera={{ position: [4.1, 3.0, 5.5], fov: 42 }}
+      camera={
+        isMobile
+          ? { position: [0, 2.0, 4.0], fov: 48 }
+          : { position: [4.1, 3.0, 5.5], fov: 42 }
+      }
       frameloop="always"
     >
       <ambientLight intensity={0.25} color="#102A38" />
@@ -74,19 +107,36 @@ export function Scene() {
       <pointLight position={[-2, 1.5, 2]} intensity={0.9} color="#22D3EE" distance={7} />
       <pointLight position={[2, -0.5, 1.8]} intensity={0.6} color="#0EA5B7" distance={6} />
       <pointLight position={[0, -1, 1]} intensity={0.4} color="#0284C7" distance={5} />
-      <pointLight position={[6.0, 2.5, -1.08]} intensity={2.2} color="#fff5eb" distance={8} decay={1.2} />
-      {/* Right-side warm light aimed at printer bed — invisible source */}
-      <pointLight position={[8.5, -0.5, -1.08]} intensity={1.8} color="#fff5ee" distance={6} decay={1.2} />
+
+      {(!renderOnly || renderOnly === "printer") && (
+        <>
+          <pointLight position={[6.0, 2.5, -1.08]} intensity={2.2} color="#fff5eb" distance={8} decay={1.2} />
+          <pointLight position={[8.5, -0.5, -1.08]} intensity={1.8} color="#fff5ee" distance={6} decay={1.2} />
+        </>
+      )}
+
       <group ref={sceneRoot}>
-        <group rotation={[0, -10 * (Math.PI / 180), 0]}>
-          <Printer mouse={mouse} position={[6.0, -0.72, -1.08]} />
-          <Phone position={[4.5, -0.22, -1.35]} />
-          <Hologram position={[4.5, 0.2, -1.35]} />
-          <Particles />
+        <group rotation={isMobile ? undefined : [0, -10 * (Math.PI / 180), 0]}>
+          {(!renderOnly || renderOnly === "printer") && (
+            <group scale={isMobile ? 0.8 : 1}>
+              <Printer
+                mouse={mouse}
+                position={isMobile ? [0, -1.2, 0] : [6.0, -0.72, -1.08]}
+              />
+            </group>
+          )}
+
+          {(!renderOnly || renderOnly === "phone-hologram") && (
+            <group scale={isMobile ? 0.85 : 1}>
+              <Phone position={isMobile ? [0, -0.1, 0] : [4.5, -0.22, -1.35]} />
+              <Hologram position={isMobile ? [0, 0.3, 0] : [4.5, 0.2, -1.35]} />
+              <Particles />
+            </group>
+          )}
         </group>
       </group>
 
-      <CameraRig mouse={mouse} />
+      <CameraRig mouse={mouse} isMobile={isMobile} mobileScrollProgress={mobileScrollProgress} />
       <ScrollRig sceneRoot={sceneRoot} />
 
       <EffectComposer multisampling={0}>
