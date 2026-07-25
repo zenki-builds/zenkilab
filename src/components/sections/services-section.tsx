@@ -23,23 +23,26 @@ const item = {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-32 lg:py-40">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+    <section id="services" className="relative py-24 lg:py-28 bg-white">
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-16 lg:mb-20"
+          className="mb-14 lg:mb-16"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#22D3EE] mb-4 block">
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
             What We Manufacture
           </span>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[700px]">
+          <h2
+            className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]"
+            style={{ color: "#0F172A" }}
+          >
             Pretty much anything you can dream up.
           </h2>
-          <p className="text-neutral-500 text-lg mt-4 max-w-[600px] leading-relaxed">
+          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#64748B" }}>
             From functional engineering parts to art pieces and cosplay props.
             If it can be printed, we can make it.
           </p>
@@ -51,27 +54,31 @@ export function ServicesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {services.map((service) => (
             <motion.a
               key={service.title}
               href={service.href}
               variants={item}
-              className="group relative bg-[#161A20] border border-white/[0.04] rounded-2xl p-7 lg:p-8 transition-all duration-400 hover:border-[#22D3EE]/20 hover:bg-[#22D3EE]/[0.02] hover:-translate-y-[2px]"
+              className="group relative rounded-2xl p-7 lg:p-8 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-lg"
+              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
             >
               {/* Icon */}
-              <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center mb-5 group-hover:bg-[#22D3EE]/10 group-hover:border-[#22D3EE]/20 transition-all duration-300">
-                <service.icon className="w-5 h-5 text-neutral-400 group-hover:text-[#22D3EE] transition-colors duration-300" />
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
+                style={{ backgroundColor: "#FFF7ED" }}
+              >
+                <service.icon className="w-5 h-5 transition-colors duration-300" style={{ color: "#F97316" }} />
               </div>
 
               {/* Title */}
-              <h3 className="text-base font-semibold text-white mb-2 tracking-[-0.01em]">
+              <h3 className="text-base font-semibold mb-2 tracking-[-0.01em]" style={{ color: "#0F172A" }}>
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-neutral-500 leading-relaxed mb-4">
+              <p className="text-sm leading-relaxed mb-4" style={{ color: "#64748B" }}>
                 {service.description}
               </p>
 
@@ -80,7 +87,8 @@ export function ServicesSection() {
                 {service.examples.map((ex) => (
                   <span
                     key={ex}
-                    className="text-[11px] px-2 py-0.5 rounded-md bg-white/[0.02] border border-white/[0.04] text-neutral-500 group-hover:border-[#22D3EE]/15 group-hover:text-neutral-400 transition-colors duration-300"
+                    className="text-[11px] px-2 py-0.5 rounded-md"
+                    style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0", color: "#64748B" }}
                   >
                     {ex}
                   </span>
@@ -88,7 +96,10 @@ export function ServicesSection() {
               </div>
 
               {/* CTA */}
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-600 group-hover:text-[#22D3EE] transition-colors duration-300">
+              <span
+                className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors duration-300"
+                style={{ color: "#F97316" }}
+              >
                 Start a Project
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
               </span>
