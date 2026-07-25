@@ -7,9 +7,8 @@ import { projectJourneys } from "@/lib/constants";
 
 /**
  * ═══════════════════════════════════════════════════════
- * Hero Section — Light Industrial 2-Column Layout
- * Headline & CTAs on the left, printer visual pushed
- * to the right corner. How It Works stack removed.
+ * Hero Section — Full Viewport Screen Layout (min-h-screen)
+ * Headline & CTAs on the left, enlarged printer animation on right
  * ═══════════════════════════════════════════════════════
  */
 
@@ -18,8 +17,8 @@ export function HeroSection() {
   const journeyIcons = [FileText, Camera, Lightbulb, Sparkles];
 
   return (
-    <section id="home" className="relative pt-28 pb-16 lg:pt-32 lg:pb-24 bg-white overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
+    <section id="home" className="relative min-h-screen flex items-center pt-24 pb-12 lg:pt-28 lg:pb-16 bg-white overflow-hidden">
+      <div className="max-w-[1280px] w-full mx-auto px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* ── LEFT: Headline & CTAs (col-span-6) ── */}
           <motion.div
@@ -29,44 +28,44 @@ export function HeroSection() {
             className="lg:col-span-6 text-center lg:text-left"
           >
             <h1
-              className="text-[clamp(2.25rem,4vw,3.25rem)] font-extrabold leading-[1.1] tracking-[-0.02em] mb-6"
+              className="text-[clamp(2.5rem,4.8vw,3.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em] mb-6"
               style={{ color: "#0F172A" }}
             >
               PRECISION 3D PRINTING FOR CUSTOM AUTOMOTIVE PARTS
             </h1>
 
-            <p className="text-lg leading-relaxed mb-8 max-w-[540px] mx-auto lg:mx-0" style={{ color: "#64748B" }}>
+            <p className="text-lg lg:text-xl leading-relaxed mb-8 max-w-[560px] mx-auto lg:mx-0" style={{ color: "#64748B" }}>
               Built by makers, for makers. We manufacture custom parts, prototypes, and one-off projects directly from your 3D models.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
+            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 h-[48px] px-6 rounded-lg text-sm font-semibold border transition-colors duration-200"
+                className="inline-flex items-center justify-center gap-2 h-[52px] px-7 rounded-xl text-base font-semibold border transition-colors duration-200 w-full sm:w-auto"
                 style={{ borderColor: "#CBD5E1", color: "#0F172A", backgroundColor: "#FFFFFF" }}
               >
-                <Settings2 className="w-4 h-4" />
+                <Settings2 className="w-5 h-5" />
                 Explore Services
               </a>
               <button
                 onClick={() => setShowJourneys(true)}
-                className="inline-flex items-center gap-2 h-[48px] px-6 rounded-lg text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 h-[52px] px-7 rounded-xl text-base font-semibold text-white transition-transform duration-200 hover:scale-[1.02] w-full sm:w-auto"
                 style={{ backgroundColor: "#F97316" }}
               >
-                <Zap className="w-4 h-4" />
+                <Zap className="w-5 h-5" />
                 Get Instant Quote
               </button>
             </div>
           </motion.div>
 
-          {/* ── RIGHT CORNER: Animated 3D Printer Visual (col-span-6) ── */}
+          {/* ── RIGHT CORNER: Enlarged Animated 3D Printer Visual (col-span-6) ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96, x: 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="lg:col-span-6 flex items-center justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[500px] aspect-square">
+            <div className="relative w-full max-w-[560px] lg:max-w-[600px] aspect-square">
               <svg
                 viewBox="0 0 500 500"
                 width="100%"
