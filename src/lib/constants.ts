@@ -1,22 +1,15 @@
 import {
   Cog,
   Car,
-  Cpu,
   FlaskConical,
-  KeyRound,
   Gift,
-  Wrench,
   Home,
-  Palette,
-  Component,
   Gem,
   type LucideIcon,
   Shield,
   Thermometer,
   Sun,
   Zap,
-  Droplets,
-  Leaf,
   FileText,
   Camera,
   Lightbulb,
@@ -34,36 +27,36 @@ export type ProjectJourney = {
 
 export const projectJourneys: ProjectJourney[] = [
   {
-    title: "I already have an STL file",
+    title: "I have an STL file ready",
     description:
-      "Upload your 3D model and we'll review it for printability, material recommendations, and pricing within 24 hours.",
+      "Upload your 3D model. We'll review it for printability, recommend a material, and send you a quote within 24 hours.",
     icon: FileText,
     href: "#quote",
-    color: "#22D3EE",
+    color: "#F97316",
   },
   {
-    title: "I have a broken part",
+    title: "I need a custom part printed",
     description:
-      "Send us a photo and measurements of the part you need replaced. We'll reverse-engineer and manufacture a perfect replacement.",
-    icon: Camera,
-    href: "#quote",
-    color: "#22D3EE",
-  },
-  {
-    title: "I have an idea",
-    description:
-      "Describe what you want to make. Our engineers will help you refine the concept, create a model, and bring it to life.",
-    icon: Lightbulb,
-    href: "#quote",
-    color: "#22D3EE",
-  },
-  {
-    title: "I want something custom",
-    description:
-      "One-off gifts, art pieces, cosplay props, or anything you can dream up. We'll work with you from sketch to finished product.",
+      "If you have a 3D model, we can manufacture it. Upload your file and tell us about your project.",
     icon: Sparkles,
     href: "#quote",
-    color: "#22D3EE",
+    color: "#F97316",
+  },
+  {
+    title: "I have a broken or missing part",
+    description:
+      "If you already have an STL file for the replacement, upload it and we'll print it. If not, contact us — CAD and reverse-engineering may be available in the future.",
+    icon: Camera,
+    href: "#contact",
+    color: "#F97316",
+  },
+  {
+    title: "I'm not sure where to start",
+    description:
+      "No problem. Get in touch and describe what you're trying to do. We'll give you honest advice on whether 3D printing is the right solution.",
+    icon: Lightbulb,
+    href: "#contact",
+    color: "#F97316",
   },
 ];
 
@@ -80,18 +73,18 @@ export const services: Service[] = [
   {
     title: "Automotive Parts",
     description:
-      "Hard-to-find clips, brackets, and interior trim pieces for restoration and custom builds. High-temperature materials that survive engine bays.",
+      "Clips, brackets, trim pieces, and functional components for restoration and custom builds. Printed in materials that handle heat and daily use.",
     icon: Car,
     href: "#quote",
-    examples: ["Gauge pods", "Interior trim clips", "Intake components"],
+    examples: ["Gauge pods", "Interior trim clips", "Mounting brackets"],
   },
   {
-    title: "Replacement Parts",
+    title: "Functional Parts",
     description:
-      "Broke something you can't buy anymore? Send us the original or a photo with measurements. We'll reverse-engineer and manufacture a perfect match.",
-    icon: KeyRound,
+      "Gears, brackets, mounts, and mechanical components for real-world use. Strong, dimensionally accurate prints for applications that need to work.",
+    icon: Cog,
     href: "#quote",
-    examples: ["Vintage knobs", "Broken clips", "Obsolete fittings"],
+    examples: ["Gears & sprockets", "Enclosures", "Clips & fasteners"],
   },
   {
     title: "Die-cast Modifications",
@@ -102,44 +95,28 @@ export const services: Service[] = [
     examples: ["Wheels & tyres", "Body kits", "Display stands"],
   },
   {
-    title: "Engineering Prototypes",
+    title: "Prototypes",
     description:
-      "Test fit, form, and function before committing to expensive tooling. Turn CAD concepts into physical parts in days, not weeks.",
+      "Test fit, form, and function before committing to expensive tooling. Turn your CAD designs into physical parts quickly and affordably.",
     icon: FlaskConical,
     href: "#quote",
-    examples: ["Product mockups", "Engineering samples", "Fitment checks"],
+    examples: ["Product mockups", "Fitment samples", "Engineering checks"],
   },
   {
-    title: "Functional Parts",
+    title: "Household & Hobby",
     description:
-      "Gears, brackets, mounts, and mechanical components that actually work under load. Designed for real-world use, not just display.",
-    icon: Cog,
+      "Custom organisers, replacement household parts, hobby accessories, and practical prints for everyday use around the home and workshop.",
+    icon: Home,
     href: "#quote",
-    examples: ["Gears & sprockets", "Mounting brackets", "Clips & fasteners"],
+    examples: ["Desk organisers", "Planters", "Workshop tools"],
   },
   {
     title: "Custom Gifts",
     description:
-      "Personalised keepsakes, trophies, and one-off creations that feel thoughtful and intentional. Made to order with attention to every detail.",
+      "Personalised keepsakes, trophies, and one-off creations. Thoughtful, made-to-order items manufactured with attention to every detail.",
     icon: Gift,
     href: "#quote",
     examples: ["Bespoke gifts", "Trophies & awards", "Personalised keychains"],
-  },
-  {
-    title: "Décor & Home",
-    description:
-      "Vases, lamp shades, organisers, and decorative objects that blend industrial precision with interior design. Beautiful things for everyday spaces.",
-    icon: Home,
-    href: "#quote",
-    examples: ["Pendant lamps", "Planters", "Desk organisers"],
-  },
-  {
-    title: "One-off Custom Prints",
-    description:
-      "Cosplay props, art pieces, architectural models, or anything you can dream up. If it can be printed, we'll help you make it real.",
-    icon: Palette,
-    href: "#quote",
-    examples: ["Cosplay helmets", "Wall sculptures", "Architectural models"],
   },
 ];
 
@@ -264,13 +241,13 @@ export const steps: Step[] = [
     number: "02",
     title: "We review and quote",
     description:
-      "Our engineers assess your project within 24 hours. You'll get a clear, itemised quote with material recommendations and timeline.",
+      "We assess your project within 24 hours. You'll get a clear, itemised quote with material recommendations and timeline.",
   },
   {
     number: "03",
     title: "We manufacture",
     description:
-      "Once confirmed, your job enters production. Industrial-grade printers run with live quality monitoring. We keep you updated throughout.",
+      "Once confirmed, your job enters production. Professional FDM printers run with quality monitoring. We keep you updated throughout.",
   },
   {
     number: "04",
@@ -290,14 +267,14 @@ export type GalleryProject = {
   description: string;
 };
 
-export const galleryCategories = [
+export const projectCategories = [
   "All",
   "Automotive",
-  "Electronics",
+  "Functional",
+  "Die-cast",
   "Prototypes",
-  "Art",
-  "Cosplay",
-  "Home Décor",
+  "Household",
+  "Gifts",
 ] as const;
 
 export const galleryProjects: GalleryProject[] = [
@@ -305,82 +282,82 @@ export const galleryProjects: GalleryProject[] = [
     id: "1",
     title: "Intake Manifold Prototype",
     category: "Automotive",
-    imageLight: "/gallery/intake.jpg",
-    imageDark: "/gallery/intake.jpg",
+    imageLight: "/projects/intake.jpg",
+    imageDark: "/projects/intake.jpg",
     description:
-      "Functional intake manifold printed in ASA for thermal testing on a modified 4-cylinder engine.",
+      "Functional intake manifold printed in ASA for thermal testing on a modified 4-cylinder engine. Printed as a single-piece test unit.",
   },
   {
     id: "2",
-    title: "Custom PCB Enclosure",
-    category: "Electronics",
-    imageLight: "/gallery/enclosure.jpg",
-    imageDark: "/gallery/enclosure.jpg",
+    title: "Dashboard Gauge Pod",
+    category: "Automotive",
+    imageLight: "/projects/gauge.jpg",
+    imageDark: "/projects/gauge.jpg",
     description:
-      "Snap-fit enclosure with integrated standoffs and ventilation for a custom IoT sensor module.",
+      "A-pillar gauge pod printed in ASA to match OEM texture. Housed boost and oil pressure gauges for a classic restoration build.",
   },
   {
     id: "3",
-    title: "Turbine Housing Mock-up",
-    category: "Prototypes",
-    imageLight: "/gallery/turbine.jpg",
-    imageDark: "/gallery/turbine.jpg",
+    title: "Custom Mounting Bracket Set",
+    category: "Functional",
+    imageLight: "/projects/bracket.jpg",
+    imageDark: "/projects/bracket.jpg",
     description:
-      "Full-scale SLA-printed turbine housing for fitment verification before CNC machining.",
+      "Set of custom brackets printed in PETG for an electronics project. Designed by the customer, manufactured by us.",
   },
   {
     id: "4",
-    title: "Geometric Wall Sculpture",
-    category: "Art",
-    imageLight: "/gallery/sculpture.jpg",
-    imageDark: "/gallery/sculpture.jpg",
+    title: "Turbine Housing Mock-up",
+    category: "Prototypes",
+    imageLight: "/projects/turbine.jpg",
+    imageDark: "/projects/turbine.jpg",
     description:
-      "Parametric wall installation comprising 47 interlocking PLA modules with matte finish.",
+      "Full-scale prototype turbine housing for fitment verification before CNC machining. Printed in carbon fibre composite.",
   },
   {
     id: "5",
-    title: "Mandalorian Helmet",
-    category: "Cosplay",
-    imageLight: "/gallery/helmet.jpg",
-    imageDark: "/gallery/helmet.jpg",
+    title: "Drone Arm Assembly",
+    category: "Prototypes",
+    imageLight: "/projects/drone.jpg",
+    imageDark: "/projects/drone.jpg",
     description:
-      "Screen-accurate Beskar helmet printed in PETG, sanded, primed, and painted with Alumaluster finish.",
+      "Carbon-fibre-reinforced drone arms with integrated motor mounts. Tested under load for a customer's custom UAV build.",
   },
   {
     id: "6",
-    title: "Minimalist Pendant Lamp",
-    category: "Home Décor",
-    imageLight: "/gallery/lamp.jpg",
-    imageDark: "/gallery/lamp.jpg",
+    title: "Die-cast Wheel Set",
+    category: "Die-cast",
+    imageLight: "/projects/diecast.jpg",
+    imageDark: "/projects/diecast.jpg",
     description:
-      "Translucent PETG shade with integrated cable management. Designed for standard E27 fittings.",
+      "Custom wheel and tyre set for a 1:64 scale die-cast model. Printed in high-detail resin for a collector's restoration project.",
   },
   {
     id: "7",
-    title: "Drone Arm Assembly",
-    category: "Prototypes",
-    imageLight: "/gallery/drone.jpg",
-    imageDark: "/gallery/drone.jpg",
+    title: "Minimalist Pendant Lamp",
+    category: "Household",
+    imageLight: "/projects/lamp.jpg",
+    imageDark: "/projects/lamp.jpg",
     description:
-      "Carbon-fibre-reinforced drone arms with integrated motor mounts, tested to 4.5 kg static load.",
+      "Translucent PETG lampshade with integrated cable management. Printed for a local interior design project.",
   },
   {
     id: "8",
-    title: "Dashboard Gauge Pod",
-    category: "Automotive",
-    imageLight: "/gallery/gauge.jpg",
-    imageDark: "/gallery/gauge.jpg",
+    title: "Workshop Tool Organiser",
+    category: "Household",
+    imageLight: "/projects/organiser.jpg",
+    imageDark: "/projects/organiser.jpg",
     description:
-      "A-pillar gauge pod printed in ASA to match OEM texture, housing boost and oil pressure gauges.",
+      "Custom modular tool organiser printed in PETG. Designed by the customer to fit their specific workshop drawer layout.",
   },
   {
     id: "9",
-    title: "Medical Device Housing",
-    category: "Electronics",
-    imageLight: "/gallery/medical.jpg",
-    imageDark: "/gallery/medical.jpg",
+    title: "Personalised Trophy Set",
+    category: "Gifts",
+    imageLight: "/projects/trophy.jpg",
+    imageDark: "/projects/trophy.jpg",
     description:
-      "IP54-rated enclosure for a portable diagnostic device with sealed button membranes and LCD window.",
+      "Custom award trophies for a local motorsport event. Printed in PLA with metallic post-processing and engraved nameplates.",
   },
 ];
 
@@ -394,52 +371,52 @@ export const faqs: FAQ[] = [
   {
     question: "What file formats do you accept?",
     answer:
-      "We accept STL, OBJ, 3MF, and STEP files. For assemblies, ZIP archives containing multiple files are recommended. Maximum single file size is 250 MB through our uploader. For larger projects, contact us directly.",
+      "We accept STL, OBJ, 3MF, and STEP files. For assemblies, ZIP archives containing multiple files are recommended. Maximum single file size is 250 MB. For larger projects, contact us directly.",
   },
   {
-    question: "I don't have a 3D file — can you still help?",
+    question: "I don't have an STL file — can you still help?",
     answer:
-      "Absolutely. Most of our customers don't have ready-made 3D models. You can send us a photo of a broken part, a sketch of an idea, or just describe what you need. Our team can create the model for you or guide you through the process.",
+      "Our current service is printing customer-provided 3D models. If you have a 3D file, we can manufacture it. If you only have an idea or a broken part with no model, contact us — CAD modelling and reverse engineering may become available in the future, but are not currently offered.",
   },
   {
     question: "What materials can you print in?",
     answer:
-      "Our current material lineup includes PLA, PETG, ABS, ASA, and TPU. Carbon-fibre-reinforced composites are available on a per-project basis. Each material has different properties — strength, flexibility, heat resistance, and UV stability — and we'll help you select the right one for your application.",
+      "Our material lineup includes PLA, PETG, ABS, ASA, and TPU. Carbon-fibre-reinforced composites are available on a per-project basis. Each material has different properties — strength, flexibility, heat resistance, and UV stability — and we'll help you choose the right one for your project.",
   },
   {
     question: "How long does printing take?",
     answer:
-      "Production time depends on part size, complexity, and material. Small parts (keychains, brackets) typically ship within 2–3 business days. Larger or complex projects may take 5–10 business days. You'll receive an estimated timeline with your quotation.",
+      "Production time depends on part size, complexity, and material. Small parts (keychains, brackets) typically ship within 2–3 business days. Larger projects may take 5–10 business days. You'll receive an estimated timeline with your quotation.",
   },
   {
     question: "Do you offer post-processing?",
     answer:
-      "Yes. Standard post-processing includes support removal and light sanding. Additional services — vapour smoothing (ABS/ASA), primer application, painting, and clear-coat finishing — are available at quoted rates. Specify your finishing requirements when submitting.",
+      "Yes. Standard post-processing includes support removal and light sanding. Additional services — vapour smoothing (ABS/ASA), primer application, painting, and clear-coat finishing — are available at quoted rates. Tell us about your finishing requirements when you submit your project.",
   },
   {
     question: "Can you print in multiple colours?",
     answer:
-      "Single-colour prints are our standard. Multi-colour printing is available for select projects using manual filament changes or multi-material systems. Note that multi-colour adds print time and cost. Contact us with your specific requirements.",
+      "Single-colour prints are our standard. Multi-colour printing is possible for select projects using manual filament changes. Note that multi-colour adds print time and cost. Contact us with your specific requirements.",
   },
   {
-    question: "What if my design needs modification?",
+    question: "Can you modify my file if it needs adjustments?",
     answer:
-      "Our engineering team can assist with design-for-manufacturing (DFM) feedback, minor modifications, and file repair. Major redesign work is quoted separately. We recommend providing native CAD files (STEP, Fusion 360, SolidWorks) when possible for the best support.",
+      "We provide basic printability feedback and can make minor file repairs to ensure a successful print. Full design changes or modifications to your model are not currently offered. For best results, provide a ready-to-print STL file.",
   },
   {
     question: "Do you ship internationally?",
     answer:
-      "We currently ship within Sri Lanka with island-wide delivery. International shipping is available upon request for select projects. Rates are calculated based on package dimensions, weight, and destination.",
+      "We currently ship within Sri Lanka with island-wide delivery. International shipping may be available upon request for select projects — contact us to discuss.",
   },
   {
     question: "How are prices calculated?",
     answer:
-      "Pricing is based on material volume, print time, post-processing requirements, and quantity. You'll receive a transparent, itemised quote before any work begins. Rush orders and complex geometries may incur surcharges.",
+      "Pricing is based on material volume, print time, post-processing requirements, and quantity. You'll receive a transparent, itemised quote before any work begins. Rush orders and complex geometries may affect pricing.",
   },
   {
     question: "Is there a minimum order quantity?",
     answer:
-      "No. We manufacture single one-off prints as well as production runs of hundreds of units. Per-unit cost decreases with quantity, and we're happy to discuss volume pricing for recurring orders.",
+      "No. We manufacture single one-off prints as well as small batch runs. Per-unit cost typically decreases with quantity. We're happy to discuss volume pricing for recurring orders.",
   },
 ];
 
@@ -450,19 +427,19 @@ export type TrustStat = {
 };
 
 export const trustStats: TrustStat[] = [
-  { label: "Projects Completed", value: "1,200+" },
-  { label: "Materials Available", value: "10+" },
-  { label: "Machines", value: "6" },
+  { label: "Materials Available", value: "6" },
+  { label: "Finish Options", value: "4+" },
   { label: "Years Building", value: "4+" },
+  { label: "Customer Rating", value: "100%" },
 ];
 
 // ── About ─────────────────────────────────────────────
 export const aboutText = {
-  heading: "Built by makers, for makers.",
+  heading: "A workshop, not a factory.",
   paragraph1:
-    "Zenki Lab began in a workshop solving real-world problems. What started as a way to manufacture custom parts for automotive restoration grew into a workshop dedicated to helping makers, enthusiasts and creators bring their ideas into reality.",
+    "Zenki Lab started with a real problem: restoring classic Toyota vehicles when original replacement parts were no longer available. Rather than giving up, we manufactured our own. That same capability is now offered to anyone who needs custom printed parts.",
   paragraph2:
-    "Every project deserves the same care we'd expect for our own. Honest advice, clear communication, and parts that fit — every time.",
+    "We're not trying to be a print farm. Every project — whether a single bracket or a batch of 50 parts — gets the same level of care we'd expect for our own builds. Honest advice, clear communication, and parts that fit right the first time.",
 };
 
 // ── Coming Soon ───────────────────────────────────────
@@ -489,9 +466,9 @@ export const comingSoonFeatures: ComingSoonFeature[] = [
     icon: Camera,
   },
   {
-    title: "Online Quote System",
-    description: "Instant quotes powered by automated file analysis.",
-    icon: Zap,
+    title: "CAD & Design Assistance",
+    description: "Professional modelling and reverse-engineering services.",
+    icon: Sparkles,
   },
 ];
 
@@ -516,9 +493,9 @@ export const footerLinks = [
     title: "Services",
     links: [
       { label: "Custom Parts", href: "#services" },
-      { label: "Prototypes", href: "#services" },
       { label: "Automotive", href: "#services" },
-      { label: "Electronics", href: "#services" },
+      { label: "Prototypes", href: "#services" },
+      { label: "Gifts", href: "#services" },
     ],
   },
   {
@@ -534,7 +511,7 @@ export const footerLinks = [
   {
     title: "Company",
     links: [
-      { label: "Gallery", href: "#gallery" },
+      { label: "Projects", href: "#projects" },
       { label: "FAQ", href: "#faq" },
       { label: "Contact", href: "#contact" },
       { label: "Start a Project", href: "#quote" },

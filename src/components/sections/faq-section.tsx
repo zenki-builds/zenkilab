@@ -13,25 +13,26 @@ export function FAQSection() {
   };
 
   return (
-    <section id="faq" className="relative py-32 lg:py-40 border-t border-white/[0.04]">
-      <div className="max-w-[960px] mx-auto px-6 lg:px-12">
-        {/* Header */}
+    <section id="faq" className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
+      <div className="max-w-[960px] mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-16 lg:mb-20"
+          className="mb-14 lg:mb-16"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#22D3EE] mb-4 block">
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
             FAQ
           </span>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[700px]">
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]" style={{ color: "#E2E8F0" }}>
             Questions? We've got answers.
           </h2>
+          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#94A3B8" }}>
+            Clear, honest answers about how we work.
+          </p>
         </motion.div>
 
-        {/* Questions */}
         <div className="space-y-3">
           {faqs.map((faq, idx) => (
             <motion.div
@@ -42,23 +43,24 @@ export function FAQSection() {
               transition={{ duration: 0.4, delay: idx * 0.05, ease: "easeOut" }}
               className={`border rounded-2xl transition-all duration-300 ${
                 openIdx === idx
-                  ? "border-[#22D3EE]/20 bg-white/[0.02]"
-                  : "border-white/[0.04] bg-transparent hover:border-white/[0.08]"
+                  ? "border-[#F97316]/20 bg-[#0F1720]"
+                  : "border-[#1E293B] bg-[#0A0F16] hover:border-[#334155]"
               }`}
             >
               <button
                 onClick={() => toggle(idx)}
                 className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
               >
-                <span className="text-base font-semibold text-white pr-4">
+                <span className="text-base font-semibold pr-4" style={{ color: "#E2E8F0" }}>
                   {faq.question}
                 </span>
                 <div
                   className={`w-8 h-8 rounded-lg border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                     openIdx === idx
-                      ? "border-[#22D3EE]/30 bg-[#22D3EE]/10 text-[#22D3EE]"
-                      : "border-white/[0.06] text-neutral-500"
+                      ? "border-[#F97316]/30 bg-[#1E1A14]"
+                      : "border-[#1E293B]"
                   }`}
+                  style={openIdx === idx ? { color: "#F97316" } : { color: "#64748B" }}
                 >
                   {openIdx === idx ? (
                     <Minus className="w-4 h-4" />
@@ -72,7 +74,7 @@ export function FAQSection() {
                   openIdx === idx ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <p className="px-6 pb-5 text-sm text-neutral-400 leading-relaxed">
+                <p className="px-6 pb-5 text-sm leading-relaxed" style={{ color: "#94A3B8" }}>
                   {faq.answer}
                 </p>
               </div>

@@ -3,91 +3,61 @@
 import { motion } from "framer-motion";
 import { steps } from "@/lib/constants";
 
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
+};
+
 export function HowItWorksSection() {
   return (
-    <section className="relative py-32 lg:py-40 border-t border-white/[0.04]">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        {/* Header */}
+    <section id="how-it-works" className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-20 lg:mb-28"
+          className="mb-14 lg:mb-16 text-center"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#22D3EE] mb-4 block">
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
             How It Works
           </span>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[700px]">
-            From idea to finished part in four steps.
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1]" style={{ color: "#E2E8F0" }}>
+            From idea to finished part
           </h2>
-          <p className="text-neutral-500 text-lg mt-4 max-w-[600px] leading-relaxed">
-            Clear communication, honest timelines, and parts that fit — every single time.
-          </p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line (desktop) */}
-          <div className="hidden lg:block absolute left-[calc(50%-1px)] top-0 bottom-0 w-px bg-white/[0.06]" />
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative flex flex-col lg:flex-row justify-between gap-8 lg:gap-0"
+        >
+          {/* Connecting line */}
+          <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-[1px]" style={{ backgroundColor: "#1E293B" }} />
 
-          <div className="space-y-16 lg:space-y-0">
-            {steps.map((step, idx) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.7, delay: idx * 0.12, ease: "easeOut" }}
-                className={`relative lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center ${
-                  idx % 2 === 0 ? "" : "lg:[direction:rtl]"
-                }`}
-              >
-                {/* Content */}
-                <div
-                  className={`relative lg:text-right ${
-                    idx % 2 === 1 ? "lg:text-left" : ""
-                  }`}
-                  style={{ direction: "ltr" }}
-                >
-                  {/* Step number (mobile) */}
-                  <span className="lg:hidden text-[#22D3EE] text-sm font-bold tracking-[0.2em] mb-4 block">
-                    {step.number}
-                  </span>
-
-                  <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-[-0.02em]">
-                    {step.title}
-                  </h3>
-                  <p className="text-neutral-500 leading-relaxed max-w-[420px] lg:ml-auto">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Timestamp dot + number */}
-                <div
-                  className="hidden lg:flex items-center justify-center relative"
-                  style={{ direction: "ltr" }}
-                >
-                  <div className="absolute left-1/2 -translate-x-1/2">
-                    <div className="w-14 h-14 rounded-2xl bg-[#161A20] border border-white/[0.08] flex items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.1)]">
-                      <span className="text-sm font-bold text-[#22D3EE] tracking-widest">
-                        {step.number}
-                      </span>
-                    </div>
+          {steps.map((step, idx) => (
+            <motion.div key={step.title} variants={item} className="flex-1 text-center relative px-4">
+              <div className="relative inline-block mx-auto">
+                <div className="absolute left-1/2 -translate-x-1/2">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}>
+                    <span className="text-sm font-bold tracking-widest" style={{ color: "#F97316" }}>
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
                   </div>
                 </div>
-
-                {/* Empty spacer for alternating layout */}
-                <div className="hidden lg:block" />
-
-                {/* Mobile connector */}
-                {idx < steps.length - 1 && (
-                  <div className="lg:hidden mt-10 ml-5 w-px h-12 bg-white/[0.06]" />
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
+              </div>
+              <h3 className="text-base font-semibold mt-20 mb-2" style={{ color: "#E2E8F0" }}>{step.title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#94A3B8" }}>{step.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

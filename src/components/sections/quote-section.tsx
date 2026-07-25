@@ -167,25 +167,25 @@ export function QuoteSection() {
   };
 
   return (
-    <section id="quote" ref={sectionRef} className="relative py-32 lg:py-40 border-t border-white/[0.04]">
-      <div className="max-w-[960px] mx-auto px-6 lg:px-12">
+    <section id="quote" ref={sectionRef} className="relative py-24 lg:py-28 bg-[#F8FAFC] border-t" style={{ borderColor: "#E2E8F0" }}>
+      <div className="max-w-[960px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-16 lg:mb-20"
+          className="mb-14 lg:mb-16"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#22D3EE] mb-4 block">
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
             Start Your Project
           </span>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.03em] text-white leading-[1.1] max-w-[700px]">
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]" style={{ color: "#0F172A" }}>
             Tell us what you need. We'll handle the rest.
           </h2>
-          <p className="text-neutral-500 text-lg mt-4 max-w-[600px] leading-relaxed">
-            Upload your files, describe your project, and our engineers will
-            review and respond with a detailed quote within 24 hours.
+          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#64748B" }}>
+            Upload your STL files, describe your project, and we'll review
+            and respond with a detailed quote within 24 hours.
           </p>
         </motion.div>
 
@@ -201,10 +201,10 @@ export function QuoteSection() {
           >
             {/* File Upload — redesigned Linear/Figma style */}
             <div>
-              <label className="text-sm font-semibold text-neutral-300 mb-2 block">
+              <label className="text-sm font-semibold mb-2 block" style={{ color: "#334155" }}>
                 Design Files
               </label>
-              <p className="text-xs text-neutral-600 mb-4">
+              <p className="text-xs mb-4" style={{ color: "#94A3B8" }}>
                 Accepted: STL, OBJ, 3MF, STEP, ZIP &middot; Up to 250 MB per file &middot; Max 10 files
               </p>
 
@@ -220,11 +220,12 @@ export function QuoteSection() {
                   setDragOver(false);
                   handleFiles(e.dataTransfer.files);
                 }}
-                className={`relative border-2 border-dashed rounded-2xl p-12 lg:p-16 text-center transition-all duration-400 ${
+                className="relative border-2 border-dashed rounded-2xl p-12 lg:p-16 text-center transition-all duration-300"
+                style={
                   dragOver
-                    ? "border-[#22D3EE] bg-[#22D3EE]/[0.04] scale-[1.01]"
-                    : "border-white/[0.06] hover:border-[#22D3EE]/30 bg-white/[0.01]"
-                }`}
+                    ? { borderColor: "#F97316", backgroundColor: "#FFF7ED" }
+                    : { borderColor: "#CBD5E1", backgroundColor: "#FFFFFF" }
+                }
               >
                 <input
                   type="file"
@@ -237,20 +238,22 @@ export function QuoteSection() {
 
                 {/* Upload icon with animated ring */}
                 <div className="relative w-16 h-16 mx-auto mb-5">
-                  <div className="absolute inset-0 rounded-2xl border border-[#22D3EE]/20 animate-pulse" />
-                  <div className="relative w-full h-full rounded-2xl bg-[#22D3EE]/[0.06] border border-[#22D3EE]/20 flex items-center justify-center">
+                  <div
+                    className="relative w-full h-full rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: "#FFF7ED", border: "1px solid #FED7AA" }}
+                  >
                     {uploading ? (
-                      <Loader2 className="w-6 h-6 text-[#22D3EE] animate-spin" />
+                      <Loader2 className="w-6 h-6 animate-spin" style={{ color: "#F97316" }} />
                     ) : (
-                      <Upload className="w-6 h-6 text-[#22D3EE]" />
+                      <Upload className="w-6 h-6" style={{ color: "#F97316" }} />
                     )}
                   </div>
                 </div>
 
-                <p className="text-base font-medium text-white mb-1">
+                <p className="text-base font-medium mb-1" style={{ color: "#0F172A" }}>
                   {dragOver ? "Drop your files here" : "Drag and drop your files here"}
                 </p>
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm" style={{ color: "#94A3B8" }}>
                   or click to browse
                 </p>
 
@@ -263,15 +266,16 @@ export function QuoteSection() {
                       exit={{ opacity: 0, height: 0 }}
                       className="mt-5 max-w-[320px] mx-auto"
                     >
-                      <div className="h-1 bg-white/[0.06] rounded-full overflow-hidden">
+                      <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#E2E8F0" }}>
                         <motion.div
-                          className="h-full bg-gradient-to-r from-[#22D3EE] to-[#0891B2] rounded-full"
+                          className="h-full rounded-full"
+                          style={{ backgroundColor: "#F97316" }}
                           initial={{ width: 0 }}
                           animate={{ width: `${Math.min(uploadProgress, 100)}%` }}
                           transition={{ duration: 0.2 }}
                         />
                       </div>
-                      <p className="text-xs text-neutral-500 mt-2">
+                      <p className="text-xs mt-2" style={{ color: "#94A3B8" }}>
                         {uploadProgress < 100
                           ? "Analysing file..."
                           : "File uploaded successfully"}
@@ -296,22 +300,27 @@ export function QuoteSection() {
                         initial={{ opacity: 0, x: -12 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 12 }}
-                        className="flex items-center gap-3 bg-[#161A20] border border-white/[0.06] rounded-xl px-4 py-3"
+                        className="flex items-center gap-3 rounded-xl px-4 py-3"
+                        style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
                       >
-                        <div className="w-9 h-9 rounded-lg bg-[#22D3EE]/10 border border-[#22D3EE]/15 flex items-center justify-center flex-shrink-0">
-                          <FileIcon className="w-4 h-4 text-[#22D3EE]" />
+                        <div
+                          className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                          style={{ backgroundColor: "#FFF7ED" }}
+                        >
+                          <FileIcon className="w-4 h-4" style={{ color: "#F97316" }} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-white truncate">{file.name}</p>
-                          <p className="text-xs text-neutral-500">
+                          <p className="text-sm truncate" style={{ color: "#0F172A" }}>{file.name}</p>
+                          <p className="text-xs" style={{ color: "#94A3B8" }}>
                             {formatSize(file.size)} &middot; Printability:{" "}
-                            <span className="text-[#22D3EE]">Checking...</span>
+                            <span style={{ color: "#F97316" }}>Checking...</span>
                           </p>
                         </div>
                         <button
                           type="button"
                           onClick={() => removeFile(idx)}
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-neutral-500 hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors"
+                          className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors"
+                          style={{ color: "#94A3B8" }}
                         >
                           <X className="w-3.5 h-3.5" />
                         </button>
@@ -431,7 +440,8 @@ export function QuoteSection() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2.5 bg-[#EF4444] hover:bg-[#EF4444]/90 disabled:opacity-50 disabled:cursor-not-allowed text-white h-[52px] px-8 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.25)]"
+              className="inline-flex items-center gap-2.5 text-white disabled:opacity-50 disabled:cursor-not-allowed h-[52px] px-8 rounded-xl text-sm font-semibold transition-all duration-300 hover:brightness-110"
+              style={{ backgroundColor: "#F97316" }}
             >
               {isSubmitting ? (
                 <>
@@ -453,15 +463,18 @@ export function QuoteSection() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-20"
           >
-            <div className="w-16 h-16 rounded-2xl bg-[#22D3EE]/10 border border-[#22D3EE]/20 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-[#22D3EE]" />
+            <div
+              className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
+              style={{ backgroundColor: "#FFF7ED", border: "1px solid #FED7AA" }}
+            >
+              <CheckCircle className="w-8 h-8" style={{ color: "#F97316" }} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3">
+            <h3 className="text-2xl font-bold mb-3" style={{ color: "#0F172A" }}>
               Quote Request Submitted
             </h3>
-            <p className="text-neutral-400 max-w-[460px] mx-auto leading-relaxed">
-              Thank you. Our engineering team will review your files and respond
-              with a detailed quotation within 24 hours. We're excited to work on your project.
+            <p className="max-w-[460px] mx-auto leading-relaxed" style={{ color: "#64748B" }}>
+              Thank you. We'll review your files and respond
+              with a detailed quote within 24 hours. We're excited to work on your project.
             </p>
           </motion.div>
         )}
@@ -485,17 +498,17 @@ function FieldWrapper({
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-sm font-semibold text-neutral-300 flex items-center gap-1">
+      <label className="text-sm font-semibold flex items-center gap-1" style={{ color: "#334155" }}>
         {label}
-        {required && <span className="text-[#EF4444]">*</span>}
+        {required && <span style={{ color: "#EF4444" }}>*</span>}
       </label>
       {children}
       {error && (
-        <p className="text-xs text-[#EF4444] mt-1">{error}</p>
+        <p className="text-xs mt-1" style={{ color: "#EF4444" }}>{error}</p>
       )}
     </div>
   );
 }
 
 const inputClass =
-  "w-full h-12 px-4 bg-[#161A20] border border-white/[0.06] rounded-xl text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-[#22D3EE]/30 focus:ring-1 focus:ring-[#22D3EE]/15 transition-all duration-200";
+  "w-full h-12 px-4 bg-white border border-[#CBD5E1] rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#F97316]/50 focus:ring-1 focus:ring-[#F97316]/20 transition-all duration-200";
