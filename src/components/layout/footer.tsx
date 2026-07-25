@@ -22,7 +22,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed max-w-[220px]" style={{ color: "#94A3B8" }}>
-              A premium custom 3D printing workshop. Built by makers, for makers — bringing ideas into the real world.
+              Premium custom 3D printing. Building confidence, one part at a time.
             </p>
           </div>
 

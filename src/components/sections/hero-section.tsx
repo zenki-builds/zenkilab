@@ -2,148 +2,28 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Settings2, Zap, X, FileText, Camera, Lightbulb, Sparkles } from "lucide-react";
+import { X, FileText, Camera, Lightbulb, Sparkles } from "lucide-react";
 import { projectJourneys } from "@/lib/constants";
+import { Hero } from "@/components/hero3d/Hero";
 
 /**
- * ═══════════════════════════════════════════════════════
- * Hero Section — Full Viewport Screen Layout (min-h-screen)
- * Headline & CTAs on the left, enlarged printer animation on right
- * ═══════════════════════════════════════════════════════
+ * HeroSection
+ * ─────────────────────────────────────────────────────────
+ * Wraps the React Three Fiber hero scene (src/components/hero3d)
+ * with the section shell and the "Start Your Project" modal.
+ * All heavy 3D logic lives in hero3d/ — this file stays a thin,
+ * fast-parsing composition root.
  */
-
 export function HeroSection() {
   const [showJourneys, setShowJourneys] = useState(false);
   const journeyIcons = [FileText, Camera, Lightbulb, Sparkles];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-24 pb-12 lg:pt-28 lg:pb-16 bg-white overflow-hidden">
-      <div className="max-w-[1280px] w-full mx-auto px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* ── LEFT: Headline & CTAs (col-span-6) ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="lg:col-span-6 text-center lg:text-left"
-          >
-            <h1
-              className="text-[clamp(2.5rem,4.8vw,3.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em] mb-6"
-              style={{ color: "#0F172A" }}
-            >
-              PRECISION 3D PRINTING FOR CUSTOM AUTOMOTIVE PARTS
-            </h1>
-
-            <p className="text-lg lg:text-xl leading-relaxed mb-8 max-w-[560px] mx-auto lg:mx-0" style={{ color: "#64748B" }}>
-              Built by makers, for makers. We manufacture custom parts, prototypes, and one-off projects directly from your 3D models.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center gap-2 h-[52px] px-7 rounded-xl text-base font-semibold border transition-colors duration-200 w-full sm:w-auto"
-                style={{ borderColor: "#CBD5E1", color: "#0F172A", backgroundColor: "#FFFFFF" }}
-              >
-                <Settings2 className="w-5 h-5" />
-                Explore Services
-              </a>
-              <button
-                onClick={() => setShowJourneys(true)}
-                className="inline-flex items-center justify-center gap-2 h-[52px] px-7 rounded-xl text-base font-semibold text-white transition-transform duration-200 hover:scale-[1.02] w-full sm:w-auto"
-                style={{ backgroundColor: "#F97316" }}
-              >
-                <Zap className="w-5 h-5" />
-                Get Instant Quote
-              </button>
-            </div>
-          </motion.div>
-
-          {/* ── RIGHT CORNER: Enlarged Animated 3D Printer Visual (col-span-6) ── */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, x: 20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="lg:col-span-6 flex items-center justify-center lg:justify-end"
-          >
-            <div className="relative w-full max-w-[560px] lg:max-w-[600px] aspect-square">
-              <svg
-                viewBox="0 0 500 500"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Animated illustration of a 3D printer printing an automotive intake manifold"
-              >
-                <defs>
-                  <linearGradient id="frame-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#F1F5F9" />
-                    <stop offset="100%" stopColor="#E2E8F0" />
-                  </linearGradient>
-                  <linearGradient id="orange-glow" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#F97316" stopOpacity="0.8" />
-                    <stop offset="100%" stopColor="#F97316" stopOpacity="0" />
-                  </linearGradient>
-                  <clipPath id="print-reveal-clip">
-                    <rect x="100" y="220" width="300" height="150" className="zenki-clip-reveal-box" />
-                  </clipPath>
-                </defs>
-
-                {/* Enclosure outer frame */}
-                <rect x="40" y="40" width="420" height="420" rx="24" fill="url(#frame-grad)" stroke="#CBD5E1" strokeWidth="3" />
-                {/* Glass panel inner border */}
-                <rect x="60" y="60" width="380" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0" strokeWidth="2" />
-
-                {/* Heatbed platform */}
-                <rect x="110" y="370" width="280" height="16" rx="4" fill="#CBD5E1" />
-                <rect x="120" y="386" width="260" height="8" fill="#E2E8F0" />
-                <rect x="140" y="394" width="20" height="26" fill="#94A3B8" />
-                <rect x="340" y="394" width="20" height="26" fill="#94A3B8" />
-
-                {/* Blueprint wireframe of the part (background) */}
-                <g stroke="#CBD5E1" strokeWidth="2" fill="none" opacity="0.7">
-                  <path d="M150 370 L170 260 C200 240, 240 240, 260 260 L280 370 Z" />
-                  <path d="M190 370 L200 270 M230 370 L235 265 M270 370 L270 280" />
-                </g>
-
-                {/* Printed part — revealed layer-by-layer in orange */}
-                <g clipPath="url(#print-reveal-clip)">
-                  <path
-                    d="M150 370 L170 260 C200 240, 240 240, 260 260 L280 370 Z"
-                    fill="#F97316"
-                    fillOpacity="0.15"
-                    stroke="#F97316"
-                    strokeWidth="4"
-                    strokeLinejoin="round"
-                  />
-                  <path d="M190 370 L200 270 M230 370 L235 265 M270 370 L270 280" stroke="#F97316" strokeWidth="3" />
-                  <line x1="120" y1="260" x2="380" y2="260" stroke="#EF4444" strokeWidth="2" opacity="0.6" />
-                </g>
-
-                {/* Moving gantry & toolhead assembly */}
-                <g className="zenki-toolhead">
-                  <rect x="60" y="200" width="380" height="12" fill="#F1F5F9" stroke="#94A3B8" strokeWidth="1.5" />
-                  <rect x="220" y="175" width="60" height="50" rx="8" fill="#334155" stroke="#F97316" strokeWidth="2" />
-                  <line x1="220" y1="190" x2="280" y2="190" stroke="#F97316" strokeWidth="3" />
-                  <polygon points="242,225 258,225 252,238 248,238" fill="#CBD5E1" />
-                  <polygon
-                    points="245,238 255,238 265,260 235,260"
-                    fill="url(#orange-glow)"
-                    className="zenki-nozzle-glow"
-                  />
-                </g>
-
-                {/* Status LED */}
-                <circle cx="410" cy="80" r="5" fill="#22C55E" />
-                <circle cx="410" cy="80" r="10" fill="#22C55E" opacity="0.2" className="zenki-nozzle-glow" />
-
-                {/* "3D printer" label */}
-                <text x="250" y="30" textAnchor="middle" fontSize="16" fontWeight="600" fill="#334155">
-                  3D printer
-                </text>
-              </svg>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center pt-24 pb-16 lg:pt-28 overflow-hidden bg-[#05070A]"
+    >
+      <Hero onStart={() => setShowJourneys(true)} />
 
       {/* ── Start Your Project Modal ── */}
       <AnimatePresence>
@@ -154,7 +34,7 @@ export function HeroSection() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center p-6"
-            style={{ backgroundColor: "rgba(15,23,42,0.4)" }}
+            style={{ backgroundColor: "rgba(6,11,20,0.6)" }}
             onClick={() => setShowJourneys(false)}
           >
             <motion.div
@@ -192,14 +72,14 @@ export function HeroSection() {
                       key={journey.title}
                       href={journey.href}
                       onClick={() => setShowJourneys(false)}
-                      className="group flex flex-col gap-3 p-5 rounded-xl transition-all duration-300 hover:border-[#F97316]/40"
+                      className="group flex flex-col gap-3 p-5 rounded-xl transition-all duration-300 hover:border-[#22D3EE]/40"
                       style={{ border: "1px solid #E2E8F0" }}
                     >
                       <div
                         className="w-9 h-9 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                        style={{ backgroundColor: "#FFF7ED" }}
+                        style={{ backgroundColor: "#ECFEFF" }}
                       >
-                        <Icon className="w-4.5 h-4.5" style={{ color: "#F97316" }} />
+                        <Icon className="w-4.5 h-4.5" style={{ color: "#0EA5B7" }} />
                       </div>
                       <div>
                         <h3 className="text-sm font-semibold mb-1" style={{ color: "#0F172A" }}>

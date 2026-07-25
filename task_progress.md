@@ -1,0 +1,6 @@
+- [x] Analyze current codebase structure
+- [ ] Rewrite Printer.tsx with open 2-pillar printer from script
+- [ ] Rewrite PrintedObject.tsx with 3 fixed gears that grow in height
+- [ ] Remove Phone.tsx from Scene.tsx
+- [ ] Update Scene.tsx to remove Phone import and adjust layout
+- [ ] Verify the build compiles

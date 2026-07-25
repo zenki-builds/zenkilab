@@ -23,7 +23,7 @@ const channelIcons: Record<string, React.ReactNode> = {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="relative py-24 lg:py-28 bg-white border-t" style={{ borderColor: "#E2E8F0" }}>
+    <section id="contact" className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
       <div className="max-w-[960px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -36,7 +36,7 @@ export function ContactSection() {
           <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
             Contact
           </span>
-          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[600px]" style={{ color: "#0F172A" }}>
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[600px]" style={{ color: "#E2E8F0" }}>
             Let's make something together.
           </h2>
         </motion.div>
@@ -56,53 +56,60 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
-              style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFFFF" }}
+              style={{ border: "1px solid #1E293B", backgroundColor: "#0A0F16" }}
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300"
-                style={{ backgroundColor: "#FFF7ED", color: "#F97316" }}
+                style={{ backgroundColor: "#1E1A14", color: "#F97316" }}
               >
-                {channelIcons[channel.label] || <ExternalLink className="w-5 h-5" />}
+                {channelIcons[channel.label] ?? <MessageCircle className="w-5 h-5" />}
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold tracking-widest uppercase mb-0.5" style={{ color: "#94A3B8" }}>
+
+              <div className="min-w-0">
+                <p className="text-sm font-semibold" style={{ color: "#E2E8F0" }}>
                   {channel.label}
                 </p>
-                <p className="text-sm truncate" style={{ color: "#0F172A" }}>{channel.value}</p>
+                <p className="text-xs truncate" style={{ color: "#94A3B8" }}>
+                  {channel.value}
+                </p>
               </div>
-              <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "#CBD5E1" }} />
+
+              <div className="ml-auto flex-shrink-0 text-[#64748B] group-hover:text-[#F97316] transition-colors duration-300">
+                <ExternalLink className="w-4 h-4" />
+              </div>
             </a>
           ))}
         </motion.div>
 
-        {/* Bottom CTA */}
+        {/* Location & CTA */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="mt-16 text-center p-10 lg:p-14 rounded-2xl"
-          style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}
+          style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}
         >
           <div
             className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-5"
-            style={{ backgroundColor: "#FFF7ED", border: "1px solid #FED7AA" }}
+            style={{ backgroundColor: "#1E1A14", border: "1px solid #1E293B" }}
           >
             <MapPin className="w-5 h-5" style={{ color: "#F97316" }} />
           </div>
-          <h3 className="text-2xl font-bold mb-3" style={{ color: "#0F172A" }}>
-            Based in Colombo, shipping island-wide
+
+          <h3 className="text-xl font-bold mb-2" style={{ color: "#E2E8F0" }}>
+            Visit the workshop
           </h3>
-          <p className="mb-8 max-w-[480px] mx-auto leading-relaxed" style={{ color: "#64748B" }}>
-            We're a local team serving all of Sri Lanka. Whether you're in
-            Colombo, Kandy, Galle, or Jaffna — we deliver to your doorstep.
+          <p className="text-sm mb-6" style={{ color: "#94A3B8" }}>
+            Colombo, Sri Lanka · Available by appointment
           </p>
+
           <a
             href="#quote"
             className="inline-flex items-center gap-2 text-white h-[52px] px-7 rounded-xl text-sm font-semibold transition-all duration-300 hover:brightness-110"
             style={{ backgroundColor: "#F97316" }}
           >
-            Start Your Project
+            Request a Quote
             <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>

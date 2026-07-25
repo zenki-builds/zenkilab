@@ -23,7 +23,7 @@ const item = {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 lg:py-28 bg-white">
+    <section id="services" className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -34,17 +34,17 @@ export function ServicesSection() {
           className="mb-14 lg:mb-16"
         >
           <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
-            What We Manufacture
+            What We Print
           </span>
           <h2
             className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]"
-            style={{ color: "#0F172A" }}
+            style={{ color: "#E2E8F0" }}
           >
-            Pretty much anything you can dream up.
+            We print custom parts.
           </h2>
-          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#64748B" }}>
-            From functional engineering parts to art pieces and cosplay props.
-            If it can be printed, we can make it.
+          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#94A3B8" }}>
+            From automotive components to household items and custom gifts. If
+            you have a 3D model, we can manufacture it.
           </p>
         </motion.div>
 
@@ -62,23 +62,23 @@ export function ServicesSection() {
               href={service.href}
               variants={item}
               className="group relative rounded-2xl p-7 lg:p-8 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-lg"
-              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
+              style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}
             >
               {/* Icon */}
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
-                style={{ backgroundColor: "#FFF7ED" }}
+                style={{ backgroundColor: "#1E1A14" }}
               >
                 <service.icon className="w-5 h-5 transition-colors duration-300" style={{ color: "#F97316" }} />
               </div>
 
               {/* Title */}
-              <h3 className="text-base font-semibold mb-2 tracking-[-0.01em]" style={{ color: "#0F172A" }}>
+              <h3 className="text-base font-semibold mb-2 tracking-[-0.01em]" style={{ color: "#E2E8F0" }}>
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#64748B" }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: "#94A3B8" }}>
                 {service.description}
               </p>
 
@@ -88,7 +88,7 @@ export function ServicesSection() {
                   <span
                     key={ex}
                     className="text-[11px] px-2 py-0.5 rounded-md"
-                    style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0", color: "#64748B" }}
+                    style={{ backgroundColor: "#0F1720", border: "1px solid #1E293B", color: "#94A3B8" }}
                   >
                     {ex}
                   </span>

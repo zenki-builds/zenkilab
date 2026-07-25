@@ -184,8 +184,8 @@ export function QuoteSection() {
             Tell us what you need. We'll handle the rest.
           </h2>
           <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#64748B" }}>
-            Upload your files, describe your project, and our engineers will
-            review and respond with a detailed quote within 24 hours.
+            Upload your STL files, describe your project, and we'll review
+            and respond with a detailed quote within 24 hours.
           </p>
         </motion.div>
 
@@ -473,8 +473,8 @@ export function QuoteSection() {
               Quote Request Submitted
             </h3>
             <p className="max-w-[460px] mx-auto leading-relaxed" style={{ color: "#64748B" }}>
-              Thank you. Our engineering team will review your files and respond
-              with a detailed quotation within 24 hours. We're excited to work on your project.
+              Thank you. We'll review your files and respond
+              with a detailed quote within 24 hours. We're excited to work on your project.
             </p>
           </motion.div>
         )}

@@ -13,18 +13,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Zenki Lab · Premium Digital Manufacturing",
+  title: "Zenki Lab · Custom 3D Printing Workshop",
   description:
-    "Zenki Lab provides custom on-demand 3D printing and digital manufacturing. Industrial-grade parts, functional prototypes, and production-ready components. Manufactured on demand, on time.",
+    "Professional custom 3D printing services based in Sri Lanka. We manufacture parts, prototypes and one-off projects from your 3D models. Built by makers, for makers.",
   keywords: [
     "3D printing",
-    "digital manufacturing",
     "custom parts",
+    "custom manufacturing",
     "prototypes",
-    "additive manufacturing",
+    "automotive parts",
     "Zenki Lab",
     "Sri Lanka",
-    "on-demand manufacturing",
+    "3D printing service",
   ],
   authors: [{ name: "Zenki Lab" }],
   icons: {
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     apple: "/favicon.svg",
   },
   openGraph: {
-    title: "Zenki Lab · Premium Digital Manufacturing",
+    title: "Zenki Lab · Custom 3D Printing Workshop",
     description:
-      "If you can imagine it, we can print it. Custom on-demand 3D printing and digital manufacturing for prototypes, parts, and production.",
+      "Professional custom 3D printing for makers, enthusiasts and businesses. We manufacture custom parts, prototypes and one-off projects from your 3D models.",
     url: "https://zenkilab.com",
     siteName: "Zenki Lab",
     locale: "en_US",
@@ -62,7 +62,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
-      <body className="min-h-screen bg-[#0F1115] text-white font-sans">
+      <body className="min-h-screen bg-white text-[#0F172A] font-sans">
         {children}
       </body>
     </html>
