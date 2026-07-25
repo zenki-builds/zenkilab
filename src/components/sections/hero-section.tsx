@@ -2,44 +2,29 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, FileEdit, X, FileText, Camera, Lightbulb, Sparkles } from "lucide-react";
+import { Settings2, Zap, X, FileText, Camera, Lightbulb, Sparkles } from "lucide-react";
 import { projectJourneys } from "@/lib/constants";
 
 /**
  * ═══════════════════════════════════════════════════════
- * Hero Section — Dark Industrial 3-Column Layout
- *
- * Left:   Headline + CTA buttons
- * Center: 3D printer visual container (pulsing placeholder)
- * Right:  "How It Works" vertical card stack
- *
- * Palette:
- *   Background      #0F172A (dark gunmetal)
- *   Surface/Cards    #1E293B (slate gray), border #334155
- *   Accent           #F97316 (performance orange)
- *   Primary text     #F8FAFC (off-white)
- *   Secondary text   #94A3B8 (cool gray)
+ * Hero Section — Light Industrial 3-Column Layout
+ * Matches the approved wireframe: light bg, dark text,
+ * orange accent, printer visual center, How It Works right.
  * ═══════════════════════════════════════════════════════
  */
 
 const howItWorksSteps = [
   {
-    number: "1",
-    icon: FileEdit,
-    title: "Design & CAD",
-    description: "Send us your STL or 3MF file, ready to print.",
+    icon: FileText,
+    title: "1. Design & CAD",
   },
   {
-    number: "2",
-    icon: Zap,
-    title: "Material Selection",
-    description: "Choose from PLA, PETG, ABS, ASA and more.",
+    icon: Settings2,
+    title: "2. Material Selection",
   },
   {
-    number: "3",
     icon: Sparkles,
-    title: "Precision Printing & Finishing",
-    description: "Layer-by-layer accuracy with careful post-processing.",
+    title: "3. Precision Printing & Finishing",
   },
 ];
 
@@ -48,75 +33,36 @@ export function HeroSection() {
   const journeyIcons = [FileText, Camera, Lightbulb, Sparkles];
 
   return (
-    <section
-      className="relative min-h-screen overflow-hidden pt-28 pb-16 lg:pt-32"
-      style={{ backgroundColor: "#0F172A" }}
-    >
-      {/* Subtle background grid texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #F8FAFC 1px, transparent 1px), linear-gradient(to bottom, #F8FAFC 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Radial accent glow behind center column */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(249,115,22,0.06) 0%, transparent 70%)",
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12">
-        {/* ═══ 3-Column Grid: stacks below 1024px ═══ */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr_0.85fr] gap-10 lg:gap-8 items-center">
-          {/* ── LEFT COLUMN: Hook & CTA ── */}
+    <section id="home" className="relative pt-28 pb-16 lg:pt-32 lg:pb-20 bg-white overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.3fr_0.75fr] gap-10 lg:gap-6 items-center">
+          {/* ── LEFT: Headline & CTAs ── */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="text-center lg:text-left"
           >
             <h1
-              className="text-[clamp(2.25rem,4.5vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.02em] mb-6"
-              style={{ color: "#F8FAFC", fontFamily: "var(--font-heading, inherit)" }}
+              className="text-[clamp(2rem,3.6vw,2.75rem)] font-extrabold leading-[1.12] tracking-[-0.02em] mb-6"
+              style={{ color: "#0F172A" }}
             >
-              PRECISION 3D PRINTING FOR{" "}
-              <span style={{ color: "#F97316" }}>CUSTOM AUTOMOTIVE PARTS</span>
+              PRECISION 3D PRINTING FOR CUSTOM AUTOMOTIVE PARTS
             </h1>
-
-            <p
-              className="text-base lg:text-lg mb-8 max-w-[480px] mx-auto lg:mx-0 leading-relaxed"
-              style={{ color: "#94A3B8" }}
-            >
-              High-temp, engineering-grade prints for brackets, housings and
-              replacement parts — built from your STL files with care.
-            </p>
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 h-[50px] px-6 rounded-lg text-sm font-semibold transition-all duration-300"
-                style={{
-                  backgroundColor: "#1E293B",
-                  border: "1px solid #334155",
-                  color: "#F8FAFC",
-                }}
+                className="inline-flex items-center gap-2 h-[46px] px-5 rounded-lg text-sm font-semibold border transition-colors duration-200"
+                style={{ borderColor: "#CBD5E1", color: "#0F172A", backgroundColor: "#FFFFFF" }}
               >
+                <Settings2 className="w-4 h-4" />
                 Explore Services
               </a>
               <button
                 onClick={() => setShowJourneys(true)}
-                className="inline-flex items-center gap-2 h-[50px] px-6 rounded-lg text-sm font-semibold transition-all duration-300 hover:brightness-110"
-                style={{
-                  backgroundColor: "#F97316",
-                  color: "#0F172A",
-                }}
+                className="inline-flex items-center gap-2 h-[46px] px-5 rounded-lg text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.02]"
+                style={{ backgroundColor: "#F97316" }}
               >
                 <Zap className="w-4 h-4" />
                 Get Instant Quote
@@ -124,14 +70,14 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* ── CENTER COLUMN: 3D Printer Visual Core (no frame, clean) ── */}
+          {/* ── CENTER: Animated 3D Printer Visual ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex items-center justify-center"
           >
-            <div className="relative w-full max-w-[460px] aspect-square">
+            <div className="relative w-full max-w-[440px] aspect-square">
               <svg
                 viewBox="0 0 500 500"
                 width="100%"
@@ -141,8 +87,8 @@ export function HeroSection() {
               >
                 <defs>
                   <linearGradient id="frame-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#1E293B" />
-                    <stop offset="100%" stopColor="#0F172A" />
+                    <stop offset="0%" stopColor="#F1F5F9" />
+                    <stop offset="100%" stopColor="#E2E8F0" />
                   </linearGradient>
                   <linearGradient id="orange-glow" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#F97316" stopOpacity="0.8" />
@@ -154,18 +100,18 @@ export function HeroSection() {
                 </defs>
 
                 {/* Enclosure outer frame */}
-                <rect x="40" y="40" width="420" height="420" rx="24" fill="url(#frame-grad)" stroke="#334155" strokeWidth="4" />
+                <rect x="40" y="40" width="420" height="420" rx="24" fill="url(#frame-grad)" stroke="#CBD5E1" strokeWidth="3" />
                 {/* Glass panel inner border */}
-                <rect x="60" y="60" width="380" height="380" rx="16" fill="#090D16" stroke="#1E293B" strokeWidth="2" />
+                <rect x="60" y="60" width="380" height="380" rx="16" fill="#FFFFFF" stroke="#E2E8F0" strokeWidth="2" />
 
                 {/* Heatbed platform */}
-                <rect x="110" y="370" width="280" height="16" rx="4" fill="#334155" />
-                <rect x="120" y="386" width="260" height="8" fill="#1E293B" />
-                <rect x="140" y="394" width="20" height="26" fill="#475569" />
-                <rect x="340" y="394" width="20" height="26" fill="#475569" />
+                <rect x="110" y="370" width="280" height="16" rx="4" fill="#CBD5E1" />
+                <rect x="120" y="386" width="260" height="8" fill="#E2E8F0" />
+                <rect x="140" y="394" width="20" height="26" fill="#94A3B8" />
+                <rect x="340" y="394" width="20" height="26" fill="#94A3B8" />
 
                 {/* Blueprint wireframe of the part (background) */}
-                <g stroke="#334155" strokeWidth="2" fill="none" opacity="0.4">
+                <g stroke="#CBD5E1" strokeWidth="2" fill="none" opacity="0.7">
                   <path d="M150 370 L170 260 C200 240, 240 240, 260 260 L280 370 Z" />
                   <path d="M190 370 L200 270 M230 370 L235 265 M270 370 L270 280" />
                 </g>
@@ -175,7 +121,7 @@ export function HeroSection() {
                   <path
                     d="M150 370 L170 260 C200 240, 240 240, 260 260 L280 370 Z"
                     fill="#F97316"
-                    fillOpacity="0.2"
+                    fillOpacity="0.15"
                     stroke="#F97316"
                     strokeWidth="4"
                     strokeLinejoin="round"
@@ -186,7 +132,7 @@ export function HeroSection() {
 
                 {/* Moving gantry & toolhead assembly */}
                 <g className="zenki-toolhead">
-                  <rect x="60" y="200" width="380" height="12" fill="#1E293B" stroke="#475569" strokeWidth="1.5" />
+                  <rect x="60" y="200" width="380" height="12" fill="#F1F5F9" stroke="#94A3B8" strokeWidth="1.5" />
                   <rect x="220" y="175" width="60" height="50" rx="8" fill="#334155" stroke="#F97316" strokeWidth="2" />
                   <line x1="220" y1="190" x2="280" y2="190" stroke="#F97316" strokeWidth="3" />
                   <polygon points="242,225 258,225 252,238 248,238" fill="#CBD5E1" />
@@ -200,54 +146,45 @@ export function HeroSection() {
                 {/* Status LED */}
                 <circle cx="410" cy="80" r="5" fill="#22C55E" />
                 <circle cx="410" cy="80" r="10" fill="#22C55E" opacity="0.2" className="zenki-nozzle-glow" />
+
+                {/* "3D printer" label */}
+                <text x="250" y="30" textAnchor="middle" fontSize="16" fontWeight="600" fill="#334155">
+                  3D printer
+                </text>
               </svg>
             </div>
           </motion.div>
 
-          {/* ── RIGHT COLUMN: How It Works Card Stack ── */}
+          {/* ── RIGHT: How It Works Card Stack ── */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <h2
-              className="text-xs font-bold tracking-[0.15em] uppercase mb-4 text-center lg:text-left"
-              style={{ color: "#F8FAFC" }}
+              className="text-xs font-bold tracking-[0.12em] uppercase mb-3 text-center lg:text-left"
+              style={{ color: "#0F172A" }}
             >
               How It Works
             </h2>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5">
               {howItWorksSteps.map((step) => {
                 const Icon = step.icon;
                 return (
                   <div
-                    key={step.number}
-                    className="flex items-start gap-3 p-4 rounded-xl transition-colors duration-300"
-                    style={{
-                      backgroundColor: "#1E293B",
-                      border: "1px solid #334155",
-                    }}
+                    key={step.title}
+                    className="flex items-center gap-3 p-3.5 rounded-lg border"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                   >
                     <div
-                      className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold"
-                      style={{
-                        backgroundColor: "rgba(249,115,22,0.12)",
-                        color: "#F97316",
-                      }}
+                      className="flex-shrink-0 w-9 h-9 rounded-md flex items-center justify-center"
+                      style={{ backgroundColor: "#FFF7ED" }}
                     >
-                      {step.number}
+                      <Icon className="w-4 h-4" style={{ color: "#F97316" }} />
                     </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Icon className="w-3.5 h-3.5" style={{ color: "#F97316" }} />
-                        <h3 className="text-sm font-semibold" style={{ color: "#F8FAFC" }}>
-                          {step.title}
-                        </h3>
-                      </div>
-                      <p className="text-xs leading-relaxed" style={{ color: "#94A3B8" }}>
-                        {step.description}
-                      </p>
-                    </div>
+                    <h3 className="text-sm font-semibold" style={{ color: "#0F172A" }}>
+                      {step.title}
+                    </h3>
                   </div>
                 );
               })}
@@ -264,8 +201,8 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 backdrop-blur-xl flex items-center justify-center p-6"
-            style={{ backgroundColor: "rgba(15,23,42,0.9)" }}
+            className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center p-6"
+            style={{ backgroundColor: "rgba(15,23,42,0.4)" }}
             onClick={() => setShowJourneys(false)}
           >
             <motion.div
@@ -275,21 +212,21 @@ export function HeroSection() {
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
               onClick={(e) => e.stopPropagation()}
               className="max-w-[720px] w-full rounded-2xl p-8 lg:p-10"
-              style={{ backgroundColor: "#1E293B", border: "1px solid #334155" }}
+              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
             >
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="text-xl font-bold mb-1" style={{ color: "#F8FAFC" }}>
+                  <h2 className="text-xl font-bold mb-1" style={{ color: "#0F172A" }}>
                     Start Your Project
                   </h2>
-                  <p className="text-sm" style={{ color: "#94A3B8" }}>
+                  <p className="text-sm" style={{ color: "#64748B" }}>
                     Choose the path that best describes your situation
                   </p>
                 </div>
                 <button
                   onClick={() => setShowJourneys(false)}
-                  className="w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
-                  style={{ border: "1px solid #334155", color: "#94A3B8" }}
+                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
+                  style={{ border: "1px solid #E2E8F0", color: "#64748B" }}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -303,20 +240,20 @@ export function HeroSection() {
                       key={journey.title}
                       href={journey.href}
                       onClick={() => setShowJourneys(false)}
-                      className="group flex flex-col gap-3 p-5 rounded-xl transition-all duration-300"
-                      style={{ border: "1px solid #334155" }}
+                      className="group flex flex-col gap-3 p-5 rounded-xl transition-all duration-300 hover:border-[#F97316]/40"
+                      style={{ border: "1px solid #E2E8F0" }}
                     >
                       <div
                         className="w-9 h-9 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                        style={{ backgroundColor: "rgba(249,115,22,0.1)", border: "1px solid rgba(249,115,22,0.25)" }}
+                        style={{ backgroundColor: "#FFF7ED" }}
                       >
                         <Icon className="w-4.5 h-4.5" style={{ color: "#F97316" }} />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold mb-1" style={{ color: "#F8FAFC" }}>
+                        <h3 className="text-sm font-semibold mb-1" style={{ color: "#0F172A" }}>
                           {journey.title}
                         </h3>
-                        <p className="text-xs leading-relaxed" style={{ color: "#94A3B8" }}>
+                        <p className="text-xs leading-relaxed" style={{ color: "#64748B" }}>
                           {journey.description}
                         </p>
                       </div>
