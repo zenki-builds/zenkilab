@@ -193,21 +193,56 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Hero — Printer Visual Placeholder Pulse
+   Hero — Zenki Printer Visual (frameless, production SVG)
    ═══════════════════════════════════════════════════════ */
-@keyframes hero-printer-pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.015); }
+
+/* 1. Toolhead sweep motion across the gantry rail */
+@keyframes zenki-toolhead-sweep {
+  0% { transform: translate(0px, 0px); }
+  25% { transform: translate(120px, 20px); }
+  50% { transform: translate(-80px, 40px); }
+  75% { transform: translate(100px, 10px); }
+  100% { transform: translate(0px, 0px); }
 }
 
-.hero-printer-pulse {
-  animation: hero-printer-pulse 3.2s ease-in-out infinite;
+.zenki-toolhead {
+  animation: zenki-toolhead-sweep 6s ease-in-out infinite alternate;
+}
+
+/* 2. Layer-by-layer reveal of the printed part via clipPath rect */
+@keyframes zenki-reveal-part {
+  0% { y: 370px; height: 0px; }
+  100% { y: 220px; height: 150px; }
+}
+
+.zenki-clip-reveal-box {
+  animation: zenki-reveal-part 6s ease-in-out infinite alternate;
+}
+
+/* 3. Nozzle heat / status LED pulse */
+@keyframes zenki-nozzle-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.zenki-nozzle-glow {
+  transform-origin: center;
+  animation: zenki-nozzle-pulse 0.4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-printer-pulse {
+  .zenki-toolhead {
     animation: none !important;
-    opacity: 0.6;
+  }
+  .zenki-clip-reveal-box {
+    animation: none !important;
+    y: 220px;
+    height: 150px;
+  }
+  .zenki-nozzle-glow {
+    animation: none !important;
+    opacity: 0.7;
+    transform: scale(1);
   }
 }
 
