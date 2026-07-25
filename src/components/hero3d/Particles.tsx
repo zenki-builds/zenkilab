@@ -130,7 +130,7 @@ export function Particles() {
   return (
     <>
       <AmbientDust />
-      <HologramEmission origin={[4.0, 0.35, 0.15]} />
+      <HologramEmission origin={[4.5, 0.35, -1.35]} />
     </>
   );
 }

@@ -51,7 +51,9 @@ export function HeroText({ onStart }: { onStart: () => void }) {
       </span>
 
       <h1 className="text-[clamp(2.1rem,4vw,3.1rem)] font-extrabold leading-[1.12] tracking-[-0.01em] mb-6 text-white uppercase">
-        ZenkiLab: Precision Additive Manufacturing Solutions
+        Built by makers,
+        <br />
+        <span style={{ color: "#22D3EE" }}>for makers.</span>
       </h1>
 
       <p className="text-base lg:text-lg leading-relaxed mb-9 max-w-[480px] mx-auto lg:mx-0 text-slate-300/90">

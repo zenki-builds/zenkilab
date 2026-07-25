@@ -24,7 +24,7 @@ function CameraRig({ mouse }: { mouse: React.RefObject<{ x: number; y: number }>
     const targetY = 3.0 + mouse.current.y * -0.1;
     camera.position.x += (targetX - camera.position.x) * 0.04;
     camera.position.y += (targetY - camera.position.y) * 0.04;
-    camera.lookAt(4.0, 0.35, -0.08);
+    camera.lookAt(4.0, 0.35, -0.58);
   });
 
   return null;
@@ -74,14 +74,12 @@ export function Scene() {
       <pointLight position={[-2, 1.5, 2]} intensity={0.9} color="#22D3EE" distance={7} />
       <pointLight position={[2, -0.5, 1.8]} intensity={0.6} color="#0EA5B7" distance={6} />
       <pointLight position={[0, -1, 1]} intensity={0.4} color="#0284C7" distance={5} />
-      {/* Overhead warm light shining down on the printer — invisible source */}
-      <pointLight position={[6.0, 2.5, -0.08]} intensity={2.2} color="#fff5eb" distance={8} decay={1.2} />
+      <pointLight position={[6.0, 2.5, -1.08]} intensity={2.2} color="#fff5eb" distance={8} decay={1.2} />
       <group ref={sceneRoot}>
-        {/* -10° Y-axis rotation on the entire assembly */}
         <group rotation={[0, -10 * (Math.PI / 180), 0]}>
-          <Printer mouse={mouse} position={[6.0, -0.72, -0.08]} />
-          <Phone position={[4.0, -0.22, 0.15]} />
-          <Hologram position={[4.0, 0.2, 0.15]} />
+          <Printer mouse={mouse} position={[6.0, -0.72, -1.08]} />
+          <Phone position={[4.5, -0.22, -1.35]} />
+          <Hologram position={[4.5, 0.2, -1.35]} />
           <Particles />
         </group>
       </group>

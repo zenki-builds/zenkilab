@@ -146,7 +146,7 @@ export function Printer({ mouse, position = [2.8, -0.72, -0.08] }: PrinterProps)
     if (root) {
       root.rotation.y = THREE.MathUtils.lerp(
         root.rotation.y,
-        -0.22 + mouse.current.x * 0.04,
+        -0.302 + mouse.current.x * 0.04,
         0.05,
       );
       root.rotation.x = THREE.MathUtils.lerp(
