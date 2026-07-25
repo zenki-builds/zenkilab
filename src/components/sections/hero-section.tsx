@@ -7,53 +7,42 @@ import { projectJourneys } from "@/lib/constants";
 
 /**
  * ═══════════════════════════════════════════════════════
- * Hero Section — Light Industrial 3-Column Layout
- * Matches the approved wireframe: light bg, dark text,
- * orange accent, printer visual center, How It Works right.
+ * Hero Section — Light Industrial 2-Column Layout
+ * Headline & CTAs on the left, printer visual pushed
+ * to the right corner. How It Works stack removed.
  * ═══════════════════════════════════════════════════════
  */
-
-const howItWorksSteps = [
-  {
-    icon: FileText,
-    title: "1. Design & CAD",
-  },
-  {
-    icon: Settings2,
-    title: "2. Material Selection",
-  },
-  {
-    icon: Sparkles,
-    title: "3. Precision Printing & Finishing",
-  },
-];
 
 export function HeroSection() {
   const [showJourneys, setShowJourneys] = useState(false);
   const journeyIcons = [FileText, Camera, Lightbulb, Sparkles];
 
   return (
-    <section id="home" className="relative pt-28 pb-16 lg:pt-32 lg:pb-20 bg-white overflow-hidden">
+    <section id="home" className="relative pt-28 pb-16 lg:pt-32 lg:pb-24 bg-white overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.3fr_0.75fr] gap-10 lg:gap-6 items-center">
-          {/* ── LEFT: Headline & CTAs ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* ── LEFT: Headline & CTAs (col-span-6) ── */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="text-center lg:text-left"
+            className="lg:col-span-6 text-center lg:text-left"
           >
             <h1
-              className="text-[clamp(2rem,3.6vw,2.75rem)] font-extrabold leading-[1.12] tracking-[-0.02em] mb-6"
+              className="text-[clamp(2.25rem,4vw,3.25rem)] font-extrabold leading-[1.1] tracking-[-0.02em] mb-6"
               style={{ color: "#0F172A" }}
             >
               PRECISION 3D PRINTING FOR CUSTOM AUTOMOTIVE PARTS
             </h1>
 
+            <p className="text-lg leading-relaxed mb-8 max-w-[540px] mx-auto lg:mx-0" style={{ color: "#64748B" }}>
+              Built by makers, for makers. We manufacture custom parts, prototypes, and one-off projects directly from your 3D models.
+            </p>
+
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 h-[46px] px-5 rounded-lg text-sm font-semibold border transition-colors duration-200"
+                className="inline-flex items-center gap-2 h-[48px] px-6 rounded-lg text-sm font-semibold border transition-colors duration-200"
                 style={{ borderColor: "#CBD5E1", color: "#0F172A", backgroundColor: "#FFFFFF" }}
               >
                 <Settings2 className="w-4 h-4" />
@@ -61,7 +50,7 @@ export function HeroSection() {
               </a>
               <button
                 onClick={() => setShowJourneys(true)}
-                className="inline-flex items-center gap-2 h-[46px] px-5 rounded-lg text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 h-[48px] px-6 rounded-lg text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.02]"
                 style={{ backgroundColor: "#F97316" }}
               >
                 <Zap className="w-4 h-4" />
@@ -70,14 +59,14 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* ── CENTER: Animated 3D Printer Visual ── */}
+          {/* ── RIGHT CORNER: Animated 3D Printer Visual (col-span-6) ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.96, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex items-center justify-center"
+            className="lg:col-span-6 flex items-center justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[440px] aspect-square">
+            <div className="relative w-full max-w-[500px] aspect-square">
               <svg
                 viewBox="0 0 500 500"
                 width="100%"
@@ -152,42 +141,6 @@ export function HeroSection() {
                   3D printer
                 </text>
               </svg>
-            </div>
-          </motion.div>
-
-          {/* ── RIGHT: How It Works Card Stack ── */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <h2
-              className="text-xs font-bold tracking-[0.12em] uppercase mb-3 text-center lg:text-left"
-              style={{ color: "#0F172A" }}
-            >
-              How It Works
-            </h2>
-            <div className="flex flex-col gap-2.5">
-              {howItWorksSteps.map((step) => {
-                const Icon = step.icon;
-                return (
-                  <div
-                    key={step.title}
-                    className="flex items-center gap-3 p-3.5 rounded-lg border"
-                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
-                  >
-                    <div
-                      className="flex-shrink-0 w-9 h-9 rounded-md flex items-center justify-center"
-                      style={{ backgroundColor: "#FFF7ED" }}
-                    >
-                      <Icon className="w-4 h-4" style={{ color: "#F97316" }} />
-                    </div>
-                    <h3 className="text-sm font-semibold" style={{ color: "#0F172A" }}>
-                      {step.title}
-                    </h3>
-                  </div>
-                );
-              })}
             </div>
           </motion.div>
         </div>
