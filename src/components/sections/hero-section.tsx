@@ -18,18 +18,34 @@ interface Particle {
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const markRef = useRef<SVGSVGElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [showJourneys, setShowJourneys] = useState(false);
   const particlesRef = useRef<Particle[]>([]);
 
-  /* Trigger hero signature mark draw-in on mount */
+  /* ── IntersectionObserver: pause hero bg loop when scrolled out of view ── */
   useEffect(() => {
-    const mark = markRef.current;
-    if (!mark) return;
-    const timer = setTimeout(() => {
-      mark.classList.add("drawn");
-    }, 100);
-    return () => clearTimeout(timer);
+    const section = sectionRef.current;
+    if (!section) return;
+
+    /* Bail out if user prefers reduced motion — no animations to pause */
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          section.classList.remove("hero-bg-paused");
+        } else {
+          section.classList.add("hero-bg-paused");
+        }
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -145,7 +161,10 @@ export function HeroSection() {
   const journeyIcons = [FileText, Camera, Lightbulb, Sparkles];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Animated Canvas Background */}
       <canvas
         ref={canvasRef}
@@ -153,13 +172,98 @@ export function HeroSection() {
         aria-hidden="true"
       />
 
+      {/* ═══ Hero Background Printer Build Loop ═══ */}
+      <div
+        className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none"
+        aria-hidden="true"
+      >
+        <svg
+          id="hero-printer-bg"
+          width="900"
+          height="700"
+          viewBox="0 0 900 700"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-full max-w-[900px]"
+          style={{
+            maskImage: "radial-gradient(ellipse 55% 55% at 50% 48%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 55% 55% at 50% 48%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 100%)",
+          }}
+        >
+          {/* ═══ Frame — enclosure box ═══ */}
+          <g id="hero-frame">
+            <rect className="hero-outline" x="200" y="80" width="500" height="420" rx="12" strokeWidth="2" />
+            <path className="hero-accent" d="M200 110 L700 110" strokeWidth="1.5" />
+            <path className="hero-accent" d="M220 460 L680 460" strokeWidth="1.5" strokeDasharray="6 8" />
+          </g>
+
+          {/* ═══ Doors — front panels ═══ */}
+          <g id="hero-doors">
+            <rect className="hero-outline" x="200" y="80" width="250" height="420" rx="12" strokeWidth="1" strokeDasharray="8 4" />
+            <rect className="hero-outline" x="450" y="80" width="250" height="420" rx="12" strokeWidth="1" strokeDasharray="8 4" />
+            <path className="hero-accent" d="M438 280 L438 320" strokeWidth="2" />
+            <path className="hero-accent" d="M462 280 L462 320" strokeWidth="2" />
+          </g>
+
+          {/* ═══ Gantry — rails ═══ */}
+          <g id="hero-gantry">
+            <path className="hero-outline" d="M240 130 L660 130" strokeWidth="1.5" />
+            <path className="hero-outline" d="M240 420 L660 420" strokeWidth="1.5" />
+            <path className="hero-accent" d="M270 130 L270 420" strokeWidth="1.5" />
+            <path className="hero-accent" d="M630 130 L630 420" strokeWidth="1.5" />
+            <path className="hero-accent" d="M270 180 L630 180" strokeWidth="1.5" strokeDasharray="4 3" />
+          </g>
+
+          {/* ═══ Toolhead — on X-axis, sweeps back and forth ═══ */}
+          <g id="hero-toolhead">
+            <rect className="hero-outline" x="398" y="158" width="44" height="36" rx="4" strokeWidth="1.5" />
+            <path className="hero-accent" d="M416 194 L416 212 L420 212 L420 194" strokeWidth="1.5" />
+            {/* Heatsink lines */}
+            <path className="hero-outline" d="M404 164 L404 174" strokeWidth="1" />
+            <path className="hero-outline" d="M416 164 L416 174" strokeWidth="1" />
+            <path className="hero-outline" d="M428 164 L428 174" strokeWidth="1" />
+            <circle className="hero-accent" cx="408" cy="178" r="7" strokeWidth="1" />
+          </g>
+
+          {/* ═══ Bed — print platform ═══ */}
+          <g id="hero-bed">
+            <rect className="hero-outline" x="300" y="340" width="300" height="8" rx="2" strokeWidth="1.5" />
+            <path className="hero-outline" d="M360 340 L360 348" strokeWidth="0.8" />
+            <path className="hero-outline" d="M420 340 L420 348" strokeWidth="0.8" />
+            <path className="hero-outline" d="M480 340 L480 348" strokeWidth="0.8" />
+            <path className="hero-accent" d="M330 348 L330 380 L570 380 L570 348" strokeWidth="1" />
+          </g>
+
+          {/* ═══ Print — object being built (clipPath + opacity cycle) ═══ */}
+          <g id="hero-print">
+            <defs>
+              <clipPath id="hero-print-clip">
+                <rect id="hero-print-clip-rect" x="380" y="230" width="80" height="44" fill="white" />
+              </clipPath>
+            </defs>
+            <g clipPath="url(#hero-print-clip)">
+              {/* Base platform */}
+              <rect className="hero-accent-fill hero-print-fill" x="380" y="266" width="80" height="8" rx="1" />
+              {/* Column */}
+              <rect className="hero-accent-fill hero-print-fill" x="406" y="226" width="28" height="40" rx="3" />
+              {/* Top cap */}
+              <rect className="hero-accent-fill hero-print-fill" x="394" y="210" width="52" height="20" rx="4" />
+              {/* Outlines */}
+              <rect className="hero-outline hero-print-fill" x="380" y="266" width="80" height="8" rx="1" />
+              <rect className="hero-outline hero-print-fill" x="406" y="226" width="28" height="40" rx="3" />
+              <rect className="hero-outline hero-print-fill" x="394" y="210" width="52" height="20" rx="4" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0F1115] z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0F1115]/40 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0F1115] z-[4]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0F1115]/40 z-[4]" />
 
       {/* Radial accent glows */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full z-[1]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full z-[5]"
         style={{
           background:
             "radial-gradient(circle, rgba(34,211,238,0.04) 0%, transparent 70%)",
@@ -167,7 +271,7 @@ export function HeroSection() {
         aria-hidden="true"
       />
       <div
-        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full z-[1]"
+        className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full z-[5]"
         style={{
           background:
             "radial-gradient(circle, rgba(34,211,238,0.03) 0%, transparent 70%)",
@@ -182,81 +286,6 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          {/* Hero Signature Mark — small line-art motif above headline */}
-          <div className="mb-6 flex justify-center" aria-hidden="true">
-            <svg
-              id="hero-signature-mark"
-              ref={markRef}
-              width="72"
-              height="64"
-              viewBox="0 0 72 64"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-[56px] h-[50px] sm:w-[72px] sm:h-[64px]"
-            >
-              {/* Outline: nozzle body + partial shape beneath */}
-              <g id="mark-outline">
-                {/* Nozzle body */}
-                <path
-                  className="mark-stroke"
-                  d="M36 8 L26 28 L46 28 Z"
-                  stroke="var(--muted-foreground)"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                {/* Nozzle tip */}
-                <path
-                  className="mark-stroke"
-                  d="M30 28 L36 38 L42 28"
-                  stroke="var(--muted-foreground)"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                {/* Pendant stroke lines — partial shape suggesting a forming print */}
-                <path
-                  className="mark-stroke"
-                  d="M22 46 Q36 42 50 46"
-                  stroke="var(--muted-foreground)"
-                  strokeWidth="1.2"
-                  fill="none"
-                />
-                <path
-                  className="mark-stroke"
-                  d="M26 52 Q36 48 46 52"
-                  stroke="var(--muted-foreground)"
-                  strokeWidth="1.2"
-                  fill="none"
-                />
-              </g>
-              {/* Accent: nozzle tip dot + single highlight line */}
-              <g id="mark-accent">
-                {/* Small accent line on the nozzle */}
-                <path
-                  className="mark-stroke mark-accent"
-                  d="M33 16 L33 24"
-                  stroke="var(--accent)"
-                  strokeWidth="1.2"
-                  fill="none"
-                />
-                <path
-                  className="mark-stroke mark-accent"
-                  d="M39 16 L39 24"
-                  stroke="var(--accent)"
-                  strokeWidth="1.2"
-                  fill="none"
-                />
-                {/* Nozzle tip dot — pulses after draw-in */}
-                <circle
-                  className="mark-dot"
-                  cx="36"
-                  cy="38"
-                  r="2"
-                  fill="var(--accent)"
-                />
-              </g>
-            </svg>
-          </div>
-
           {/* Heading */}
           <h1 className="text-[clamp(2.75rem,7vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white mb-6 max-w-[900px] mx-auto">
             Built by makers,
@@ -385,7 +414,7 @@ export function HeroSection() {
       </AnimatePresence>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0F1115] to-transparent z-[2] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0F1115] to-transparent z-[6] pointer-events-none" />
     </section>
   );
 }

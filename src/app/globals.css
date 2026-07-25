@@ -193,46 +193,80 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Part A — Hero Signature Mark
+   Part A — Hero Background Build Loop
    ═══════════════════════════════════════════════════════ */
 
-/* Draw-in: stroke-dasharray covers full path, animated to 0 offset */
-#hero-signature-mark .mark-stroke {
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  opacity: 0;
+/* Background printer illustration: low-contrast ambient layer */
+#hero-printer-bg {
+  opacity: 0.10;
 }
 
-#hero-signature-mark.drawn .mark-stroke {
-  animation: hero-mark-draw 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+/* Outline strokes — faint blueprint aesthetic */
+#hero-printer-bg .hero-outline {
+  stroke: var(--muted-foreground);
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+
+/* Accent strokes — slightly more visible */
+#hero-printer-bg .hero-accent {
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   opacity: 1;
 }
 
-#hero-signature-mark.drawn .mark-stroke.mark-accent {
-  animation-delay: 0.22s;
+#hero-printer-bg .hero-accent-fill {
+  fill: color-mix(in srgb, var(--accent) 70%, white);
 }
 
-@keyframes hero-mark-draw {
-  from {
-    stroke-dashoffset: 300;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+/* Pause all hero bg animations when section scrolls out of view */
+.hero-bg-paused #hero-toolhead,
+.hero-bg-paused #hero-print .hero-print-fill,
+.hero-bg-paused #hero-print-clip-rect {
+  animation-play-state: paused !important;
 }
 
-/* Idle pulse on nozzle dot after draw-in completes */
-#hero-signature-mark .mark-dot {
-  opacity: 0.6;
+/* ── Toolhead: continuous back-and-forth sweep ── */
+#hero-toolhead {
+  animation: hero-toolhead-sweep 3.4s ease-in-out infinite;
 }
 
-#hero-signature-mark.drawn .mark-dot {
-  animation: hero-dot-pulse 3.2s ease-in-out 1.6s infinite;
+@keyframes hero-toolhead-sweep {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(24px); }
 }
 
-@keyframes hero-dot-pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+/* ── Print: build-up via clipPath, hold, fade, loop ── */
+#hero-print .hero-print-fill {
+  opacity: 0;
+  animation: hero-print-cycle 7.2s ease-in-out infinite;
+}
+
+/* Sync clip rect: 0 → full height over first ~60%, hold, reset at end */
+#hero-print-clip-rect {
+  animation: hero-clip-grow 7.2s ease-in-out infinite;
+}
+
+@keyframes hero-print-cycle {
+  0%      { opacity: 0; }
+  5%      { opacity: 1; }
+  58%     { opacity: 1; }  /* build + brief hold */
+  68%     { opacity: 0; }  /* fade out */
+  100%    { opacity: 0; }  /* remain transparent until loop restarts */
+}
+
+@keyframes hero-clip-grow {
+  0%      { height: 0px; }
+  56%     { height: 44px; }  /* build phase */
+  67%     { height: 44px; }  /* hold */
+  68%     { height: 0px; }   /* instant reset while transparent */
+  100%    { height: 0px; }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -274,17 +308,23 @@ html {
    ═══════════════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
-  #hero-signature-mark .mark-stroke {
-    stroke-dashoffset: 0;
+  /* Part A — Hero background: freeze at mid-build, no motion */
+  #hero-toolhead {
+    animation: none !important;
+    transform: translateX(12px);
+  }
+
+  #hero-print .hero-print-fill {
+    animation: none !important;
     opacity: 1;
-    animation: none !important;
   }
 
-  #hero-signature-mark .mark-dot {
-    opacity: 0.8;
+  #hero-print-clip-rect {
     animation: none !important;
+    height: 22px;
   }
 
+  /* Part B — Printer illustration: no motion */
   #printer-illustration .printer-outline,
   #printer-illustration .printer-accent {
     animation: none !important;
