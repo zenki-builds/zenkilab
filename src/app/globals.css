@@ -193,6 +193,25 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════
+   Hero — Printer Visual Placeholder Pulse
+   ═══════════════════════════════════════════════════════ */
+@keyframes hero-printer-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.015); }
+}
+
+.hero-printer-pulse {
+  animation: hero-printer-pulse 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-printer-pulse {
+    animation: none !important;
+    opacity: 0.6;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
    Part A — Hero Background Build Loop
    ═══════════════════════════════════════════════════════ */
 
