@@ -106,7 +106,6 @@ export function QuoteSection() {
       );
       if (valid.length > 0) {
         setFiles((prev) => [...prev, ...valid].slice(0, 10));
-        // Simulate upload animation
         setUploading(true);
         setUploadProgress(0);
         const interval = setInterval(() => {
@@ -158,7 +157,6 @@ export function QuoteSection() {
       setTimeout(() => setSubmitted(false), 6000);
     } catch {
       setIsSubmitting(false);
-      // Fallback — still show success so user isn't blocked
       setSubmitted(true);
       reset();
       setFiles([]);
@@ -167,7 +165,7 @@ export function QuoteSection() {
   };
 
   return (
-    <section id="quote" ref={sectionRef} className="relative py-24 lg:py-28 bg-[#F8FAFC] border-t" style={{ borderColor: "#E2E8F0" }}>
+    <section id="quote" ref={sectionRef} className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
       <div className="max-w-[960px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -180,10 +178,10 @@ export function QuoteSection() {
           <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
             Start Your Project
           </span>
-          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]" style={{ color: "#0F172A" }}>
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]" style={{ color: "#E2E8F0" }}>
             Tell us what you need. We'll handle the rest.
           </h2>
-          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#64748B" }}>
+          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#94A3B8" }}>
             Upload your STL files, describe your project, and we'll review
             and respond with a detailed quote within 24 hours.
           </p>
@@ -199,12 +197,12 @@ export function QuoteSection() {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-10"
           >
-            {/* File Upload — redesigned Linear/Figma style */}
+            {/* File Upload */}
             <div>
-              <label className="text-sm font-semibold mb-2 block" style={{ color: "#334155" }}>
+              <label className="text-sm font-semibold mb-2 block" style={{ color: "#CBD5E1" }}>
                 Design Files
               </label>
-              <p className="text-xs mb-4" style={{ color: "#94A3B8" }}>
+              <p className="text-xs mb-4" style={{ color: "#64748B" }}>
                 Accepted: STL, OBJ, 3MF, STEP, ZIP &middot; Up to 250 MB per file &middot; Max 10 files
               </p>
 
@@ -223,8 +221,8 @@ export function QuoteSection() {
                 className="relative border-2 border-dashed rounded-2xl p-12 lg:p-16 text-center transition-all duration-300"
                 style={
                   dragOver
-                    ? { borderColor: "#F97316", backgroundColor: "#FFF7ED" }
-                    : { borderColor: "#CBD5E1", backgroundColor: "#FFFFFF" }
+                    ? { borderColor: "#F97316", backgroundColor: "#1E1A14" }
+                    : { borderColor: "#1E293B", backgroundColor: "#0A0F16" }
                 }
               >
                 <input
@@ -236,11 +234,10 @@ export function QuoteSection() {
                   className="absolute inset-0 opacity-0 cursor-pointer z-10"
                 />
 
-                {/* Upload icon with animated ring */}
                 <div className="relative w-16 h-16 mx-auto mb-5">
                   <div
                     className="relative w-full h-full rounded-2xl flex items-center justify-center"
-                    style={{ backgroundColor: "#FFF7ED", border: "1px solid #FED7AA" }}
+                    style={{ backgroundColor: "#1E1A14", border: "1px solid #1E293B" }}
                   >
                     {uploading ? (
                       <Loader2 className="w-6 h-6 animate-spin" style={{ color: "#F97316" }} />
@@ -250,14 +247,13 @@ export function QuoteSection() {
                   </div>
                 </div>
 
-                <p className="text-base font-medium mb-1" style={{ color: "#0F172A" }}>
+                <p className="text-base font-medium mb-1" style={{ color: "#E2E8F0" }}>
                   {dragOver ? "Drop your files here" : "Drag and drop your files here"}
                 </p>
-                <p className="text-sm" style={{ color: "#94A3B8" }}>
+                <p className="text-sm" style={{ color: "#64748B" }}>
                   or click to browse
                 </p>
 
-                {/* Upload progress bar */}
                 <AnimatePresence>
                   {uploading && (
                     <motion.div
@@ -266,7 +262,7 @@ export function QuoteSection() {
                       exit={{ opacity: 0, height: 0 }}
                       className="mt-5 max-w-[320px] mx-auto"
                     >
-                      <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#E2E8F0" }}>
+                      <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
                         <motion.div
                           className="h-full rounded-full"
                           style={{ backgroundColor: "#F97316" }}
@@ -275,7 +271,7 @@ export function QuoteSection() {
                           transition={{ duration: 0.2 }}
                         />
                       </div>
-                      <p className="text-xs mt-2" style={{ color: "#94A3B8" }}>
+                      <p className="text-xs mt-2" style={{ color: "#64748B" }}>
                         {uploadProgress < 100
                           ? "Analysing file..."
                           : "File uploaded successfully"}
@@ -301,17 +297,17 @@ export function QuoteSection() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 12 }}
                         className="flex items-center gap-3 rounded-xl px-4 py-3"
-                        style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
+                        style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}
                       >
                         <div
                           className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                          style={{ backgroundColor: "#FFF7ED" }}
+                          style={{ backgroundColor: "#1E1A14" }}
                         >
                           <FileIcon className="w-4 h-4" style={{ color: "#F97316" }} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm truncate" style={{ color: "#0F172A" }}>{file.name}</p>
-                          <p className="text-xs" style={{ color: "#94A3B8" }}>
+                          <p className="text-sm truncate" style={{ color: "#E2E8F0" }}>{file.name}</p>
+                          <p className="text-xs" style={{ color: "#64748B" }}>
                             {formatSize(file.size)} &middot; Printability:{" "}
                             <span style={{ color: "#F97316" }}>Checking...</span>
                           </p>
@@ -320,7 +316,7 @@ export function QuoteSection() {
                           type="button"
                           onClick={() => removeFile(idx)}
                           className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors"
-                          style={{ color: "#94A3B8" }}
+                          style={{ color: "#64748B" }}
                         >
                           <X className="w-3.5 h-3.5" />
                         </button>
@@ -465,14 +461,14 @@ export function QuoteSection() {
           >
             <div
               className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
-              style={{ backgroundColor: "#FFF7ED", border: "1px solid #FED7AA" }}
+              style={{ backgroundColor: "#1E1A14", border: "1px solid #1E293B" }}
             >
               <CheckCircle className="w-8 h-8" style={{ color: "#F97316" }} />
             </div>
-            <h3 className="text-2xl font-bold mb-3" style={{ color: "#0F172A" }}>
+            <h3 className="text-2xl font-bold mb-3" style={{ color: "#E2E8F0" }}>
               Quote Request Submitted
             </h3>
-            <p className="max-w-[460px] mx-auto leading-relaxed" style={{ color: "#64748B" }}>
+            <p className="max-w-[460px] mx-auto leading-relaxed" style={{ color: "#94A3B8" }}>
               Thank you. We'll review your files and respond
               with a detailed quote within 24 hours. We're excited to work on your project.
             </p>
@@ -498,7 +494,7 @@ function FieldWrapper({
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-sm font-semibold flex items-center gap-1" style={{ color: "#334155" }}>
+      <label className="text-sm font-semibold flex items-center gap-1" style={{ color: "#CBD5E1" }}>
         {label}
         {required && <span style={{ color: "#EF4444" }}>*</span>}
       </label>
@@ -511,4 +507,4 @@ function FieldWrapper({
 }
 
 const inputClass =
-  "w-full h-12 px-4 bg-white border border-[#CBD5E1] rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#F97316]/50 focus:ring-1 focus:ring-[#F97316]/20 transition-all duration-200";
+  "w-full h-12 px-4 bg-[#0A0F16] border border-[#1E293B] rounded-xl text-sm text-[#E2E8F0] placeholder:text-[#64748B] focus:outline-none focus:border-[#F97316]/50 focus:ring-1 focus:ring-[#F97316]/20 transition-all duration-200";
