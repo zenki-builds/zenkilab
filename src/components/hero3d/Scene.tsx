@@ -75,6 +75,8 @@ export function Scene() {
       <pointLight position={[2, -0.5, 1.8]} intensity={0.6} color="#0EA5B7" distance={6} />
       <pointLight position={[0, -1, 1]} intensity={0.4} color="#0284C7" distance={5} />
       <pointLight position={[6.0, 2.5, -1.08]} intensity={2.2} color="#fff5eb" distance={8} decay={1.2} />
+      {/* Right-side warm light aimed at printer bed — invisible source */}
+      <pointLight position={[8.5, -0.5, -1.08]} intensity={1.8} color="#fff5ee" distance={6} decay={1.2} />
       <group ref={sceneRoot}>
         <group rotation={[0, -10 * (Math.PI / 180), 0]}>
           <Printer mouse={mouse} position={[6.0, -0.72, -1.08]} />
