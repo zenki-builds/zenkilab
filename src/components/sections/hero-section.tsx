@@ -186,8 +186,8 @@ export function HeroSection() {
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full max-w-[900px]"
           style={{
-            maskImage: "radial-gradient(ellipse 55% 55% at 50% 48%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 55% 55% at 50% 48%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 100%)",
+            maskImage: "radial-gradient(ellipse 50% 50% at 50% 48%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.6) 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 50% 50% at 50% 48%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.6) 100%)",
           }}
         >
           {/* ═══ Frame — enclosure box ═══ */}
