@@ -4,25 +4,10 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// A deterministic pseudo-random value avoids impure render-time calls while
-// still distributing particles naturally and consistently across renders.
 function noise(index: number, channel: number) {
   const value = Math.sin(index * 12.9898 + channel * 78.233) * 43758.5453;
   return value - Math.floor(value);
 }
-
-/**
- * Particles
- * ─────────────────────────────────────────────────────────
- * Two cheap particle systems using a single THREE.Points draw
- * call each (no per-particle React overhead, no instancing
- * needed since we just need floating dust motes):
- *
- *   1. Ambient background dust — sparse, slow drifting, dim.
- *   2. Hologram emission — denser, brighter cyan motes drifting
- *      up and away from the hologram position, additive blended
- *      to read as "emitted particles" from the CAD model.
- */
 
 function useDrift(count: number, spread: [number, number, number]) {
   return useMemo(() => {
@@ -75,13 +60,13 @@ function AmbientDust() {
   );
 }
 
-function HologramEmission({ origin }: { origin: [number, number, number] }) {
+function HologramEmission({ origin, isMobile }: { origin: [number, number, number]; isMobile: boolean }) {
   const count = 60;
   const pointsRef = useRef<THREE.Points>(null);
 
   const { positions, seeds } = useMemo(() => {
     const positions = new Float32Array(count * 3);
-    const seeds = new Float32Array(count * 2); // [speed, phase]
+    const seeds = new Float32Array(count * 2);
     for (let i = 0; i < count; i++) {
       positions[i * 3] = origin[0] + (noise(i, 4) - 0.5) * 0.7;
       positions[i * 3 + 1] = origin[1] + (noise(i, 5) - 0.5) * 0.5;
@@ -115,10 +100,10 @@ function HologramEmission({ origin }: { origin: [number, number, number] }) {
       </bufferGeometry>
       <pointsMaterial
         color="#67E8F9"
-        size={0.02}
+        size={isMobile ? 0.014 : 0.02}
         sizeAttenuation
         transparent
-        opacity={0.9}
+        opacity={isMobile ? 0.8 : 0.9}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />
@@ -126,11 +111,14 @@ function HologramEmission({ origin }: { origin: [number, number, number] }) {
   );
 }
 
-export function Particles() {
+export function Particles({ isMobile = false }: { isMobile?: boolean }) {
   return (
     <>
       <AmbientDust />
-      <HologramEmission origin={[0, 0.65, 0]} />
+      <HologramEmission
+        isMobile={isMobile}
+        origin={isMobile ? [0, -0.55, 0.3] : [4.5, 0.35, -1.35]}
+      />
     </>
   );
 }

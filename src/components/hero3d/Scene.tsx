@@ -27,10 +27,12 @@ function CameraRig({
   mouse,
   isMobile,
   mobileScrollProgress = 0,
+  renderOnly,
 }: {
   mouse: React.RefObject<{ x: number; y: number }>;
   isMobile: boolean;
   mobileScrollProgress?: number;
+  renderOnly?: string;
 }) {
   const { camera } = useThree();
 
@@ -45,24 +47,37 @@ function CameraRig({
       return;
     }
 
-    // ── Mobile: top-down → bed-level descent ──
     const p = mobileScrollProgress;
 
-    // Camera position
-    const camY = 3.2 + p * -2.9;  // 3.2 → 0.3  (drops from above spool to bed level)
-    const camZ = 5.0 + p * -1.6;  // 5.0 → 3.4  (moves closer)
+    if (renderOnly === "phone-hologram") {
+      // Mobile phone/hologram canvas: camera flies past hologram gear (3D dolly effect)
+      const camY = 3.2 + p * -2.9;   // 3.2 → 0.3  (drops past gear at Y:0.35)
+      const camZ = 3.5 + p * -2.0;   // 3.5 → 1.5  (passes gear at Z:2.0)
+      const lookY = 0.5 + p * -1.3;  // 0.5 → -0.8 (ends looking at phone)
+      const lookZ = 0.0;
 
-    // LookAt target
-    const lookY = 2.0 + p * -2.2;  // 2.0 → -0.2  (drops from top-of-printer to below-bed)
-    const lookZ = 0.0 + p * 0.6;
+      const targetX = 0 + mouse.current.x * 0.06;
+      const targetY = camY + mouse.current.y * -0.03;
 
-    const targetX = 0 + mouse.current.x * 0.06;
-    const targetY = camY + mouse.current.y * -0.03;
+      camera.position.x += (targetX - camera.position.x) * 0.04;
+      camera.position.y += (targetY - camera.position.y) * 0.04;
+      camera.position.z += (camZ - camera.position.z) * 0.04;
+      camera.lookAt(0, lookY, lookZ);
+    } else {
+      // Mobile printer canvas: top-down → bed-level descent
+      const camY = 3.2 + p * -2.9;
+      const camZ = 5.0 + p * -1.6;
+      const lookY = 2.0 + p * -2.2;
+      const lookZ = 0.0 + p * 0.6;
 
-    camera.position.x += (targetX - camera.position.x) * 0.04;
-    camera.position.y += (targetY - camera.position.y) * 0.04;
-    camera.position.z += (camZ - camera.position.z) * 0.04;
-    camera.lookAt(0, lookY, lookZ);
+      const targetX = 0 + mouse.current.x * 0.06;
+      const targetY = camY + mouse.current.y * -0.03;
+
+      camera.position.x += (targetX - camera.position.x) * 0.04;
+      camera.position.y += (targetY - camera.position.y) * 0.04;
+      camera.position.z += (camZ - camera.position.z) * 0.04;
+      camera.lookAt(0, lookY, lookZ);
+    }
   });
 
   return null;
@@ -158,13 +173,13 @@ export function Scene({
             <group scale={isMobile ? 0.85 : 1}>
               <Phone position={isMobile ? [0, -0.8, 0] : [4.5, -0.22, -1.35]} />
               <Hologram position={isMobile ? [0, 0.3, 0] : [4.5, 0.2, -1.35]} />
-              <Particles />
+              <Particles isMobile={isMobile} />
             </group>
           )}
         </group>
       </group>
 
-      <CameraRig mouse={mouse} isMobile={isMobile} mobileScrollProgress={mobileScrollProgress} />
+      <CameraRig mouse={mouse} isMobile={isMobile} mobileScrollProgress={mobileScrollProgress} renderOnly={renderOnly} />
       <ScrollRig sceneRoot={sceneRoot} />
 
       <EffectComposer multisampling={0}>

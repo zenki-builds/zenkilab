@@ -98,9 +98,16 @@ export function Hologram({
 
   useFrame(({ clock }, delta) => {
     if (gearGroup.current) {
-      gearGroup.current.rotation.y += delta * 0.55;
-      gearGroup.current.rotation.x =
-        Math.sin(clock.getElapsedTime() * 0.7) * 0.08;
+      if (isMobile) {
+        // Mobile: slow random spin in both Y and X axes
+        const t = clock.getElapsedTime();
+        gearGroup.current.rotation.y += delta * 0.22;
+        gearGroup.current.rotation.x = Math.sin(t * 0.45) * 0.18;
+      } else {
+        // Desktop: simple Y rotation only
+        gearGroup.current.rotation.y += delta * 0.55;
+        gearGroup.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.7) * 0.08;
+      }
     }
   });
 
@@ -117,8 +124,8 @@ export function Hologram({
         />
       </mesh>
 
-      <mesh position={[0, 0.18, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.45, 0.24, 0.5, 32, 1, true]} />
+      <mesh position={[0, isMobile ? -0.1 : 0.18, 0]} rotation={isMobile ? [0, 0, 0] : [-Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={isMobile ? [0.5, 0.15, 1.2, 32, 1, true] : [0.45, 0.24, 0.5, 32, 1, true]} />
         <meshBasicMaterial
           color="#22d3ee"
           transparent
@@ -129,7 +136,12 @@ export function Hologram({
         />
       </mesh>
 
-      <group ref={gearGroup} position={[0, 0.35, 0]} scale={isMobile ? 14.0 : 1.0}>
+      <group
+        ref={gearGroup}
+        position={[0, 0.35, isMobile ? 2.0 : 0]}
+        scale={isMobile ? 112.0 : 1.0}
+        rotation={isMobile ? [-0.6, 0.6, 0] : undefined}
+      >
         <group position={[-0.18 * S, 0, 0.05 * S]}>
           <mesh geometry={geoGear1} material={wireframe} />
           <mesh geometry={geoGear1} material={aura} scale={1.008} />

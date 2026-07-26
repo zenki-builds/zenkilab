@@ -89,7 +89,7 @@ function MobilePhoneScene() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[50vh] rounded-2xl overflow-hidden"
+      className="relative w-full h-[50vh] rounded-2xl mt-0 mb-8 pointer-events-none"
       style={{ opacity: 0 }}
     >
       <Suspense fallback={<SceneFallback />}>
