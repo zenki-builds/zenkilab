@@ -138,24 +138,24 @@ export function Scene({
       }
       frameloop="always"
     >
-      <ambientLight intensity={0.25} color="#102A38" />
-      <directionalLight position={[3, 4, 3]} intensity={0.6} color="#94A3B8" />
-      <pointLight position={[-2, 1.5, 2]} intensity={0.9} color="#22D3EE" distance={7} />
-      <pointLight position={[2, -0.5, 1.8]} intensity={0.6} color="#0EA5B7" distance={6} />
-      <pointLight position={[0, -1, 1]} intensity={0.4} color="#0284C7" distance={5} />
+      <ambientLight intensity={0.25} color="#241D16" />
+      <directionalLight position={[3, 4, 3]} intensity={0.6} color="#E8E4DE" />
+      <pointLight position={[-2, 1.5, 2]} intensity={1.2} color="#22D3EE" distance={7} />
+      <pointLight position={[2, -0.5, 1.8]} intensity={0.85} color="#0EA5B7" distance={6} />
+      <pointLight position={[0, -1, 1]} intensity={0.75} color="#22D3EE" distance={5} />
 
       {(!renderOnly || renderOnly === "printer") && (
         <>
           <pointLight
             position={isMobile ? [0, 3.0, 0] : [6.0, 2.5, -1.08]}
-            intensity={isMobile ? 4.5 : 2.2}
+            intensity={isMobile ? 2.8 : 1.3}
             color="#fffaf3"
             distance={isMobile ? 8 : 8}
             decay={1.2}
           />
           <pointLight
             position={isMobile ? [2.0, -0.5, 0] : [8.5, -0.5, -1.08]}
-            intensity={isMobile ? 2.5 : 1.8}
+            intensity={isMobile ? 1.6 : 1.0}
             color="#fff5ee"
             distance={6}
             decay={1.2}

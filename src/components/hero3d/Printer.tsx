@@ -103,7 +103,7 @@ export function Printer({ mouse, position = [2.8, -0.72, -0.08] }: PrinterProps)
     [],
   );
   const matGear = useMemo(
-    () => new THREE.MeshStandardMaterial({ color: "#dba04a", metalness: 0.97, roughness: 0.08 }),
+    () => new THREE.MeshStandardMaterial({ color: "#22D3EE", metalness: 0.05, roughness: 0.7 }),
     [],
   );
   const matBrass = useMemo(
@@ -111,11 +111,11 @@ export function Printer({ mouse, position = [2.8, -0.72, -0.08] }: PrinterProps)
     [],
   );
   const matOrange = useMemo(
-    () => new THREE.MeshStandardMaterial({ color: "#F97316", metalness: 0.15, roughness: 0.5 }),
+    () => new THREE.MeshStandardMaterial({ color: "#22D3EE", metalness: 0.15, roughness: 0.5 }),
     [],
   );
   const matOrangeAccent = useMemo(
-    () => new THREE.MeshStandardMaterial({ color: "#F97316", emissive: "#F97316", emissiveIntensity: 0.4, metalness: 0.2, roughness: 0.3 }),
+    () => new THREE.MeshStandardMaterial({ color: "#22D3EE", emissive: "#22D3EE", emissiveIntensity: 0.4, metalness: 0.2, roughness: 0.3 }),
     [],
   );
 
