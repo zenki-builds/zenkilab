@@ -34,35 +34,75 @@ export function Header() {
     >
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         <nav className="flex items-center justify-between h-[72px]">
-          {/* Logo — hexagon monogram */}
+          {/* Logo — 3D spinning hexagon + Z */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <path
-                d="M20 2 L36 11 V29 L20 38 L4 29 V11 Z"
-                stroke="#22D3EE"
-                strokeWidth="1.6"
+            <div
+              className="overflow-visible"
+              style={{ perspective: "200px", width: 34, height: 34 }}
+            >
+              <svg
+                width="34"
+                height="34"
+                viewBox="0 0 40 40"
                 fill="none"
-              />
-              <path
-                d="M20 2 L36 11 V29 L20 38 L4 29 V11 Z"
-                stroke="#E2E8F0"
-                strokeOpacity="0.15"
-                strokeWidth="1.6"
-                fill="none"
-                transform="scale(0.78) translate(5.7 5.7)"
-              />
-              <text
-                x="20"
-                y="25"
-                textAnchor="middle"
-                fontSize="15"
-                fontWeight="800"
-                fill="#E2E8F0"
-                fontFamily="var(--font-geist-sans), sans-serif"
+                aria-hidden="true"
               >
-                Z
-              </text>
-            </svg>
+                <style>
+                  {`
+                    @keyframes hex3dLeft {
+                      0%   { transform: rotateY(0deg); }
+                      100% { transform: rotateY(-360deg); }
+                    }
+                    @keyframes z3dRight {
+                      0%   { transform: rotateY(360deg); }
+                      100% { transform: rotateY(0deg); }
+                    }
+                    .hex-3d {
+                      transform-origin: 20px 20px;
+                      animation: hex3dLeft 8s linear infinite;
+                    }
+                    .z-3d {
+                      transform-origin: 20px 23px;
+                      animation: z3dRight 8s linear infinite;
+                    }
+                  `}
+                </style>
+
+                {/* Outer hexagon — spins left (counter-clockwise in 3D) */}
+                <g className="hex-3d">
+                  <path
+                    d="M20 2 L36 11 V29 L20 38 L4 29 V11 Z"
+                    stroke="#22D3EE"
+                    strokeWidth="1.6"
+                    fill="none"
+                  />
+                </g>
+
+                {/* Inner hexagon — stationary */}
+                <path
+                  d="M20 2 L36 11 V29 L20 38 L4 29 V11 Z"
+                  stroke="#E2E8F0"
+                  strokeOpacity="0.15"
+                  strokeWidth="1.6"
+                  fill="none"
+                  transform="scale(0.78) translate(5.7 5.7)"
+                />
+
+                {/* Z character — spins right (clockwise in 3D) */}
+                <text
+                  x="20"
+                  y="26"
+                  textAnchor="middle"
+                  fontSize="15"
+                  fontWeight="800"
+                  fill="#E2E8F0"
+                  fontFamily="var(--font-geist-sans), sans-serif"
+                  className="z-3d"
+                >
+                  Z
+                </text>
+              </svg>
+            </div>
             <span className="text-lg font-extrabold tracking-[0.02em] text-[#E2E8F0]">
               ZENKI<span className="text-[#22D3EE]">LAB</span>
             </span>
