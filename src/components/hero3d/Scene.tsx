@@ -16,6 +16,13 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+/**
+ * CameraRig
+ * ─────────
+ * Mobile: interpolates camera from steep top-down (0 % scroll)
+ *         to low bed-level POV (100 % scroll).
+ * Desktop: unchanged ¾ front-right perspective.
+ */
 function CameraRig({
   mouse,
   isMobile,
@@ -28,25 +35,34 @@ function CameraRig({
   const { camera } = useThree();
 
   useFrame(() => {
-    if (isMobile) {
-      // Camera drops from filament level to bed level as user scrolls
-      const camY = 2.0 - mobileScrollProgress * 1.5; // 2.0 → 0.5
-      const lookY = 1.5 - mobileScrollProgress * 2.0; // 1.5 → -0.5 (bed level)
-      const lookZ = 0 + mobileScrollProgress * 0.2;
-
-      const targetX = 0 + mouse.current.x * 0.08;
-      const targetY = camY + mouse.current.y * -0.03;
-
-      camera.position.x += (targetX - camera.position.x) * 0.03;
-      camera.position.y += (targetY - camera.position.y) * 0.03;
-      camera.lookAt(0, lookY, lookZ);
-    } else {
+    if (!isMobile) {
+      // ── Desktop: unchanged ──
       const targetX = 4.1 + mouse.current.x * 0.2;
       const targetY = 3.0 + mouse.current.y * -0.1;
       camera.position.x += (targetX - camera.position.x) * 0.04;
       camera.position.y += (targetY - camera.position.y) * 0.04;
       camera.lookAt(4.0, 0.35, -0.58);
+      return;
     }
+
+    // ── Mobile: top-down → bed-level descent ──
+    const p = mobileScrollProgress;
+
+    // Camera position
+    const camY = 3.2 + p * -2.9;  // 3.2 → 0.3  (drops from above spool to bed level)
+    const camZ = 5.0 + p * -1.6;  // 5.0 → 3.4  (moves closer)
+
+    // LookAt target
+    const lookY = 2.0 + p * -2.2;  // 2.0 → -0.2  (drops from top-of-printer to below-bed)
+    const lookZ = 0.0 + p * 0.6;
+
+    const targetX = 0 + mouse.current.x * 0.06;
+    const targetY = camY + mouse.current.y * -0.03;
+
+    camera.position.x += (targetX - camera.position.x) * 0.04;
+    camera.position.y += (targetY - camera.position.y) * 0.04;
+    camera.position.z += (camZ - camera.position.z) * 0.04;
+    camera.lookAt(0, lookY, lookZ);
   });
 
   return null;
@@ -97,7 +113,7 @@ export function Scene({
       }}
       camera={
         isMobile
-          ? { position: [0, 2.0, 4.0], fov: 48 }
+          ? { position: [0, 3.2, 5.0], fov: 52 }
           : { position: [4.1, 3.0, 5.5], fov: 42 }
       }
       frameloop="always"
@@ -110,8 +126,20 @@ export function Scene({
 
       {(!renderOnly || renderOnly === "printer") && (
         <>
-          <pointLight position={[6.0, 2.5, -1.08]} intensity={2.2} color="#fff5eb" distance={8} decay={1.2} />
-          <pointLight position={[8.5, -0.5, -1.08]} intensity={1.8} color="#fff5ee" distance={6} decay={1.2} />
+          <pointLight
+            position={isMobile ? [0, 3.0, 0] : [6.0, 2.5, -1.08]}
+            intensity={isMobile ? 4.5 : 2.2}
+            color="#fffaf3"
+            distance={isMobile ? 8 : 8}
+            decay={1.2}
+          />
+          <pointLight
+            position={isMobile ? [2.0, -0.5, 0] : [8.5, -0.5, -1.08]}
+            intensity={isMobile ? 2.5 : 1.8}
+            color="#fff5ee"
+            distance={6}
+            decay={1.2}
+          />
         </>
       )}
 
@@ -128,7 +156,7 @@ export function Scene({
 
           {(!renderOnly || renderOnly === "phone-hologram") && (
             <group scale={isMobile ? 0.85 : 1}>
-              <Phone position={isMobile ? [0, -0.1, 0] : [4.5, -0.22, -1.35]} />
+              <Phone position={isMobile ? [0, -0.8, 0] : [4.5, -0.22, -1.35]} />
               <Hologram position={isMobile ? [0, 0.3, 0] : [4.5, 0.2, -1.35]} />
               <Particles />
             </group>

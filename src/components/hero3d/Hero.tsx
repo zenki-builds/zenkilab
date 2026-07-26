@@ -42,7 +42,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
         </div>
 
         {/* Mobile: stacked column with scroll-driven camera POV on both scenes */}
-        <div className="lg:hidden">
+        <div className="lg:hidden mt-[10vh]">
           <HeroText onStart={onStart} />
 
           {/* Step 1: Phone + Hologram + Particles (with scroll camera effect) */}
@@ -132,7 +132,7 @@ function MobilePrinterScene() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[85vh] rounded-2xl overflow-hidden -mt-[10vh] mb-8 z-20"
+              className="relative w-full h-[85vh] rounded-2xl overflow-hidden -mt-[25vh] mb-8 z-20"
       style={{ opacity: 0 }}
     >
       <Suspense fallback={<SceneFallback />}>
