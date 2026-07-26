@@ -41,14 +41,14 @@ export function Hero({ onStart }: { onStart: () => void }) {
           <div className="col-span-7" />
         </div>
 
-        {/* Mobile: stacked column with scroll-driven camera POV on both scenes */}
+        {/* Mobile: stacked column */}
         <div className="lg:hidden mt-[10vh]">
           <HeroText onStart={onStart} />
 
-          {/* Step 1: Phone + Hologram + Particles (with scroll camera effect) */}
+          {/* Phone + Hologram + Particles — behind text layer, click-through */}
           <MobilePhoneScene />
 
-          {/* Step 2: Printer alone (with scroll camera effect) */}
+          {/* Printer — overlaps 40% of phone canvas */}
           <MobilePrinterScene />
         </div>
       </div>
@@ -56,9 +56,6 @@ export function Hero({ onStart }: { onStart: () => void }) {
   );
 }
 
-/**
- * MobilePhoneScene — scroll-driven camera POV for phone/hologram canvas
- */
 function MobilePhoneScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -89,7 +86,7 @@ function MobilePhoneScene() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[50vh] rounded-2xl mt-0 mb-8 pointer-events-none"
+      className="relative w-full h-[70vh] rounded-2xl -mt-[10vh] mb-0 pointer-events-none overflow-hidden z-0"
       style={{ opacity: 0 }}
     >
       <Suspense fallback={<SceneFallback />}>
@@ -99,9 +96,6 @@ function MobilePhoneScene() {
   );
 }
 
-/**
- * MobilePrinterScene — scroll-driven camera POV for printer canvas
- */
 function MobilePrinterScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -132,7 +126,7 @@ function MobilePrinterScene() {
   return (
     <div
       ref={containerRef}
-              className="relative w-full h-[85vh] rounded-2xl overflow-hidden -mt-[25vh] mb-8 z-20"
+      className="relative w-full h-[85vh] rounded-2xl overflow-hidden -mt-[28vh] mb-8 z-20"
       style={{ opacity: 0 }}
     >
       <Suspense fallback={<SceneFallback />}>

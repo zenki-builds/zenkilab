@@ -126,6 +126,11 @@ export function Scene({
         powerPreference: "high-performance",
         localClippingEnabled: true,
       }}
+      style={
+        renderOnly === "phone-hologram"
+          ? { pointerEvents: "none" as any }
+          : undefined
+      }
       camera={
         isMobile
           ? { position: [0, 3.2, 5.0], fov: 52 }
