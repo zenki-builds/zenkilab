@@ -68,7 +68,7 @@ export const onRequestPost = async ({
   for (const file of uploadedFiles) {
     if (file && file.size > 0 && file.size < 250 * 1024 * 1024) {
       const arrayBuffer = await file.arrayBuffer();
-      const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+      const base64 = arrayBufferToBase64(arrayBuffer);
       attachments.push({
         filename: file.name,
         content: base64,
@@ -172,6 +172,28 @@ ${rows}
     });
   }
 };
+
+/** Chunked base64 encoder — avoids stack overflow on Cloudflare Workers */
+function arrayBufferToBase64(buffer: ArrayBuffer): string {
+  const bytes = new Uint8Array(buffer);
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  const len = bytes.length;
+  let result = "";
+  for (let i = 0; i < len; i += 3) {
+    const b1 = bytes[i];
+    const b2 = i + 1 < len ? bytes[i + 1] : 0;
+    const b3 = i + 2 < len ? bytes[i + 2] : 0;
+    result += chars[b1 >> 2];
+    result += chars[((b1 & 3) << 4) | (b2 >> 4)];
+    if (i + 1 < len) {
+      result += chars[((b2 & 15) << 2) | (b3 >> 6)];
+      result += i + 2 < len ? chars[b3 & 63] : "=";
+    } else {
+      result += "==";
+    }
+  }
+  return result;
+}
 
 function sanitize(str: string): string {
   return str
