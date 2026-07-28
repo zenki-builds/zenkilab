@@ -10,15 +10,70 @@ export function Footer() {
         <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2 mb-4">
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-4 group">
               <div
-                className="w-7 h-7 rounded-md flex items-center justify-center font-bold text-xs"
-                style={{ backgroundColor: "#22D3EE", color: "#0B0D10" }}
+                className="overflow-visible"
+                style={{ perspective: "200px", width: 34, height: 34 }}
               >
-                Z
+                <svg
+                  width="34"
+                  height="34"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <style>
+                    {`
+                      @keyframes footerHex3d {
+                        0%   { transform: rotateY(0deg); }
+                        100% { transform: rotateY(-360deg); }
+                      }
+                      @keyframes footerZ3d {
+                        0%   { transform: rotateY(360deg); }
+                        100% { transform: rotateY(0deg); }
+                      }
+                      .fh-3d {
+                        transform-origin: 20px 20px;
+                        animation: footerHex3d 8s linear infinite;
+                      }
+                      .fz-3d {
+                        transform-origin: 20px 23px;
+                        animation: footerZ3d 8s linear infinite;
+                      }
+                    `}
+                  </style>
+                  <g className="fh-3d">
+                    <path
+                      d="M20 2 L36 11 V29 L20 38 L4 29 V11 Z"
+                      stroke="#22D3EE"
+                      strokeWidth="1.6"
+                      fill="none"
+                    />
+                  </g>
+                  <path
+                    d="M20 2 L36 11 V29 L20 38 L4 29 V11 Z"
+                    stroke="#FFFFFF"
+                    strokeOpacity="0.12"
+                    strokeWidth="1.6"
+                    fill="none"
+                    transform="scale(0.78) translate(5.7 5.7)"
+                  />
+                  <text
+                    x="20"
+                    y="26"
+                    textAnchor="middle"
+                    fontSize="15"
+                    fontWeight="800"
+                    fill="#FFFFFF"
+                    fontFamily="var(--font-geist-sans), sans-serif"
+                    className="fz-3d"
+                  >
+                    Z
+                  </text>
+                </svg>
               </div>
-              <span className="text-lg font-bold tracking-[-0.01em] text-white">
-                ZENKI LAB
+              <span className="text-lg font-extrabold tracking-[0.02em] text-white">
+                ZENKI<span style={{ color: "#22D3EE" }}>LAB</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed max-w-[220px]" style={{ color: "#A5ADB8" }}>
