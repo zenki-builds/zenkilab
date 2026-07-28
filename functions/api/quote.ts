@@ -151,9 +151,16 @@ ${rows}
     });
 
     if (!res.ok) {
-      const err = await res.text();
-      console.error("MailChannels error:", err);
-      return new Response(JSON.stringify({ error: "Failed to send email" }), {
+      const errText = await res.text();
+      console.error("MailChannels error:", errText);
+      let errMsg = "Failed to send email";
+      try {
+        const errJson = JSON.parse(errText);
+        errMsg = errJson.errors?.[0]?.message || errJson.message || errJson.error || errText.substring(0, 200);
+      } catch {
+        errMsg = errText.substring(0, 200) || "Failed to send email";
+      }
+      return new Response(JSON.stringify({ error: errMsg }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
