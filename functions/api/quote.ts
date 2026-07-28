@@ -1,12 +1,11 @@
 // Cloudflare Pages Function — handles POST /api/quote
-// Sends quote submissions via MailChannels with DKIM signing.
+// Sends quote submissions via Resend API.
 //
-// Requires two things set up in Cloudflare:
-//   1. DNS: TXT record at mailchannels._domainkey.zenkilab.com with the public key
-//   2. Env: DKIM_PRIVATE_KEY variable containing the RSA private key (PEM format)
+// Requires:
+//   Cloudflare Pages env var: RESEND_API_KEY
 
 interface Env {
-  DKIM_PRIVATE_KEY: string;
+  RESEND_API_KEY: string;
 }
 
 export const onRequestPost = async ({
@@ -22,12 +21,12 @@ export const onRequestPost = async ({
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  const DKIM_PRIVATE_KEY = env.DKIM_PRIVATE_KEY;
+  const RESEND_API_KEY = env.RESEND_API_KEY;
 
-  if (!DKIM_PRIVATE_KEY) {
-    console.error("DKIM_PRIVATE_KEY environment variable is not set");
+  if (!RESEND_API_KEY) {
+    console.error("RESEND_API_KEY environment variable is not set");
     return new Response(
-      JSON.stringify({ error: "Server not configured — missing DKIM key" }),
+      JSON.stringify({ error: "Server not configured — missing Resend API key" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
@@ -121,42 +120,32 @@ ${rows}
 </body>
 </html>`;
 
+  const text = `New quote request from ${name} (${email}).\nPhone: ${phone}\nMaterial: ${material}\nQuantity: ${quantity}\nColor: ${color}\nNotes: ${notes || "None"}\nFiles: ${fileCount || 0}`;
+
   try {
-    const res = await fetch("https://api.mailchannels.net/tx/v1/send", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+      },
       body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: "zenkilabhq@gmail.com", name: "Zenki Lab" }],
-            dkim_domain: "zenkilab.com",
-            dkim_selector: "mailchannels",
-            dkim_private_key: DKIM_PRIVATE_KEY,
-          },
-        ],
-        from: {
-          email: "quote@zenkilab.com",
-          name: "Zenki Lab",
-        },
+        from: "Zenki Lab <quote@zenkilab.com>",
+        to: ["quote@zenkilab.com"],
         subject: `New Quote Request from ${name}`,
-        content: [
-          {
-            type: "text/plain",
-            value: `New quote request from ${name} (${email}).\nPhone: ${phone}\nMaterial: ${material}\nQuantity: ${quantity}\nColor: ${color}\nNotes: ${notes || "None"}\nFiles: ${fileCount || 0}`,
-          },
-          { type: "text/html", value: html },
-        ],
-        reply_to: { email, name },
+        html,
+        text,
+        reply_to: email,
       }),
     });
 
     if (!res.ok) {
       const errText = await res.text();
-      console.error("MailChannels error:", errText);
+      console.error("Resend error:", errText);
       let errMsg = "Failed to send email";
       try {
         const errJson = JSON.parse(errText);
-        errMsg = errJson.errors?.[0]?.message || errJson.message || errJson.error || errText.substring(0, 200);
+        errMsg = errJson.message || errJson.error || errText.substring(0, 200);
       } catch {
         errMsg = errText.substring(0, 200) || "Failed to send email";
       }
