@@ -74,6 +74,7 @@ export function QuoteSection() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (submitted) {
@@ -136,6 +137,7 @@ export function QuoteSection() {
 
   const onSubmit = async (data: QuoteFormData) => {
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       const res = await fetch("/api/quote", {
         method: "POST",
@@ -147,7 +149,8 @@ export function QuoteSection() {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to submit");
+        const errBody = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+        throw new Error(errBody.error || "Failed to submit");
       }
 
       setIsSubmitting(false);
@@ -155,12 +158,10 @@ export function QuoteSection() {
       reset();
       setFiles([]);
       setTimeout(() => setSubmitted(false), 6000);
-    } catch {
+    } catch (err) {
       setIsSubmitting(false);
-      setSubmitted(true);
-      reset();
-      setFiles([]);
-      setTimeout(() => setSubmitted(false), 6000);
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setTimeout(() => setSubmitError(null), 8000);
     }
   };
 
@@ -431,6 +432,18 @@ export function QuoteSection() {
                 className={`${inputClass} resize-none`}
               />
             </FieldWrapper>
+
+            {/* Submit Error */}
+            {submitError && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-xl text-sm"
+                style={{ backgroundColor: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)", color: "#EF4444" }}
+              >
+                {submitError}
+              </motion.div>
+            )}
 
             {/* Submit */}
             <button
