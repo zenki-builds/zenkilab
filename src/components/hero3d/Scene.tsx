@@ -127,9 +127,7 @@ export function Scene({
         localClippingEnabled: true,
       }}
       style={
-        renderOnly === "phone-hologram"
-          ? { pointerEvents: "none" as any }
-          : undefined
+        isMobile ? { pointerEvents: "none" as any } : undefined
       }
       camera={
         isMobile

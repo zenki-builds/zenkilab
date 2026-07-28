@@ -54,55 +54,82 @@ export function ServicesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {services.map((service) => (
             <motion.a
               key={service.title}
               href={service.href}
               variants={item}
-              className="group relative rounded-2xl p-7 lg:p-8 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-lg"
+              className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-[2px]"
               style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
             >
-              {/* Icon */}
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
-                style={{ backgroundColor: "rgba(34,211,238,0.08)" }}
-              >
-                <service.icon className="w-5 h-5 transition-colors duration-300" style={{ color: "#22D3EE" }} />
+              {/* ── Image container: 16:9, rounded-top, gradient overlay ── */}
+              <div className="relative w-full aspect-video overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out"
+                  style={{ transform: "scale(1)" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.transform = "scale(1.03)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
+                  }}
+                />
+                {/* Gradient fade to card surface */}
+                <div
+                  className="absolute inset-x-0 bottom-0 h-16 pointer-events-none z-10"
+                  style={{
+                    background: "linear-gradient(to top, #171B21 0%, rgba(23,27,33,0.6) 50%, transparent 100%)",
+                  }}
+                />
               </div>
 
-              {/* Title */}
-              <h3 className="text-base font-semibold mb-2 tracking-[-0.01em]" style={{ color: "#FFFFFF" }}>
-                {service.title}
-              </h3>
+              {/* ── Card content ── */}
+              <div className="p-7 lg:p-8">
+                {/* Icon */}
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
+                  style={{ backgroundColor: "rgba(34,211,238,0.08)" }}
+                >
+                  <service.icon className="w-5 h-5 transition-colors duration-300" style={{ color: "#22D3EE" }} />
+                </div>
 
-              {/* Description */}
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#A5ADB8" }}>
-                {service.description}
-              </p>
+                {/* Title */}
+                <h3 className="text-base font-semibold mb-2 tracking-[-0.01em]" style={{ color: "#FFFFFF" }}>
+                  {service.title}
+                </h3>
 
-              {/* Examples */}
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {service.examples.map((ex) => (
-                  <span
-                    key={ex}
-                    className="text-[11px] px-2 py-0.5 rounded-md"
-                    style={{ backgroundColor: "#171B21", border: "1px solid #293038", color: "#A5ADB8" }}
-                  >
-                    {ex}
-                  </span>
-                ))}
+                {/* Description */}
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "#A5ADB8" }}>
+                  {service.description}
+                </p>
+
+                {/* Examples */}
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {service.examples.map((ex) => (
+                    <span
+                      key={ex}
+                      className="text-[11px] px-2 py-0.5 rounded-md"
+                      style={{ backgroundColor: "#171B21", border: "1px solid #293038", color: "#A5ADB8" }}
+                    >
+                      {ex}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <span
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors duration-300"
+                  style={{ color: "#22D3EE" }}
+                >
+                  Start a Project
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
+                </span>
               </div>
-
-              {/* CTA */}
-              <span
-                className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors duration-300"
-                style={{ color: "#22D3EE" }}
-              >
-                Start a Project
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
-              </span>
             </motion.a>
           ))}
         </motion.div>

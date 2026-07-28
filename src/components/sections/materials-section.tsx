@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Ruler } from "lucide-react";
 import { materials } from "@/lib/constants";
 
 export function MaterialsSection() {
@@ -70,6 +71,16 @@ export function MaterialsSection() {
                   </div>
                 ))}
               </div>
+
+              {/* Shrinkage — subtle engineering detail */}
+              {material.shrinkage && (
+                <div className="mt-5 pt-4 flex items-center gap-2.5" style={{ borderTop: "1px solid #293038" }}>
+                  <Ruler className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "#5F6A76" }} />
+                  <p className="text-[11px]" style={{ color: "#5F6A76" }}>
+                    Shrinkage: <span style={{ color: "#A5ADB8" }}>{material.shrinkage}</span>
+                  </p>
+                </div>
+              )}
             </motion.div>
           ))}
         </div>

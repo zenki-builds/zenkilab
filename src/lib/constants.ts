@@ -10,6 +10,7 @@ import {
   Thermometer,
   Sun,
   Zap,
+  Ruler,
   FileText,
   Camera,
   Lightbulb,
@@ -67,6 +68,7 @@ export type Service = {
   icon: LucideIcon;
   href: string;
   examples: string[];
+  image: string;
 };
 
 export const services: Service[] = [
@@ -77,6 +79,7 @@ export const services: Service[] = [
     icon: Car,
     href: "#quote",
     examples: ["Gauge pods", "Interior trim clips", "Mounting brackets"],
+    image: "/services/automotive.jpg",
   },
   {
     title: "Functional Parts",
@@ -85,6 +88,7 @@ export const services: Service[] = [
     icon: Cog,
     href: "#quote",
     examples: ["Gears & sprockets", "Enclosures", "Clips & fasteners"],
+    image: "/services/functional.jpg",
   },
   {
     title: "Die-cast Modifications",
@@ -93,6 +97,7 @@ export const services: Service[] = [
     icon: Gem,
     href: "#quote",
     examples: ["Wheels & tyres", "Body kits", "Display stands"],
+    image: "/services/diecast.jpg",
   },
   {
     title: "Prototypes",
@@ -101,6 +106,7 @@ export const services: Service[] = [
     icon: FlaskConical,
     href: "#quote",
     examples: ["Product mockups", "Fitment samples", "Engineering checks"],
+    image: "/services/prototypes.jpg",
   },
   {
     title: "Household & Hobby",
@@ -109,6 +115,7 @@ export const services: Service[] = [
     icon: Home,
     href: "#quote",
     examples: ["Desk organisers", "Planters", "Workshop tools"],
+    image: "/services/household.jpg",
   },
   {
     title: "Custom Gifts",
@@ -117,6 +124,7 @@ export const services: Service[] = [
     icon: Gift,
     href: "#quote",
     examples: ["Bespoke gifts", "Trophies & awards", "Personalised keychains"],
+    image: "/services/gifts.jpg",
   },
 ];
 
@@ -134,6 +142,7 @@ export type Material = {
   color: string;
   textColor: string;
   borderColor: string;
+  shrinkage?: string;
 };
 
 export const materials: Material[] = [
@@ -150,6 +159,7 @@ export const materials: Material[] = [
     color: "#22D3EE",
     textColor: "text-cyan-400",
     borderColor: "border-cyan-500/20",
+    shrinkage: "~0.2–0.5%",
   },
   {
     name: "PETG",
@@ -164,6 +174,7 @@ export const materials: Material[] = [
     color: "#3B82F6",
     textColor: "text-blue-400",
     borderColor: "border-blue-500/20",
+    shrinkage: "~0.3–0.8%",
   },
   {
     name: "ABS",
@@ -178,6 +189,7 @@ export const materials: Material[] = [
     color: "#F59E0B",
     textColor: "text-amber-400",
     borderColor: "border-amber-500/20",
+    shrinkage: "~1.0–1.5%",
   },
   {
     name: "ASA",
@@ -192,6 +204,7 @@ export const materials: Material[] = [
     color: "#10B981",
     textColor: "text-emerald-400",
     borderColor: "border-emerald-500/20",
+    shrinkage: "~0.8–1.2%",
   },
   {
     name: "TPU",
@@ -206,6 +219,7 @@ export const materials: Material[] = [
     color: "#8B5CF6",
     textColor: "text-violet-400",
     borderColor: "border-violet-500/20",
+    shrinkage: "~0.5–1.0%",
   },
   {
     name: "Carbon Fiber Composite",
@@ -220,6 +234,7 @@ export const materials: Material[] = [
     color: "#6B7280",
     textColor: "text-gray-400",
     borderColor: "border-gray-500/20",
+    shrinkage: "~0.1–0.3%",
   },
 ];
 
