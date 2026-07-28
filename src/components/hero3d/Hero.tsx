@@ -126,7 +126,7 @@ function MobilePrinterScene() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[85vh] rounded-2xl overflow-hidden -mt-[28vh] mb-8 z-20"
+      className="relative w-full h-[85vh] rounded-2xl overflow-hidden -mt-[28vh] mb-8 z-20 pointer-events-none"
       style={{ opacity: 0 }}
     >
       <Suspense fallback={<SceneFallback />}>

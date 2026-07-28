@@ -46,7 +46,7 @@ export const projectJourneys: ProjectJourney[] = [
   {
     title: "I have a broken or missing part",
     description:
-      "If you already have an STL file for the replacement, upload it and we'll print it. If not, contact us — CAD and reverse-engineering may be available in the future.",
+      "If you already have an STL file for the replacement, upload it and we'll print it. If not, contact us. CAD and reverse-engineering may be available in the future.",
     icon: Camera,
     href: "#contact",
     color: "#22D3EE",
@@ -250,7 +250,7 @@ export const steps: Step[] = [
     number: "01",
     title: "Tell us what you need",
     description:
-      "Upload a file, send a photo, or describe your idea. Choose the path that best fits your situation — we meet you where you are.",
+      "Upload a file, send a photo, or describe your idea. Choose the path that best fits your situation. We meet you where you are.",
   },
   {
     number: "02",
@@ -268,7 +268,7 @@ export const steps: Step[] = [
     number: "04",
     title: "Quality check and deliver",
     description:
-      "Every part is inspected, finished, and carefully packaged. Island-wide delivery or pickup from our Colombo facility — your choice.",
+      "Every part is inspected, finished, and carefully packaged. Island-wide delivery or pickup from our Colombo facility. Your choice.",
   },
 ];
 
@@ -389,14 +389,14 @@ export const faqs: FAQ[] = [
       "We accept STL, OBJ, 3MF, and STEP files. For assemblies, ZIP archives containing multiple files are recommended. Maximum single file size is 250 MB. For larger projects, contact us directly.",
   },
   {
-    question: "I don't have an STL file — can you still help?",
+    question: "I don't have an STL file. Can you still help?",
     answer:
-      "Our current service is printing customer-provided 3D models. If you have a 3D file, we can manufacture it. If you only have an idea or a broken part with no model, contact us — CAD modelling and reverse engineering may become available in the future, but are not currently offered.",
+      "Our current service is printing customer-provided 3D models. If you have a 3D file, we can manufacture it. If you only have an idea or a broken part with no model, contact us. CAD modelling and reverse engineering may become available in the future, but are not currently offered.",
   },
   {
     question: "What materials can you print in?",
     answer:
-      "Our material lineup includes PLA, PETG, ABS, ASA, and TPU. Carbon-fibre-reinforced composites are available on a per-project basis. Each material has different properties — strength, flexibility, heat resistance, and UV stability — and we'll help you choose the right one for your project.",
+      "Our material lineup includes PLA, PETG, ABS, ASA, and TPU. Carbon-fibre-reinforced composites are available on a per-project basis. Each material has different properties: strength, flexibility, heat resistance, and UV stability. We'll help you choose the right one for your project.",
   },
   {
     question: "How long does printing take?",
@@ -406,7 +406,7 @@ export const faqs: FAQ[] = [
   {
     question: "Do you offer post-processing?",
     answer:
-      "Yes. Standard post-processing includes support removal and light sanding. Additional services — vapour smoothing (ABS/ASA), primer application, painting, and clear-coat finishing — are available at quoted rates. Tell us about your finishing requirements when you submit your project.",
+      "Yes. Standard post-processing includes support removal and light sanding. Additional services include vapour smoothing (ABS/ASA), primer application, painting, and clear-coat finishing. These are available at quoted rates. Tell us about your finishing requirements when you submit your project.",
   },
   {
     question: "Can you print in multiple colours?",
@@ -421,7 +421,7 @@ export const faqs: FAQ[] = [
   {
     question: "Do you ship internationally?",
     answer:
-      "We currently ship within Sri Lanka with island-wide delivery. International shipping may be available upon request for select projects — contact us to discuss.",
+      "We currently ship within Sri Lanka with island-wide delivery. International shipping may be available upon request for select projects. Contact us to discuss.",
   },
   {
     question: "How are prices calculated?",
@@ -454,7 +454,7 @@ export const aboutText = {
   paragraph1:
     "Zenki Lab started with a real problem: restoring classic Toyota vehicles when original replacement parts were no longer available. Rather than giving up, we manufactured our own. That same capability is now offered to anyone who needs custom printed parts.",
   paragraph2:
-    "We're not trying to be a print farm. Every project — whether a single bracket or a batch of 50 parts — gets the same level of care we'd expect for our own builds. Honest advice, clear communication, and parts that fit right the first time.",
+    "We're not trying to be a print farm. Every project, whether a single bracket or a batch of 50 parts, gets the same level of care we'd expect for our own builds. Honest advice, clear communication, and parts that fit right the first time.",
 };
 
 // ── Coming Soon ───────────────────────────────────────
