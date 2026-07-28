@@ -81,38 +81,6 @@ export function ContactSection() {
           ))}
         </motion.div>
 
-        {/* Location & CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="mt-16 text-center p-10 lg:p-14 rounded-2xl"
-          style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
-        >
-          <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-5"
-            style={{ backgroundColor: "rgba(34,211,238,0.08)", border: "1px solid #293038" }}
-          >
-            <MapPin className="w-5 h-5" style={{ color: "#22D3EE" }} />
-          </div>
-
-          <h3 className="text-xl font-bold mb-2" style={{ color: "#FFFFFF" }}>
-            Visit the workshop
-          </h3>
-          <p className="text-sm mb-6" style={{ color: "#A5ADB8" }}>
-            Colombo, Sri Lanka · Available by appointment
-          </p>
-
-          <a
-            href="#quote"
-            className="inline-flex items-center gap-2 text-white h-[52px] px-7 rounded-xl text-sm font-semibold transition-all duration-300 hover:brightness-110"
-            style={{ backgroundColor: "#EF4444" }}
-          >
-            Request a Quote
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </motion.div>
       </div>
     </section>
   );

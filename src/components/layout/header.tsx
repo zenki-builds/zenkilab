@@ -18,6 +18,17 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const scrollToSection = (href: string) => {
+    setMobileOpen(false);
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) {
+      const headerHeight = 72;
+      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -114,6 +125,7 @@ export function Header() {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                 className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5 rounded-md transition-all duration-200"
               >
                 {link.label}
@@ -147,7 +159,7 @@ export function Header() {
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                   className="block px-3 py-3 text-sm font-medium rounded-md text-white/80 hover:text-white hover:bg-white/5 transition-colors"
                 >
                   {link.label}
