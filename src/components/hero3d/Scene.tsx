@@ -138,28 +138,40 @@ export function Scene({
       }
       frameloop="always"
     >
-      <ambientLight intensity={0.25} color="#241D16" />
-      <directionalLight position={[3, 4, 3]} intensity={0.6} color="#E8E4DE" />
-      <pointLight position={[-2, 1.5, 2]} intensity={1.2} color="#22D3EE" distance={7} />
-      <pointLight position={[2, -0.5, 1.8]} intensity={0.85} color="#0EA5B7" distance={6} />
-      <pointLight position={[0, -1, 1]} intensity={0.75} color="#22D3EE" distance={5} />
+      {/* Neutral-toned ambient fill — subtle, cool-charcoal */}
+      <ambientLight intensity={0.28} color="#2A2E35" />
+      {/* Key light — soft white for definition */}
+      <directionalLight position={[3, 4, 3]} intensity={0.55} color="#EAEBEC" />
+      {/* Cyan accent point lights — premium engineering glow */}
+      <pointLight position={[-2, 1.5, 2]} intensity={1.0} color="#22D3EE" distance={7} />
+      <pointLight position={[2, -0.5, 1.8]} intensity={0.7} color="#0EA5B7" distance={6} />
+      <pointLight position={[0, -1, 1]} intensity={0.6} color="#22D3EE" distance={5} />
 
       {(!renderOnly || renderOnly === "printer") && (
         <>
           <pointLight
             position={isMobile ? [0, 3.0, 0] : [6.0, 2.5, -1.08]}
             intensity={isMobile ? 2.8 : 1.3}
-            color="#fffaf3"
+            color="#F5F0EB"
             distance={isMobile ? 8 : 8}
             decay={1.2}
           />
           <pointLight
             position={isMobile ? [2.0, -0.5, 0] : [8.5, -0.5, -1.08]}
             intensity={isMobile ? 1.6 : 1.0}
-            color="#fff5ee"
+            color="#F0EDE8"
             distance={6}
             decay={1.2}
           />
+          {!isMobile && (
+            <pointLight
+              position={[7.2, 0.35, 0.25]}
+              intensity={0.55}
+              color="#F2EFEA"
+              distance={6.5}
+              decay={1.3}
+            />
+          )}
         </>
       )}
 
@@ -188,7 +200,7 @@ export function Scene({
       <ScrollRig sceneRoot={sceneRoot} />
 
       <EffectComposer multisampling={0}>
-        <Bloom intensity={0.65} luminanceThreshold={0.3} luminanceSmoothing={0.25} mipmapBlur radius={0.5} />
+        <Bloom intensity={0.55} luminanceThreshold={0.35} luminanceSmoothing={0.25} mipmapBlur radius={0.5} />
         <Vignette eskil={false} offset={0.15} darkness={0.65} />
       </EffectComposer>
     </Canvas>

@@ -28,7 +28,7 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-[#05070A]/80 backdrop-blur-xl border-b border-[#1E293B]/60"
+          ? "bg-[#0B0D10]/80 backdrop-blur-xl border-b border-[#293038]/60"
           : "bg-transparent"
       }`}
     >
@@ -81,8 +81,8 @@ export function Header() {
                 {/* Inner hexagon — stationary */}
                 <path
                   d="M20 2 L36 11 V29 L20 38 L4 29 V11 Z"
-                  stroke="#E2E8F0"
-                  strokeOpacity="0.15"
+                  stroke="#FFFFFF"
+                  strokeOpacity="0.12"
                   strokeWidth="1.6"
                   fill="none"
                   transform="scale(0.78) translate(5.7 5.7)"
@@ -95,7 +95,7 @@ export function Header() {
                   textAnchor="middle"
                   fontSize="15"
                   fontWeight="800"
-                  fill="#E2E8F0"
+                  fill="#FFFFFF"
                   fontFamily="var(--font-geist-sans), sans-serif"
                   className="z-3d"
                 >
@@ -103,7 +103,7 @@ export function Header() {
                 </text>
               </svg>
             </div>
-            <span className="text-lg font-extrabold tracking-[0.02em] text-[#E2E8F0]">
+            <span className="text-lg font-extrabold tracking-[0.02em] text-white">
               ZENKI<span className="text-[#22D3EE]">LAB</span>
             </span>
           </Link>
@@ -114,7 +114,7 @@ export function Header() {
               <a
                 key={link.label}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-[#E2E8F0]/80 hover:text-[#E2E8F0] hover:bg-white/5 rounded-md transition-all duration-200"
+                className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5 rounded-md transition-all duration-200"
               >
                 {link.label}
               </a>
@@ -124,7 +124,7 @@ export function Header() {
           {/* Menu Button (hamburger) */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex lg:hidden items-center justify-center w-10 h-10 rounded-md text-[#E2E8F0] hover:bg-white/5 transition-colors"
+            className="flex lg:hidden items-center justify-center w-10 h-10 rounded-md text-white hover:bg-white/5 transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -140,7 +140,7 @@ export function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden bg-[#05070A]/95 backdrop-blur-xl border-b border-[#1E293B]/60 overflow-hidden"
+            className="lg:hidden bg-[#0B0D10]/95 backdrop-blur-xl border-b border-[#293038]/60 overflow-hidden"
           >
             <div className="px-6 py-4 space-y-1">
               {navLinks.map((link) => (
@@ -148,7 +148,7 @@ export function Header() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-3 py-3 text-sm font-medium rounded-md text-[#E2E8F0]/80 hover:text-[#E2E8F0] hover:bg-white/5 transition-colors"
+                  className="block px-3 py-3 text-sm font-medium rounded-md text-white/80 hover:text-white hover:bg-white/5 transition-colors"
                 >
                   {link.label}
                 </a>

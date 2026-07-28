@@ -62,7 +62,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
-      <body className="min-h-screen bg-white text-[#0F172A] font-sans">
+      <body className="min-h-screen bg-[#0B0D10] text-white font-sans">
         {children}
       </body>
     </html>

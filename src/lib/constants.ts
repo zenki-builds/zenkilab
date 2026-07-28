@@ -32,7 +32,7 @@ export const projectJourneys: ProjectJourney[] = [
       "Upload your 3D model. We'll review it for printability, recommend a material, and send you a quote within 24 hours.",
     icon: FileText,
     href: "#quote",
-    color: "#F97316",
+    color: "#22D3EE",
   },
   {
     title: "I need a custom part printed",
@@ -40,7 +40,7 @@ export const projectJourneys: ProjectJourney[] = [
       "If you have a 3D model, we can manufacture it. Upload your file and tell us about your project.",
     icon: Sparkles,
     href: "#quote",
-    color: "#F97316",
+    color: "#22D3EE",
   },
   {
     title: "I have a broken or missing part",
@@ -48,7 +48,7 @@ export const projectJourneys: ProjectJourney[] = [
       "If you already have an STL file for the replacement, upload it and we'll print it. If not, contact us — CAD and reverse-engineering may be available in the future.",
     icon: Camera,
     href: "#contact",
-    color: "#F97316",
+    color: "#22D3EE",
   },
   {
     title: "I'm not sure where to start",
@@ -56,7 +56,7 @@ export const projectJourneys: ProjectJourney[] = [
       "No problem. Get in touch and describe what you're trying to do. We'll give you honest advice on whether 3D printing is the right solution.",
     icon: Lightbulb,
     href: "#contact",
-    color: "#F97316",
+    color: "#22D3EE",
   },
 ];
 
@@ -480,8 +480,8 @@ export type ContactChannel = {
 };
 
 export const contactChannels: ContactChannel[] = [
-  { label: "WhatsApp", value: "+94 77 000 0000", href: "https://wa.me/94770000000" },
-  { label: "Email", value: "hello@zenkilab.com", href: "mailto:hello@zenkilab.com" },
+  { label: "WhatsApp", value: "+94 70 2100 270", href: "https://wa.me/94702100270" },
+  { label: "Email", value: "quote@zenkilab.com", href: "mailto:quote@zenkilab.com" },
   { label: "Instagram", value: "@zenkilab", href: "https://instagram.com/zenkilab" },
   { label: "Facebook", value: "/zenkilab", href: "https://facebook.com/zenkilab" },
   { label: "TikTok", value: "@zenkilab", href: "https://tiktok.com/@zenkilab" },

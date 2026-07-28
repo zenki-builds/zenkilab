@@ -23,7 +23,7 @@ const item = {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
+    <section id="services" className="relative py-24 lg:py-28 bg-[#0B0D10] border-t" style={{ borderColor: "#293038" }}>
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -33,16 +33,16 @@ export function ServicesSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-14 lg:mb-16"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#22D3EE" }}>
             What We Print
           </span>
           <h2
             className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]"
-            style={{ color: "#E2E8F0" }}
+            style={{ color: "#FFFFFF" }}
           >
             We print custom parts.
           </h2>
-          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#94A3B8" }}>
+          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#A5ADB8" }}>
             From automotive components to household items and custom gifts. If
             you have a 3D model, we can manufacture it.
           </p>
@@ -62,23 +62,23 @@ export function ServicesSection() {
               href={service.href}
               variants={item}
               className="group relative rounded-2xl p-7 lg:p-8 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-lg"
-              style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}
+              style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
             >
               {/* Icon */}
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
-                style={{ backgroundColor: "#1E1A14" }}
+                style={{ backgroundColor: "rgba(34,211,238,0.08)" }}
               >
-                <service.icon className="w-5 h-5 transition-colors duration-300" style={{ color: "#F97316" }} />
+                <service.icon className="w-5 h-5 transition-colors duration-300" style={{ color: "#22D3EE" }} />
               </div>
 
               {/* Title */}
-              <h3 className="text-base font-semibold mb-2 tracking-[-0.01em]" style={{ color: "#E2E8F0" }}>
+              <h3 className="text-base font-semibold mb-2 tracking-[-0.01em]" style={{ color: "#FFFFFF" }}>
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#94A3B8" }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: "#A5ADB8" }}>
                 {service.description}
               </p>
 
@@ -88,7 +88,7 @@ export function ServicesSection() {
                   <span
                     key={ex}
                     className="text-[11px] px-2 py-0.5 rounded-md"
-                    style={{ backgroundColor: "#0F1720", border: "1px solid #1E293B", color: "#94A3B8" }}
+                    style={{ backgroundColor: "#171B21", border: "1px solid #293038", color: "#A5ADB8" }}
                   >
                     {ex}
                   </span>
@@ -98,7 +98,7 @@ export function ServicesSection() {
               {/* CTA */}
               <span
                 className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors duration-300"
-                style={{ color: "#F97316" }}
+                style={{ color: "#22D3EE" }}
               >
                 Start a Project
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />

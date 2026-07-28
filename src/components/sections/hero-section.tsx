@@ -21,7 +21,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-24 pb-16 lg:pt-28 overflow-hidden bg-[#05070A]"
+      className="relative min-h-screen flex items-center pt-24 pb-16 lg:pt-28 overflow-hidden bg-[#0B0D10]"
     >
       <Hero onStart={() => setShowJourneys(true)} />
 
@@ -34,7 +34,7 @@ export function HeroSection() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center p-6"
-            style={{ backgroundColor: "rgba(6,11,20,0.6)" }}
+            style={{ backgroundColor: "rgba(8,10,14,0.6)" }}
             onClick={() => setShowJourneys(false)}
           >
             <motion.div
@@ -44,21 +44,21 @@ export function HeroSection() {
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
               onClick={(e) => e.stopPropagation()}
               className="max-w-[720px] w-full rounded-2xl p-8 lg:p-10"
-              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
+              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E5E7EB" }}
             >
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="text-xl font-bold mb-1" style={{ color: "#0F172A" }}>
+                  <h2 className="text-xl font-bold mb-1" style={{ color: "#0B0D10" }}>
                     Start Your Project
                   </h2>
-                  <p className="text-sm" style={{ color: "#64748B" }}>
+                  <p className="text-sm" style={{ color: "#5F6A76" }}>
                     Choose the path that best describes your situation
                   </p>
                 </div>
                 <button
                   onClick={() => setShowJourneys(false)}
                   className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
-                  style={{ border: "1px solid #E2E8F0", color: "#64748B" }}
+                  style={{ border: "1px solid #E5E7EB", color: "#5F6A76" }}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -73,19 +73,19 @@ export function HeroSection() {
                       href={journey.href}
                       onClick={() => setShowJourneys(false)}
                       className="group flex flex-col gap-3 p-5 rounded-xl transition-all duration-300 hover:border-[#22D3EE]/40"
-                      style={{ border: "1px solid #E2E8F0" }}
+                      style={{ border: "1px solid #E5E7EB" }}
                     >
                       <div
                         className="w-9 h-9 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                         style={{ backgroundColor: "#ECFEFF" }}
                       >
-                        <Icon className="w-4.5 h-4.5" style={{ color: "#0EA5B7" }} />
+                        <Icon className="w-4.5 h-4.5" style={{ color: "#0891B2" }} />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold mb-1" style={{ color: "#0F172A" }}>
+                        <h3 className="text-sm font-semibold mb-1" style={{ color: "#0B0D10" }}>
                           {journey.title}
                         </h3>
-                        <p className="text-xs leading-relaxed" style={{ color: "#64748B" }}>
+                        <p className="text-xs leading-relaxed" style={{ color: "#5F6A76" }}>
                           {journey.description}
                         </p>
                       </div>

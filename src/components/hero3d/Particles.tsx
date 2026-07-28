@@ -53,7 +53,7 @@ function AmbientDust() {
         size={0.012}
         sizeAttenuation
         transparent
-        opacity={0.5}
+        opacity={0.45}
         depthWrite={false}
       />
     </points>
@@ -103,7 +103,7 @@ function HologramEmission({ origin, isMobile }: { origin: [number, number, numbe
         size={isMobile ? 0.014 : 0.02}
         sizeAttenuation
         transparent
-        opacity={isMobile ? 0.8 : 0.9}
+        opacity={isMobile ? 0.75 : 0.85}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />

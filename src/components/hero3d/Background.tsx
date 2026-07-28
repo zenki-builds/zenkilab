@@ -12,12 +12,12 @@
 export function Background() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Dark gradient base */}
+      {/* Dark gradient base — rich charcoal with subtle cyan glow */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 74% 32%, rgba(34,211,238,0.14), transparent 55%), linear-gradient(150deg, #05070A 0%, #0A0F16 45%, #0D1420 100%)",
+            "radial-gradient(circle at 74% 32%, rgba(34,211,238,0.10), transparent 55%), linear-gradient(150deg, #0B0D10 0%, #171B21 45%, #1A2028 100%)",
         }}
       />
 
@@ -27,7 +27,7 @@ export function Background() {
         style={{
           backgroundSize: "42px 42px",
           backgroundImage:
-            "linear-gradient(to right, rgba(148,163,184,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.05) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(165,173,184,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(165,173,184,0.04) 1px, transparent 1px)",
         }}
       />
 

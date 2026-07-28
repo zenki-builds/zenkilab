@@ -486,7 +486,7 @@ export function PrinterAnimationSection() {
         </div>
 
         {/* Caption */}
-        <p className="text-sm text-neutral-500 mt-8 max-w-[440px] mx-auto leading-relaxed">
+        <p className="text-sm mt-8 max-w-[440px] mx-auto leading-relaxed" style={{ color: "#A5ADB8" }}>
           Every project is built layer by layer — precision from the first line
           to the final surface.
         </p>

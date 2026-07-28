@@ -23,7 +23,7 @@ const channelIcons: Record<string, React.ReactNode> = {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
+    <section id="contact" className="relative py-24 lg:py-28 bg-[#0B0D10] border-t" style={{ borderColor: "#293038" }}>
       <div className="max-w-[960px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -33,10 +33,10 @@ export function ContactSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-14 lg:mb-16"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#22D3EE" }}>
             Contact
           </span>
-          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[600px]" style={{ color: "#E2E8F0" }}>
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[600px]" style={{ color: "#FFFFFF" }}>
             Let's make something together.
           </h2>
         </motion.div>
@@ -56,25 +56,25 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
-              style={{ border: "1px solid #1E293B", backgroundColor: "#0A0F16" }}
+              style={{ border: "1px solid #293038", backgroundColor: "#171B21" }}
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300"
-                style={{ backgroundColor: "#1E1A14", color: "#F97316" }}
+                style={{ backgroundColor: "rgba(34,211,238,0.08)", color: "#22D3EE" }}
               >
                 {channelIcons[channel.label] ?? <MessageCircle className="w-5 h-5" />}
               </div>
 
               <div className="min-w-0">
-                <p className="text-sm font-semibold" style={{ color: "#E2E8F0" }}>
+                <p className="text-sm font-semibold" style={{ color: "#FFFFFF" }}>
                   {channel.label}
                 </p>
-                <p className="text-xs truncate" style={{ color: "#94A3B8" }}>
+                <p className="text-xs truncate" style={{ color: "#A5ADB8" }}>
                   {channel.value}
                 </p>
               </div>
 
-              <div className="ml-auto flex-shrink-0 text-[#64748B] group-hover:text-[#F97316] transition-colors duration-300">
+              <div className="ml-auto flex-shrink-0 text-[#5F6A76] group-hover:text-[#22D3EE] transition-colors duration-300">
                 <ExternalLink className="w-4 h-4" />
               </div>
             </a>
@@ -88,26 +88,26 @@ export function ContactSection() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="mt-16 text-center p-10 lg:p-14 rounded-2xl"
-          style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}
+          style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
         >
           <div
             className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-5"
-            style={{ backgroundColor: "#1E1A14", border: "1px solid #1E293B" }}
+            style={{ backgroundColor: "rgba(34,211,238,0.08)", border: "1px solid #293038" }}
           >
-            <MapPin className="w-5 h-5" style={{ color: "#F97316" }} />
+            <MapPin className="w-5 h-5" style={{ color: "#22D3EE" }} />
           </div>
 
-          <h3 className="text-xl font-bold mb-2" style={{ color: "#E2E8F0" }}>
+          <h3 className="text-xl font-bold mb-2" style={{ color: "#FFFFFF" }}>
             Visit the workshop
           </h3>
-          <p className="text-sm mb-6" style={{ color: "#94A3B8" }}>
+          <p className="text-sm mb-6" style={{ color: "#A5ADB8" }}>
             Colombo, Sri Lanka · Available by appointment
           </p>
 
           <a
             href="#quote"
             className="inline-flex items-center gap-2 text-white h-[52px] px-7 rounded-xl text-sm font-semibold transition-all duration-300 hover:brightness-110"
-            style={{ backgroundColor: "#F97316" }}
+            style={{ backgroundColor: "#EF4444" }}
           >
             Request a Quote
             <ArrowRight className="w-4 h-4" />

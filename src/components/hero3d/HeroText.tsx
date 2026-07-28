@@ -56,7 +56,7 @@ export function HeroText({ onStart }: { onStart: () => void }) {
         <span style={{ color: "#22D3EE" }}>for makers.</span>
       </h1>
 
-      <p className="text-base lg:text-lg leading-relaxed mb-9 max-w-[480px] mx-auto lg:mx-0 text-slate-300/90">
+      <p className="text-base lg:text-lg leading-relaxed mb-9 max-w-[480px] mx-auto lg:mx-0 text-[#A5ADB8]/90">
         Professional custom 3D printing for makers, enthusiasts and businesses. We manufacture custom parts, prototypes and one-off projects from your 3D models.
       </p>
 
@@ -65,8 +65,8 @@ export function HeroText({ onStart }: { onStart: () => void }) {
           onClick={onStart}
           className="inline-flex items-center justify-center gap-2 h-[52px] px-8 rounded-full text-base font-semibold text-white transition-transform duration-200 hover:scale-[1.03] w-full sm:w-auto"
           style={{
-            background: "linear-gradient(135deg, #22D3EE 0%, #0EA5B7 100%)",
-            boxShadow: "0 8px 24px -6px rgba(34,211,238,0.5)",
+            background: "#EF4444",
+            boxShadow: "0 8px 24px -6px rgba(239,68,68,0.4)",
           }}
         >
           <Zap className="w-4.5 h-4.5" />

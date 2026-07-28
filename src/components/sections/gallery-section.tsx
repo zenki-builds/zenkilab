@@ -17,7 +17,7 @@ export function GallerySection() {
   const selected = galleryProjects.find((p) => p.id === selectedProject);
 
   return (
-    <section id="projects" className="relative py-24 lg:py-28 bg-[#05070A] border-t" style={{ borderColor: "#1E293B" }}>
+    <section id="projects" className="relative py-24 lg:py-28 bg-[#0B0D10] border-t" style={{ borderColor: "#293038" }}>
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -26,13 +26,13 @@ export function GallerySection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-12 lg:mb-14"
         >
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#F97316" }}>
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-4 block" style={{ color: "#22D3EE" }}>
             Projects
           </span>
-          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]" style={{ color: "#E2E8F0" }}>
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-[-0.02em] leading-[1.1] max-w-[700px]" style={{ color: "#FFFFFF" }}>
             Real parts, real projects.
           </h2>
-          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#94A3B8" }}>
+          <p className="text-lg mt-4 max-w-[600px] leading-relaxed" style={{ color: "#A5ADB8" }}>
             A selection of work we've manufactured for our customers.
           </p>
         </motion.div>
@@ -45,8 +45,8 @@ export function GallerySection() {
               className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
               style={
                 activeCategory === cat
-                  ? { backgroundColor: "#F97316", color: "#FFFFFF" }
-                  : { backgroundColor: "#0F1720", color: "#94A3B8", border: "1px solid #1E293B" }
+                  ? { backgroundColor: "#22D3EE", color: "#0B0D10" }
+                  : { backgroundColor: "#171B21", color: "#A5ADB8", border: "1px solid #293038" }
               }
             >
               {cat}
@@ -65,17 +65,17 @@ export function GallerySection() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: idx * 0.04 }}
                 className="break-inside-avoid group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg"
-                style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}
+                style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
                 onClick={() => setSelectedProject(project.id)}
               >
-                <div className="aspect-[4/3] flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0F1720, #1E293B)" }}>
-                  <ImageIcon className="w-12 h-12" style={{ color: "#334155" }} />
+                <div className="aspect-[4/3] flex items-center justify-center" style={{ background: "linear-gradient(135deg, #171B21, #293038)" }}>
+                  <ImageIcon className="w-12 h-12" style={{ color: "#3B4656" }} />
                 </div>
 
-                <div className="absolute inset-0 bg-[#05070A]/0 group-hover:bg-[#05070A]/60 transition-all duration-400 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#0B0D10]/0 group-hover:bg-[#0B0D10]/60 transition-all duration-400 flex items-center justify-center">
                   <span
                     className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl"
-                    style={{ backgroundColor: "#F97316", color: "#FFFFFF" }}
+                    style={{ backgroundColor: "#22D3EE", color: "#0B0D10" }}
                   >
                     View Details
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -83,10 +83,10 @@ export function GallerySection() {
                 </div>
 
                 <div className="p-5">
-                  <span className="text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5 block" style={{ color: "#F97316" }}>
+                  <span className="text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5 block" style={{ color: "#22D3EE" }}>
                     {project.category}
                   </span>
-                  <h3 className="text-sm font-semibold leading-snug" style={{ color: "#E2E8F0" }}>
+                  <h3 className="text-sm font-semibold leading-snug" style={{ color: "#FFFFFF" }}>
                     {project.title}
                   </h3>
                 </div>
@@ -103,7 +103,7 @@ export function GallerySection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center p-6"
-            style={{ backgroundColor: "rgba(5,7,10,0.7)" }}
+            style={{ backgroundColor: "rgba(8,10,14,0.7)" }}
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -112,27 +112,27 @@ export function GallerySection() {
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="max-w-[640px] w-full rounded-2xl overflow-hidden relative"
-              style={{ backgroundColor: "#0A0F16", border: "1px solid #1E293B" }}
+              style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="aspect-video flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0F1720, #1E293B)" }}>
-                <ImageIcon className="w-16 h-16" style={{ color: "#334155" }} />
+              <div className="aspect-video flex items-center justify-center" style={{ background: "linear-gradient(135deg, #171B21, #293038)" }}>
+                <ImageIcon className="w-16 h-16" style={{ color: "#3B4656" }} />
               </div>
               <div className="p-8">
-                <span className="text-[10px] font-semibold tracking-[0.12em] uppercase mb-2 block" style={{ color: "#F97316" }}>
+                <span className="text-[10px] font-semibold tracking-[0.12em] uppercase mb-2 block" style={{ color: "#22D3EE" }}>
                   {selected.category}
                 </span>
-                <h3 className="text-xl font-bold mb-3" style={{ color: "#E2E8F0" }}>
+                <h3 className="text-xl font-bold mb-3" style={{ color: "#FFFFFF" }}>
                   {selected.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#94A3B8" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "#A5ADB8" }}>
                   {selected.description}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-4 right-4 w-10 h-10 rounded-xl flex items-center justify-center transition-colors"
-                style={{ backgroundColor: "#0F1720", border: "1px solid #1E293B", color: "#E2E8F0" }}
+                style={{ backgroundColor: "#171B21", border: "1px solid #293038", color: "#FFFFFF" }}
               >
                 <X className="w-4 h-4" />
               </button>
