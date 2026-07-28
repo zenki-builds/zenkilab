@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="border-t bg-[#171B21]" style={{ borderColor: "#293038" }}>
       <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
         {/* Top */}
-        <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="py-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="inline-flex items-center gap-2.5 mb-4 group">
