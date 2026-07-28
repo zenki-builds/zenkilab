@@ -21,12 +21,13 @@ export function Header() {
   const scrollToSection = (href: string) => {
     setMobileOpen(false);
     const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) {
-      const headerHeight = 72;
-      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    // Defer scroll until mobile menu finishes closing (250ms animation)
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 300);
   };
 
   useEffect(() => {

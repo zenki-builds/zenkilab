@@ -44,21 +44,21 @@ export function HeroSection() {
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
               onClick={(e) => e.stopPropagation()}
               className="max-w-[720px] w-full rounded-2xl p-8 lg:p-10"
-              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E5E7EB" }}
+              style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
             >
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="text-xl font-bold mb-1" style={{ color: "#0B0D10" }}>
+                  <h2 className="text-xl font-bold mb-1" style={{ color: "#FFFFFF" }}>
                     Start Your Project
                   </h2>
-                  <p className="text-sm" style={{ color: "#5F6A76" }}>
+                  <p className="text-sm" style={{ color: "#A5ADB8" }}>
                     Choose the path that best describes your situation
                   </p>
                 </div>
                 <button
                   onClick={() => setShowJourneys(false)}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
-                  style={{ border: "1px solid #E5E7EB", color: "#5F6A76" }}
+                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors hover:bg-white/5"
+                  style={{ border: "1px solid #293038", color: "#A5ADB8" }}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -73,19 +73,19 @@ export function HeroSection() {
                       href={journey.href}
                       onClick={() => setShowJourneys(false)}
                       className="group flex flex-col gap-3 p-5 rounded-xl transition-all duration-300 hover:border-[#22D3EE]/40"
-                      style={{ border: "1px solid #E5E7EB" }}
+                      style={{ border: "1px solid #293038" }}
                     >
                       <div
                         className="w-9 h-9 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                        style={{ backgroundColor: "#ECFEFF" }}
+                        style={{ backgroundColor: "rgba(34,211,238,0.08)" }}
                       >
-                        <Icon className="w-4.5 h-4.5" style={{ color: "#0891B2" }} />
+                        <Icon className="w-4.5 h-4.5" style={{ color: "#22D3EE" }} />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold mb-1" style={{ color: "#0B0D10" }}>
+                        <h3 className="text-sm font-semibold mb-1" style={{ color: "#FFFFFF" }}>
                           {journey.title}
                         </h3>
-                        <p className="text-xs leading-relaxed" style={{ color: "#5F6A76" }}>
+                        <p className="text-xs leading-relaxed" style={{ color: "#A5ADB8" }}>
                           {journey.description}
                         </p>
                       </div>
