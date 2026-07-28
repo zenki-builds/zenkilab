@@ -112,50 +112,54 @@ export function ContactSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[640px] mx-auto"
         >
-          {contactChannels.map((channel) => (
-            <a
-              key={channel.label}
-              href={channel.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-4 rounded-xl transition-all duration-300"
-              style={{ border: "1px solid #293038", backgroundColor: "#171B21" }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(34,211,238,0.4)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.borderColor = "#293038";
-              }}
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
-                style={{ backgroundColor: "rgba(34,211,238,0.08)", color: "#22D3EE" }}
+          {contactChannels.map((channel, idx) => {
+            const isLast = idx === contactChannels.length - 1;
+            const isOdd = contactChannels.length % 2 === 1;
+            return (
+              <a
+                key={channel.label}
+                href={channel.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${isLast && isOdd ? "sm:col-span-2 sm:justify-self-center sm:max-w-[calc(50%-6px)] sm:w-full" : ""}`}
+                style={{ border: "1px solid #293038", backgroundColor: "#171B21" }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(34,211,238,0.16)";
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 12px rgba(34,211,238,0.2)";
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(34,211,238,0.4)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(34,211,238,0.08)";
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = "#293038";
                 }}
               >
-                {channelIcons[channel.label] ?? <WhatsAppIcon />}
-              </div>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                  style={{ backgroundColor: "rgba(34,211,238,0.08)", color: "#22D3EE" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(34,211,238,0.16)";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 12px rgba(34,211,238,0.2)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(34,211,238,0.08)";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+                  }}
+                >
+                  {channelIcons[channel.label] ?? <WhatsAppIcon />}
+                </div>
 
-              <div className="min-w-0">
-                <p className="text-sm font-semibold" style={{ color: "#FFFFFF" }}>
-                  {channel.label}
-                </p>
-                <p className="text-xs truncate" style={{ color: "#A5ADB8" }}>
-                  {channel.value}
-                </p>
-              </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold" style={{ color: "#FFFFFF" }}>
+                    {channel.label}
+                  </p>
+                  <p className="text-xs truncate" style={{ color: "#A5ADB8" }}>
+                    {channel.value}
+                  </p>
+                </div>
 
-              <div className="ml-auto flex-shrink-0 text-[#5F6A76] group-hover:text-[#22D3EE] transition-colors duration-300">
-                <ExternalLink className="w-4 h-4" />
-              </div>
-            </a>
-          ))}
+                <div className="ml-auto flex-shrink-0 text-[#5F6A76] group-hover:text-[#22D3EE] transition-colors duration-300">
+                  <ExternalLink className="w-4 h-4" />
+                </div>
+              </a>
+            );
+          })}
         </motion.div>
 
       </div>
