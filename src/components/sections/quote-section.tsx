@@ -139,13 +139,15 @@ export function QuoteSection() {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
+      const formData = new FormData();
+      Object.entries({ ...data, fileCount: String(files.length) }).forEach(([key, val]) => {
+        formData.append(key, val as string);
+      });
+      files.forEach((file) => formData.append("files", file));
+
       const res = await fetch("/api/quote", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          fileCount: files.length,
-        }),
+        body: formData,
       });
 
       if (!res.ok) {

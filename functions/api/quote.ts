@@ -1,5 +1,5 @@
 // Cloudflare Pages Function — handles POST /api/quote
-// Sends quote submissions via Resend API.
+// Sends quote submissions via Resend API with file attachments.
 //
 // Requires:
 //   Cloudflare Pages env var: RESEND_API_KEY
@@ -31,48 +31,50 @@ export const onRequestPost = async ({
     );
   }
 
-  let body: {
-    name: string;
-    email: string;
-    phone: string;
-    country: string;
-    material: string;
-    color: string;
-    quantity: string;
-    layerHeight: string;
-    notes?: string;
-    desiredDate?: string;
-    fileCount?: number;
-  };
-
+  // Parse multipart form data
+  let formData: FormData;
   try {
-    body = await request.json();
+    formData = await request.formData();
   } catch {
-    return new Response(JSON.stringify({ error: "Invalid JSON" }), {
+    return new Response(JSON.stringify({ error: "Invalid form data" }), {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 
-  const {
-    name,
-    email,
-    phone,
-    country,
-    material,
-    color,
-    quantity,
-    layerHeight,
-    notes,
-    desiredDate,
-    fileCount,
-  } = body;
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const phone = formData.get("phone") as string;
+  const country = formData.get("country") as string;
+  const material = formData.get("material") as string;
+  const color = formData.get("color") as string;
+  const quantity = formData.get("quantity") as string;
+  const layerHeight = formData.get("layerHeight") as string;
+  const notes = formData.get("notes") as string | null;
+  const desiredDate = formData.get("desiredDate") as string | null;
+  const fileCount = formData.get("fileCount") as string;
 
   if (!name || !email || !material) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+  }
+
+  // Collect uploaded files as base64 attachments
+  const attachments: Array<{ filename: string; content: string; content_type: string }> = [];
+  const uploadedFiles = formData.getAll("files") as File[];
+
+  for (const file of uploadedFiles) {
+    if (file && file.size > 0 && file.size < 250 * 1024 * 1024) {
+      const arrayBuffer = await file.arrayBuffer();
+      const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+      attachments.push({
+        filename: file.name,
+        content: base64,
+        content_type: file.type || "application/octet-stream",
+      });
+    }
   }
 
   const fields = [
@@ -85,16 +87,18 @@ export const onRequestPost = async ({
     { label: "Quantity", value: quantity || "—" },
     { label: "Layer Height", value: layerHeight || "—" },
     { label: "Desired Date", value: desiredDate || "—" },
-    { label: "Files Uploaded", value: fileCount ? String(fileCount) : "0" },
+    { label: "Files Uploaded", value: fileCount || String(uploadedFiles.length) },
     { label: "Notes", value: notes || "—" },
   ];
 
   const rows = fields
     .map(
       (f) =>
-        `<tr><td style="padding:8px 12px;border-bottom:1px solid #1E232B;color:#8B919E;font-size:13px;white-space:nowrap">${f.label}</td><td style="padding:8px 12px;border-bottom:1px solid #1E232B;color:#fafafa;font-size:13px">${f.value}</td></tr>`
+        `<tr><td style="padding:8px 12px;border-bottom:1px solid #1E232B;color:#8B919E;font-size:13px;white-space:nowrap">${f.label}</td><td style="padding:8px 12px;border-bottom:1px solid #1E232B;color:#fafafa;font-size:13px">${sanitize(f.value)}</td></tr>`
     )
     .join("");
+
+  const fileNames = uploadedFiles.map((f) => f.name).join(", ") || "None";
 
   const html = `<!DOCTYPE html>
 <html>
@@ -106,7 +110,7 @@ export const onRequestPost = async ({
 </td></tr>
 <tr><td style="padding:0 24px 8px">
 <h1 style="font-size:20px;font-weight:700;color:#fafafa;margin:0 0 4px">New Quote Request</h1>
-<p style="font-size:14px;color:#8B919E;margin:0">${name} submitted a project enquiry.</p>
+<p style="font-size:14px;color:#8B919E;margin:0">${sanitize(name)} submitted a project enquiry.</p>
 </td></tr>
 <tr><td style="padding:20px 24px">
 <table width="100%" style="background:#161A20;border-radius:12px;border:1px solid rgba(255,255,255,0.06);overflow:hidden">
@@ -114,13 +118,13 @@ ${rows}
 </table>
 </td></tr>
 <tr><td style="padding:24px">
-<p style="font-size:12px;color:#4B5260;margin:0">Sent via Zenki Lab quoting system · Reply directly to this email to respond to ${name}</p>
+<p style="font-size:12px;color:#4B5260;margin:0">Sent via Zenki Lab quoting system · Reply directly to this email to respond to ${sanitize(name)}</p>
 </td></tr>
 </table>
 </body>
 </html>`;
 
-  const text = `New quote request from ${name} (${email}).\nPhone: ${phone}\nMaterial: ${material}\nQuantity: ${quantity}\nColor: ${color}\nNotes: ${notes || "None"}\nFiles: ${fileCount || 0}`;
+  const text = `New quote request from ${name} (${email}).\nPhone: ${phone}\nMaterial: ${material}\nQuantity: ${quantity}\nColor: ${color}\nNotes: ${notes || "None"}\nFiles: ${fileNames}`;
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -136,6 +140,7 @@ ${rows}
         html,
         text,
         reply_to: email,
+        attachments: attachments.length > 0 ? attachments : undefined,
       }),
     });
 
@@ -167,3 +172,11 @@ ${rows}
     });
   }
 };
+
+function sanitize(str: string): string {
+  return str
+    .replaceAll("&", "\u0026")
+    .replaceAll("<", "\u003C")
+    .replaceAll(">", "\u003E")
+    .replaceAll('"', "\u0022");
+}
