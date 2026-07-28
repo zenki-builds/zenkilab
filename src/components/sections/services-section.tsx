@@ -61,11 +61,11 @@ export function ServicesSection() {
               key={service.title}
               href={service.href}
               variants={item}
-              className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-[2px]"
+              className="group relative rounded-2xl transition-all duration-300 hover:-translate-y-[2px]"
               style={{ backgroundColor: "#171B21", border: "1px solid #293038" }}
             >
               {/* ── Image container: 16:9, rounded-top, gradient overlay ── */}
-              <div className="relative w-full aspect-video overflow-hidden">
+              <div className="relative w-full aspect-video overflow-hidden rounded-t-2xl">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -88,8 +88,8 @@ export function ServicesSection() {
                 />
               </div>
 
-              {/* ── Card content ── */}
-              <div className="p-7 lg:p-8">
+              {/* ── Card content — pulled up to overlap image ── */}
+              <div className="relative p-7 lg:p-8" style={{ marginTop: "-24px" }}>
                 {/* Icon */}
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
